@@ -1,0 +1,272 @@
+/* Método First Mobile */
+
+/* Ajustes generales */
+
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
+
+*{
+    margin: 0;
+    font-family: "Quicksand", serif;
+    font-optical-sizing: auto;
+}
+
+:root{
+    /* Paleta de Colores */
+    --fondoGeneral:#F8FAFC;
+    --textColor:black;
+    --textInverso:white;
+    --linkColor:#2b2b2b;
+    --fondoTarjeta:#ffffff;
+    --fondoBanner:rgb(19, 18, 18);
+    --botonGeneral:#2988ec;
+    /* Bordes */
+    --radioGeneral:20px;
+}
+
+body {
+    width: 100%;
+    background-color: var(--fondoGeneral);
+}
+
+main{
+    min-height: 100vh;
+}
+
+/* Header */
+
+header{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1{
+    margin-left: 10px;
+    font-weight: 600;
+}
+header a{
+    margin-right: 10px;
+}
+
+#login_btn{
+    text-decoration: none;
+    color: var(--linkColor);
+    font-weight: 900;
+    transition: all ease-in-out 700ms;      
+}
+
+#login_btn:hover{
+    border-bottom: solid 2px black;
+    transition: all ease-in-out 700ms;
+}
+
+/* Categorías */
+
+#area_categorias{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background-color: var(--fondoBanner); 
+}
+
+#area_categorias h2{
+    color: var(--textInverso);
+    padding-top: 20px;
+    font-weight: 500;
+}
+
+#categorias{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.categoria{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    border-radius: var(--radioGeneral);
+    height: 120px;
+    width: 90%;
+    max-width: 300px;
+    color: white;
+    font-size: 1.3rem;
+    text-shadow: 3px 3px 6px black;
+}
+
+.categoria p{
+    margin: 10px;
+}
+
+.colorE{
+    background-image:url(laptopEconomica.jpg);
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+.colorG{
+    background-image:url(laptopGamer.jpg);
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+.colorA{
+    background-image:url(laptopAlta.jpg);
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+
+/* Ofertas */
+
+#area_ofertas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#area_ofertas h2{
+    color: var(--textColor);
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 2em;
+}
+
+#scroll_productos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Todos los Productos */
+
+#area_productos{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+}
+
+#area_productos h2{
+    color: var(--textColor);
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 2em;
+    text-align: center;
+}
+
+#all_productos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* tarjetas de productos */
+
+.tarjeta_producto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 400px;
+    margin: 20px;
+    background-color: var(--fondoTarjeta);
+    border-radius: var(--radioGeneral);
+    box-shadow: 2px 2px 10px #cacaca;
+}
+
+.imagen_producto{
+    width: 80%;
+    aspect-ratio: 1/1;
+}
+
+.detalles_producto{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.detalles_producto .marca{
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.detalles_producto .modelo{
+    font-weight: 400;
+    font-size: 1.2rem; 
+}
+
+.detalles_producto .precio{
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 2px 0;
+}
+
+.detalles_producto .precio span{
+    font-weight: 700;
+}
+
+.acciones_producto{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_cart_button{
+    border-radius: 10px;
+    background-color: var(--botonGeneral);
+    margin-top: 5px;
+    padding: 5px 10px;
+    color: var(--textInverso);
+    border: none;
+    font-size: 1.2rem;
+}
+
+
+
+/* Footer */
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+/* Adaptaciones para pantallas más grandes */
+
+/* Categorías */
+
+@media (min-width:700px){
+    #categorias{
+        flex-direction: row;
+    }
+
+    .categoria:hover{
+        width: 350px;
+        max-width: 350px;
+        font-size: 1.6rem;
+        font-weight: 700;
+        transition: all ease-in-out 500ms;
+        cursor: pointer;
+    }
+    
+}
