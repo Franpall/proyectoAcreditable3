@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', , productos=mostrar_productos())
+    return render_template('index.html', productos=mostrar_productos())
 
 @app.route('/login')
 def iniciarSesion():
