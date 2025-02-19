@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franpal Store</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <h1>Franpal Store</h1>
+        <div>
+        <!-- {% if usuario_logueado %} -->
+        <!-- {% else %} -->
+            <a id="perfil_btn" href="{{ url_for('iniciarSesion') }}">Perfil</a>
+        <!-- {% endif %} -->
+        </div>
+    </header>
+    <section id="area_descripcion">
+        <div id="producto">
+            <article class="tarjeta_producto">
+                <h2>Lenovo Ideapad 3</h2>
+                <div class="imagen-descripcion">
+                    <img class="imagen_producto" src="lenovo-ideapad.jpg" alt="Lenovo ideapad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Ideapad 3</p>
+                        <p class="color">Color:</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <p class="cantidad">Cantidad</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+
+
+
+
+
+</body>
+</html>
