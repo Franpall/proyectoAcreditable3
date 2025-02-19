@@ -5,28 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FranpalStore</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='authStyle.css') }}">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Inicio de Sesión</h2>
-        <form>
-            <img src="img/img usuario.svg" width="30" height="30">
-            <label for="username">Usuario</label>
-            <input type="text" id="username" name="username" required>
+    <header>
+        <h1>Franpal Store</h1>
+    </header>
+    <main class="general_container">
+        <div class="login-container">
+            <h2>Inicio de Sesión</h2>
+            <form>
+                <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="30" height="30">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" required>
 
-            <img src="img/img contraseña.svg" width="30" height="30">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" required>
+                <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="30" height="30">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
 
-            <a href="#">¿Olvido su contraseña?</a>
+                <a href="#">¿Olvidó su contraseña?</a>
 
-            <button class="btn">Iniciar Sesión</button>
-            <button class="btn">No tengo cuenta</button>
-        </form>
-    </div>
+                <button class="btn">Iniciar Sesión</button>
+                <button class="btn">No tengo cuenta</button>
+            </form>
+        </div>
+    </main>
     <footer>
-        <h3>Todos los derechos reservados - 2025</h3>
+        <p>Todos los derechos reservados - 2025</p>
     </footer>
 </body>
 </html>
