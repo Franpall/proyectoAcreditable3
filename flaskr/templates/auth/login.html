@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FranpalStore</title>
+    <title>Iniciar Sesión - Franpal Store</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='authStyle.css') }}">
 </head>
@@ -27,7 +27,7 @@
                 <a href="#">¿Olvidó su contraseña?</a>
 
                 <button class="btn">Iniciar Sesión</button>
-                <button class="btn">No tengo cuenta</button>
+                <a class="btn" href="{{ url_for('registrarse') }}">No tengo cuenta</a>
             </form>
         </div>
     </main>
