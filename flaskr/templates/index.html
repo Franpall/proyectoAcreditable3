@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Franpal Store</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
         <h1>Franpal Store</h1>
-        <div>
-        <!-- {% if usuario_logueado %} -->
-        <!-- {% else %} -->
-            <a id="login_btn" href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
-        <!-- {% endif %} -->
+        <div id="contralogo_area">
+            <!-- aqui va un IF el usuario está logeado -->
+            <!-- <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
+            <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a> -->
+            <!-- aqui va un ELSE -->
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
+                <hr>   
+                <a href="{{ url_for('registrarse') }}">Registrarse</a>
+            </div>
         </div>
     </header>
     <main>
@@ -33,53 +39,188 @@
         </section>
         <section id="area_ofertas">
             <h2>Ofertas</h2>
-            {% for producto in productos %}
-                {% if producto[5] < 100 %} 
-                <div id="scroll_productos">
-                    <article class="tarjeta_producto">
-                        <img class="imagen_producto" src="lenovo-thinkpad.jpg" alt="Lenovo Thinkpad">
-                        <div class="detalles_producto">
-                            <p class="marca">{{producto[1]}}</p>
-                            <p class="modelo">{{producto[2]}}</p>
-                            <p class="precio"> <span>US$</span> {{producto[5]}}</p>
-                            <div class="acciones_producto">
-                                <!--{% if usuario_logueado %}    ADAPTAR BOTON CUANDO ESTÉ LISTO EL CARRITO -->
-                                <button class="add_cart_button">Agregar Al Carrito</button>                                    
-                                <!-- {% else %} -->
-                                <!-- <button class="add_cart_button">Agregar Al Carrito</button>  -->
-                                <!-- {% endif %} -->
-                            </div>
+            <div id="scroll_productos">
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
                         </div>
-                    </article>
-                </div>
-                {% endif %}
-            {% endfor %}
+                    </div>
+                </article>
+
+
+                <!-- Vista Previa antes de imprementar un bucle FOR para los productos -->
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <!--  -->
+
+
+            </div>
         </section>
+        
         <section id="area_productos">
             <h2>Todos Nuestros Productos</h2>
-            {% for producto in productos %}
-                <div id="all_productos">
-                        <article class="tarjeta_producto">
-                            <img class="imagen_producto" src="{{ producto[4] }}" alt="Lenovo Thinkpad">
-                            <div class="detalles_producto">
-                                <p class="marca">{{producto[1]}}</p>
-                                <p class="modelo">{{producto[2]}}</p>
-                                <p class="precio"> <span>US$</span> {{producto[5]}}</p>
-                                <div class="acciones_producto">
-                                    <!--{% if usuario_logueado %}    ADAPTAR BOTON CUANDO ESTÉ LISTO EL CARRITO -->
-                                    <button class="add_cart_button">Agregar Al Carrito</button>                                    
-                                    <!-- {% else %} -->
-                                    <!-- <button class="add_cart_button">Agregar Al Carrito</button>  -->
-                                    <!-- {% endif %} -->
-                                </div>
-                            </div>
-                        </article>
-                </div>
-            {% endfor %}
+            <div id="all_productos">
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+
+
+
+                <!-- Vista Previa antes de imprementar un bucle FOR para los productos -->
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="tarjeta_producto">
+                    <img class="imagen_producto" src="{{ url_for('static', filename='img/productos/lenovo-thinkpad.jpg') }}" alt="Lenovo Thinkpad">
+                    <div class="detalles_producto">
+                        <p class="marca">Lenovo</p>
+                        <p class="modelo">Thinkpad</p>
+                        <p class="precio"> <span>US$</span> 250</p>
+                        <div class="acciones_producto">
+                            <button class="add_cart_button">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <!--  -->
+
+
+
+
+            </div>
         </section>
     </main>
     <footer>
         <p>Todos los derechos reservados - 2025</p>
     </footer>
+    <script src="{{ url_for('static', filename='menus.js') }}"></script>
 </body>
 </html>
