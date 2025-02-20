@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franpal Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='detallesStyle.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Franpal Store</h1>
+        <div id="contralogo_area">
+            <!-- aqui va un IF el usuario está logeado -->
+            <!-- <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
+            <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a> -->
+            <!-- aqui va un ELSE -->
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
+                <hr>   
+                <a href="{{ url_for('registrarse') }}">Registrarse</a>
+            </div>
+        </div>
+    </header>
+    <section id="area_descripcion">
+        <div id="producto">
+            <article class="preview_producto">
+                <h2>Lenovo Ideapad 3</h2>
+                <div class="imagen-descripcion">
+                    <div id="imagen_box">
+                        <img class="imagen_preview" src="{{ url_for('static', filename='img/productos/lenovo-ideapad.jpg') }}" alt="Lenovo ideapad">
+                    </div>
+                    <div class="detalles_preview">
+                        <p class="marca_preview">Lenovo</p>
+                        <p class="modelo_preview">Ideapad 3</p>
+                        <p class="color_preview">Color:</p>
+                        <p class="precio_preview"> <span>US$</span> 250</p>
+                        <p class="cantidad_preview">Cantidad</p>
+                        <div class="acciones_producto_preview">
+                            <button class="add_cart_button_preview">Agregar Al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <footer>
+        <p>Todos los derechos reservados - 2025</p>
+    </footer>
+    <script src="{{ url_for('static', filename='menus.js') }}"></script>
+</body>
+</html>
