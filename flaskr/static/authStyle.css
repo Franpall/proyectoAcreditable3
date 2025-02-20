@@ -1,20 +1,14 @@
 @import url(style.css);
 
-body {
-    background-image: url(/img/fondo.login.jfif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0;
-}
-
 .general_container{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
 }
 
 .login-container {
+    margin-top: 20px;
     background-color: var(--fondoTarjeta);
     padding: 15px;
     border-radius: 20px;
@@ -100,6 +94,7 @@ body {
 }
 
 .register-container {
+    margin-top: 20px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 30px;
