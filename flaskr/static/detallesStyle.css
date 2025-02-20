@@ -1,0 +1,131 @@
+/* Método First Mobile */
+
+/* Ajustes generales */
+
+@import url(style.css);
+
+/* Descripcion */
+
+
+/* tarjetas de producto */
+
+.preview_producto{
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 20px;
+    background-color: var(--fondoTarjeta);
+    border-radius: var(--radioGeneral);
+    box-shadow: 2px 2px 10px #cacaca;
+    min-height: 620px;
+}
+
+.preview_producto h2{
+    display: inline-block;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.imagen-descripcion{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#imagen_box{
+    width: 40%;
+    box-sizing: content-box;
+    aspect-ratio: 1/1;
+    align-items: left;
+}
+
+.imagen_preview{
+    width: 100%;
+    box-sizing: content-box;
+    aspect-ratio: 1/1;
+    align-items: left;
+}
+
+.detalles_preview{
+    padding-left: 100px;
+    width: 80%;
+    display: flex;
+    justify-content: right;
+    align-items: start;
+    flex-direction: column;
+}
+
+.detalles_preview .marca_preview{
+    font-weight: 800;
+    font-size: 2rem;
+    padding-top: 30px;
+}
+
+.detalles_preview .modelo_preview{
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding-top: 10px;
+}
+
+.detalles_preview .color_preview{
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding-top: 10px;
+}
+
+.detalles_preview .precio_preview{
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 2px 0;
+    padding-top: 10px;
+}
+
+.detalles_preview .precio_preview span{
+    font-weight: 700;
+}
+
+.detalles_preview .cantidad_preview{
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 2px 0;
+    padding-top: 10px;
+}
+
+.acciones_producto_preview{
+    width: 100%;
+    margin-left: -50px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.add_cart_button_preview{
+    border-radius: 10px;
+    background-color: var(--botonGeneral);
+    margin-top: 5px;
+    padding: 5px 10px;
+    color: var(--textInverso);
+    border: none;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adaptacion a pantallas mas grandes */
+
+@media (min-width:700px){
+    .imagen-descripcion{
+        flex-direction: row;
+    }
+
+    #imagen_box{
+        padding-top: 10px;
+        padding-left: 70px;
+    }
+    .preview_producto{
+        min-height: 350px;
+    }
+}
