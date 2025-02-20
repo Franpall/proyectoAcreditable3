@@ -150,10 +150,6 @@
         flex-direction: row;
     }
 
-    #imagen_box{
-        padding-top: 10px;
-        padding-left: 70px;
-    }
     .preview_producto{
         min-height: 350px;
     }
