@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franpal Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='detallesStyle.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">Franpal Store</a></h1>
+        <div id="contralogo_area">
+            <!-- aqui va un IF el usuario está logeado -->
+            <!-- <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="">Cerrar Sesión</a>
+            </div> -->
+            <!-- aqui va un ELSE -->
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
+                <hr>   
+                <a href="{{ url_for('registrarse') }}">Registrarse</a>
+            </div>
+            <!-- aqui va un End if -->
+        </div>
+    </header>
+    <footer>
+        <p>Todos los derechos reservados - 2025</p>
+    </footer>
+    <script src="{{ url_for('static', filename='menus.js') }}"></script>
+</body>
+</html>

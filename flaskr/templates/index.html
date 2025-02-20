@@ -8,21 +8,21 @@
 </head>
 <body>
     <header>
-        <h1>Franpal Store</h1>
+        <h1><a href="{{ url_for('index') }}">Franpal Store</a></h1>
         <div id="contralogo_area">
             <!-- aqui va un IF el usuario está logeado -->
-            <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
+            <!-- <a class="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
             <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
             <div id="float_menu" class="hint">
                 <a href="">Cerrar Sesión</a>
-            </div>
+            </div> -->
             <!-- aqui va un ELSE -->
-            <!-- <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
             <div id="float_menu" class="hint">
                 <a href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
                 <hr>   
                 <a href="{{ url_for('registrarse') }}">Registrarse</a>
-            </div> -->
+            </div>
             <!-- aqui va un End if -->
         </div>
     </header>
