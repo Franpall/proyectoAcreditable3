@@ -40,6 +40,11 @@
                     <p class="modelo_preview">Ideapad 3</p>
                     <p class="precio_preview"> <span>US$</span> 250</p>
                     <p class="cantidad_preview">Cantidad</p>
+                    <div class="cantidad-selector">
+                        <button id="decremento">-</button>
+                        <input type="number" id="cantidad" value="1" min="1" readonly>
+                        <button id="incremento">+</button>
+                    </div>
                     <div class="acciones_producto_preview">
                         <button class="add_cart_button_preview">Agregar Al Carrito</button>
                     </div>
@@ -80,5 +85,6 @@
         <p>Todos los derechos reservados - 2025</p>
     </footer>
     <script src="{{ url_for('static', filename='menus.js') }}"></script>
+    <script src="{{ url_for('static', filename='cantidad-selector.js') }}"></script>
 </body>
 </html>
