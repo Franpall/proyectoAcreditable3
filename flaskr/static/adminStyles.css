@@ -89,6 +89,74 @@ p {
   margin-bottom: 1rem;
 }
 
+#product_form{
+  display: flex;
+  flex-direction: column;
+}
+
+.product_form_area{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+#right_product_form{
+  margin-top: 6px;
+}
+
+#checkbox_producto{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+#product_descripcion_input{
+  overflow: hidden;
+  resize: vertical;
+  height: 150px;
+  vertical-align: top;
+}
+
+.imagen_label{
+  font-weight: bold;
+}
+
+/* Botones del admin */
+
+.actions_td{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.actions_td a{
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  padding: 2px 5px;
+}
+
+.actions_td a:hover{
+  text-decoration: none;
+  color: white;
+  box-shadow: 2px 2px 5px #062c33;
+}
+
+.delete_btn_admin{
+  background-color: rgb(187, 27, 27);
+}
+
+.update_btn_admin{
+  background-color: rgb(28, 116, 199);
+}
+
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
@@ -587,6 +655,11 @@ pre code {
 @media (min-width: 992px) {
   .container-lg, .container-md, .container-sm, .container {
     max-width: 960px;
+  }
+
+  #product_form{
+    display: flex;
+    flex-direction: row;
   }
 }
 @media (min-width: 1200px) {
