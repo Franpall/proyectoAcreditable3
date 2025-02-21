@@ -1,0 +1,120 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Ventas</li>
+        </ol>
+        <div class="card mb-4">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Ventas
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <!-- {% if products|length < 1 %} -->
+                        <!-- <h4>No hay productos en el inventario, registre sus productos ahora!</h4> -->
+                        <!-- {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.marca }}</td>
+                                    <td>{{ product.modelo }}</td>
+                                    <td>{{ product.stock }}</td>
+                                    <td>{{ product.precio }}</td>
+                                    <td class="actions_td">
+                                        <a href="" class="delete_btn_admin">Borrar</a>
+                                        <br>
+                                        <a href="" class="update_btn_admin">Editar</a>  
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %} -->
+
+ <!--Prueba temporal sin base de datos  -->
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>003</td>
+                                    <td>30-12-2025</td>
+                                    <td>03:33pm</td>
+                                    <td>Lenovo Ideapad 3</td>
+                                    <td>1</td>
+                                    <td>350</td>
+                                    <td>Pagado</td>
+                                </tr>
+                                <tr>
+                                    <td>007</td>
+                                    <td>30-12-2025</td>
+                                    <td>03:35pm</td>
+                                    <td>Lenovo Ideapad 3</td>
+                                    <td>3</td>
+                                    <td>1050</td>
+                                    <td>Pendiente</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
