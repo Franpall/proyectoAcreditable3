@@ -10,20 +10,24 @@
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item active">Resumen General</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header">Products</div>
+            <div class="card-header">Productos</div>
             <div class="card-body">
                 <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    Products Table
+                    Tabla de Productos
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         {% if products|length < 1 %}
-                        <h4>There are no Products, add one above</h4>
+                        <h4>No hay productos en el inventario, regístrelos en
+                            <a href="/productos">
+                                Productos
+                            </a>
+                        </h4>
                         {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -55,54 +59,6 @@
                             </tbody>
                         </table>
                         {% endif %}
-                </div>
-            </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">Locations</div>
-            <div class="card-body">
-                <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Locations Table
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <!-- {% if locations|length < 1 %} -->
-                        <h4>There are no Locations, add one above</h4>
-                        <!-- {% else %}
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Location Name</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Location Name</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                {% for location in locations %}
-                                <tr>
-                                    <td>{{ location.location_id }}</td>
-                                    <td>{{ location.date_created.date() }}</td>
-                                    <td>
-                                        <a href="/delete-location/{{ location.location_id }}">Delete</a>
-                                        <br>
-                                        <a href="/update-location/{{ location.location_id }}">Update</a>  
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %} -->
                 </div>
             </div>
                 </div>
