@@ -9,18 +9,42 @@
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="/products/">Products</a></li>
-            <li class="breadcrumb-item active">Update Product</li>
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
+            <li class="breadcrumb-item active">Actualizar Producto</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header">Update Product</div>
+            <div class="card-header">Actualizar Producto</div>
             <div class="card-body">
-                <form action="/update-product/{{product.product_id}}" method="POST" id="product_form">
-                    <label for="product_name" class="col-form-label">Product Name</label>
-                    <input type="text" name="product_name" id="product_name" value="{{product.product_id}}">
-                    <br>
-                    <input id="submitProduct" value="Update" class="btn btn-primary">
+                <form action="/products/" method="POST" id="product_form">
+                    <div id="left_product_form" class="product_form_area">
+                        <label for="product_name" class="col-form-label">Marca</label>
+                        <input type="text" name="product_name" id="product_name">
+                        <label for="product_name" class="col-form-label">Modelo</label>
+                        <input type="text" name="product_name" id="product_name">
+                        <label for="product_name" class="col-form-label">Cantidad Disponible</label>
+                        <input type="number" name="product_name" id="product_name">
+                        <label for="product_name" class="col-form-label">Precio</label>
+                        <input type="number" name="product_name" id="product_name">
+                        <label for="opcionesGama" class="col-form-label">Gama del producto:</label>
+                        <select id="opcionesGama" name="opcionesGama">
+                        <option value="opcion1">Económica</option>
+                        <option value="opcion2">Gamer</option>
+                        <option value="opcion3">Alta</option>
+                        </select>
+                    </div>
+                    <div id="right_product_form" class="product_form_area">
+                        <label for="product_descripcion_input">Descripcion</label>
+                        <textarea type="text" name="product_descripcion_input" id="product_descripcion_input"></textarea>
+                        <div id="checkbox_producto">
+                            <label for="product_name" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
+                            <input type="checkbox" name="product_name" id="product_name">
+                        </div>
+                        <label for="product_name" class="col-form-label imagen_label">Imagen:</label>
+                        <input type="file" name="product_name" id="product_name">
+                        <br>
+                        <input id="submitProduct" value="Añadir Producto" class="btn btn-primary">
+                    </div>
                 </form>
             </div>
         </div>
