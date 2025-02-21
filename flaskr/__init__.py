@@ -29,6 +29,14 @@ def verProducto():
 def adminDashboard():
     return render_template('admin/dashboard.html')
 
-@app.route('/products')
-def adminProducts():
+@app.route('/productos')
+def adminProductos():
     return render_template('admin/productos.html')
+
+@app.route('/ventas')
+def adminVentas():
+    return render_template('admin/ventas.html')
+
+@app.route('/editar-producto')
+def adminUpdateUI():
+    return render_template('admin/editarProducto.html')
