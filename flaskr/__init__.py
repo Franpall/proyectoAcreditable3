@@ -22,3 +22,13 @@ def verCarrito():
 @app.route('/producto')
 def verProducto():
     return render_template('producto.html')
+
+# Rutas para administradores
+
+@app.route('/dashboard')
+def adminDashboard():
+    return render_template('admin/dashboard.html')
+
+@app.route('/products')
+def adminProducts():
+    return render_template('admin/productos.html')
