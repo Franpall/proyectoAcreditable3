@@ -10,62 +10,147 @@
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active">Products</li>
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Productos</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header">Products</div>
+            <div class="card-header">Productos</div>
             <div class="card-body">
                 <div class="card mb-4">
-                    <div class="card-header">New Product</div>
+                    <div class="card-header"><b>Nuevo Producto</b></div>
                     <div class="card-body">
                         <form action="/products/" method="POST" id="product_form">
-                            <label for="product_name" class="col-form-label">Product Name</label>
-                            <input type="text" name="product_name" id="product_name">
-                            <input id="submitProduct" value="Add Product" class="btn btn-primary">
+                            <div id="left_product_form" class="product_form_area">
+                                <label for="product_name" class="col-form-label">Marca</label>
+                                <input type="text" name="product_name" id="product_name">
+                                <label for="product_name" class="col-form-label">Modelo</label>
+                                <input type="text" name="product_name" id="product_name">
+                                <label for="product_name" class="col-form-label">Cantidad Disponible</label>
+                                <input type="number" name="product_name" id="product_name">
+                                <label for="product_name" class="col-form-label">Precio</label>
+                                <input type="number" name="product_name" id="product_name">
+                                <label for="opcionesGama" class="col-form-label">Gama del producto:</label>
+                                <select id="opcionesGama" name="opcionesGama">
+                                <option value="opcion1">Económica</option>
+                                <option value="opcion2">Gamer</option>
+                                <option value="opcion3">Alta</option>
+                                </select>
+                            </div>
+                            <div id="right_product_form" class="product_form_area">
+                                <label for="product_descripcion_input">Descripcion</label>
+                                <textarea type="text" name="product_descripcion_input" id="product_descripcion_input"></textarea>
+                                <div id="checkbox_producto">
+                                    <label for="product_name" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
+                                    <input type="checkbox" name="product_name" id="product_name">
+                                </div>
+                                <label for="product_name" class="col-form-label imagen_label">Imagen:</label>
+                                <input type="file" name="product_name" id="product_name">
+                                <br>
+                                <input id="submitProduct" value="Añadir Producto" class="btn btn-primary">
+                            </div>
                         </form>
                     </div>
                 </div>
                 <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
-                    Products Table
+                    Inventario de Productos
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <!-- {% if products|length < 1 %} -->
-                        <h4>There are no Products, add one above</h4>
+                        <!-- <h4>No hay productos en el inventario, registre sus productos ahora!</h4> -->
                         <!-- {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 {% for product in products %}
                                 <tr>
-                                    <td>{{ product.product_id }}</td>
-                                    <td>{{ product.date_created.date() }}</td>
-                                    <td>
-                                        <a href="/delete-product/{{ product.product_id }}">Delete</a>
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.marca }}</td>
+                                    <td>{{ product.modelo }}</td>
+                                    <td>{{ product.stock }}</td>
+                                    <td>{{ product.precio }}</td>
+                                    <td class="actions_td">
+                                        <a href="" class="delete_btn_admin">Borrar</a>
                                         <br>
-                                        <a href="/update-product/{{ product.product_id }}">Update</a>  
+                                        <a href="" class="update_btn_admin">Editar</a>  
                                     </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                         {% endif %} -->
+
+
+ <!--Prueba temporal sin base de datos  -->
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Lenovo</td>
+                                    <td>Ideapad 3</td>
+                                    <td>40</td>
+                                    <td>350</td>
+                                    <td class="actions_td">
+                                        <a href="" class="delete_btn_admin">Borrar</a>
+                                        <br>
+                                        <a href="" class="update_btn_admin">Editar</a>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>006</td>
+                                    <td>HP</td>
+                                    <td>RJ45</td>
+                                    <td>100</td>
+                                    <td>250</td>
+                                    <td class="actions_td">
+                                        <a href="" class="delete_btn_admin">Borrar</a>
+                                        <br>
+                                        <a href="" class="update_btn_admin">Editar</a>  
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>
                 </div>
