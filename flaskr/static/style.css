@@ -17,10 +17,13 @@
     --textInverso:white;
     --linkColor:#2b2b2b;
     --fondoTarjeta:#ffffff;
-    --fondoBanner:rgb(19, 18, 18);
-    --botonGeneral:#2988ec;
+    --fondoBanner:#191919;
+    --botonGeneral:#2453b8;
+    --botonHover:#2370c2;
     /* Bordes */
     --radioGeneral:20px;
+    /* Sombras */
+    --sombrasDeCajas: 2px 2px 10px #cacaca;
 }
 
 body {
@@ -315,7 +318,8 @@ header h1 a{
 
 .add_cart_button:hover{
     cursor: pointer;
-    box-shadow: 2px 2px 10px #cacaca;
+    background-color: var(--botonHover);
+    box-shadow: var(--sombrasDeCajas);
 }
 
 
@@ -327,6 +331,8 @@ footer{
     justify-content: center;
     align-items: center;
     height: 70px;
+    background-color: var(--fondoBanner);
+    color: var(--textInverso);
 }
 
 /* Adaptaciones para pantallas más grandes */
