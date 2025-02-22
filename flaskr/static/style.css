@@ -90,6 +90,7 @@ header h1 a{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .hint{
@@ -145,7 +146,7 @@ header h1 a{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: var(--textInverso);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
@@ -165,20 +166,21 @@ header h1 a{
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: 500;
-    color: #000;
-    background-color: #fff;
+    color: var(--textColor);
+    background-color: var(--textInverso);
     border: none;
     border-radius: 45px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
+    text-decoration: none;
 }
 
 .btn-banner:hover{
-    background-color: #2453b8;
+    background-color: var(--botonGeneral);
     box-shadow: 0px 15px 20px rgba(46, 110, 229, 0.4);
-    color: #fff;
+    color: var(--textInverso);
     transform: translateY(-7px);
 }
 
