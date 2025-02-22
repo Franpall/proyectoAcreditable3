@@ -66,13 +66,13 @@ header h1 a{
     align-items: center;
     text-decoration: none;
     color: var(--linkColor);
-    transition: all ease-in-out 700ms;   
+    transition: transform 0.3s ease;   
     height: 80%;
 }
 
 .user_btn:hover{
     border-bottom: solid 1px black;
-    transition: all ease-in-out 200ms;
+    transform: scale(1.1);
     cursor: pointer;
 }
 
