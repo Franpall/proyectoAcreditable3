@@ -328,10 +328,13 @@ footer{
         flex-direction: row;
     }
 
+    .categoria{ 
+        transition: all 500ms ease; 
+    }
+
     .categoria:hover{
-        font-size: 1.6rem;
+        transform: scale(1.1);
         font-weight: 700;
-        transition: all ease-in-out 500ms;
         cursor: pointer;
     }
 
@@ -344,9 +347,12 @@ footer{
 }
 
 @media (min-width:1035px){
-    .categoria:hover{
-        max-width: 350px;
-        width: 350px;
+    .categoria{
+        transition: transform 0.3s ease, font-size 500ms ease, font-weight 500ms ease;
     }
-    
+
+    .categoria:hover{
+        transform: scale(1.1);
+    }
+
 }
