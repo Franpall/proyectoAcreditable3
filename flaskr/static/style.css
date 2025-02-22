@@ -108,8 +108,13 @@ header h1 a{
     justify-content: center;
     align-items: center;
     height: 50px;
+    width: 100%;
     text-decoration: none;
     color: var(--linkColor);
+}
+
+#float_menu a:hover{
+    background-color: lightgray;
 }
 
 /* Categorías */
