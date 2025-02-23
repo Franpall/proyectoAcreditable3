@@ -8,7 +8,7 @@
 }
 
 .login-container {
-    margin-top: 130px;
+    margin-top: 20px;
     background-color: var(--fondoTarjeta);
     padding: 15px;
     border-radius: 20px;
@@ -94,7 +94,7 @@
 }
 
 .register-container {
-    margin-top: 60px;
+    margin-top: 20px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 30px;
@@ -174,4 +174,24 @@
 .register-container .btn:hover {
     background-color: var(--botonHover);
     transform: scale(1.05);
+}
+
+/* Responsive */
+
+@media (min-height:695px){
+    .login-container {
+        margin-top: 100px;
+    }
+    .register-container {
+        margin-top: 80px;
+    }
+}
+
+@media (min-height:900px){
+    .login-container {
+        margin-top: 150px;
+    }
+    .register-container {
+        margin-top: 130px;
+    }
 }
