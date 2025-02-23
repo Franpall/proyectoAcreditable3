@@ -77,7 +77,7 @@
 }
 
 .login-container .btn {
-    background-color: #007bff;
+    background-color: var(--botonGeneral);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -89,7 +89,7 @@
 }
 
 .login-container .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--botonHover);
     transform: scale(1.05);
 }
 
@@ -160,7 +160,7 @@
 .register-container .btn {
     display: inline-block;
     width: auto;
-    background-color: #007bff;
+    background-color: var(--botonGeneral);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -172,6 +172,6 @@
 }
 
 .register-container .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--botonHover);
     transform: scale(1.05);
 }
