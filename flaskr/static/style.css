@@ -26,6 +26,10 @@
     --sombrasDeCajas: 2px 2px 10px #cacaca;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body {
     width: 100%;
     background-color: var(--fondoGeneral);
