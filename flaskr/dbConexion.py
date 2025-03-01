@@ -70,12 +70,30 @@ def reducir_stock(id_producto):
         return resultado"""
 
 # Area de Registro
+
 def registrar_cliente(usuario, correo, contraseña, rol):
     conn = crear_conexion()
     cursor = conn.cursor()
+
+    # Verificar si el usuario ya existe
+    cursor.execute("SELECT usuario FROM usuario WHERE usuario = %s", (usuario,))
+    resultado_usuario = cursor.fetchone()
+
+    # Verificar si el correo ya existe
+    cursor.execute("SELECT correo FROM usuario WHERE correo = %s", (correo,))
+    resultado_correo = cursor.fetchone()
+
+    if resultado_usuario:
+        conn.close()
+        return False, "El usuario ya existe"
+    if resultado_correo:
+        conn.close()
+        return False, "El correo ya existe"
+
     cursor.execute(
         'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
         (usuario, correo, contraseña, rol)
     )
     conn.commit()
     conn.close()
+    return True, "Usuario registrado con exito"
