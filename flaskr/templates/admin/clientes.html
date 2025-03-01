@@ -1,0 +1,74 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Clientes</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Clientes</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Todos Los Clientes
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <!-- {% if products|length < 1 %} -->
+                        <!-- <h4>No hay clientes registrados</h4> -->
+                        <!-- {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.nombre }}</td>
+                                    <td>{{ product.correo }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %} -->
+
+
+ <!--Prueba temporal sin base de datos  -->
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Francisco</td>
+                                    <td>francisco@gmail.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
