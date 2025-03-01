@@ -111,3 +111,16 @@ def mostrar_clientes():
         usuarios.append(Usuario(cliente[0],cliente[1],cliente[2]))
     conn.close()
     return usuarios
+
+# Area de administradores
+
+def mostrar_admins():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'admin'")
+    admins = cursor.fetchall()
+    usuarios = list()
+    for admin in admins:
+        usuarios.append(Usuario(admin[0],admin[1],admin[2]))
+    conn.close()
+    return usuarios

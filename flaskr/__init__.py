@@ -40,7 +40,8 @@ def adminClientes():
 
 @app.route('/admins')
 def adminAdmins():
-    return render_template('admin/admins.html')
+    usuarios = mostrar_admins()
+    return render_template('admin/admins.html', admins=usuarios)
 
 @app.route('/ventas')
 def adminVentas():
@@ -72,5 +73,4 @@ def registerAdmin():
         contraseña = request.form['password']
 
         registrar_cliente(usuario, correo, contraseña, 2)
-        #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
-        return render_template('admin/dashboard.html')
+        return adminAdmins()
