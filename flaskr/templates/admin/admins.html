@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <!-- {% if products|length < 1 %} -->
-                        <!-- <h4>No hay clientes registrados</h4> -->
-                        <!-- {% else %}
+                        {% if admins|length < 1 %}
+                        <h4>No hay clientes registrados</h4>
+                        {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -56,11 +56,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for product in products %}
+                                {% for admin in admins %}
                                 <tr>
-                                    <td>{{ product.id }}</td>
-                                    <td>{{ product.nombre }}</td>
-                                    <td>{{ product.correo }}</td>
+                                    <td>{{ admin.id }}</td>
+                                    <td>{{ admin.nombre }}</td>
+                                    <td>{{ admin.correo }}</td>
                                     <td class="actions_td">
                                         <a href="" class="delete_btn_admin">Borrar</a>  
                                     </td>
@@ -68,30 +68,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        {% endif %} -->
-
-
- <!--Prueba temporal sin base de datos  -->
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>006</td>
-                                    <td>Jose</td>
-                                    <td>jose@gmail.com</td>
-                                    <td class="actions_td">
-                                        <a href="" class="delete_btn_admin">Borrar</a>  
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {% endif %}
                 </div>
             </div>
                 </div>
