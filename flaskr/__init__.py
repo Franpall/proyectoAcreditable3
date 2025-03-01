@@ -35,7 +35,8 @@ def adminProductos():
 
 @app.route('/clientes')
 def adminClientes():
-    return render_template('admin/clientes.html')
+    usuarios = mostrar_clientes()
+    return render_template('admin/clientes.html', clientes=usuarios)
 
 @app.route('/admins')
 def adminAdmins():

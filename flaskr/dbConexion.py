@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+from flaskr.models import Usuario
 
 def crear_conexion():
     try:
@@ -97,3 +98,17 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     conn.commit()
     conn.close()
     return True, "Usuario registrado con exito"
+
+# Area de clientes
+
+def mostrar_clientes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'cliente'")
+    clientes = cursor.fetchall()
+    for cliente in clientes:
+        usuarios = [
+            Usuario(cliente[0],cliente[1],cliente[2])
+        ]
+    conn.close()
+    return usuarios
