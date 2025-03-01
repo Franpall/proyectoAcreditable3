@@ -106,9 +106,8 @@ def mostrar_clientes():
     cursor = conn.cursor()
     cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'cliente'")
     clientes = cursor.fetchall()
+    usuarios = list()
     for cliente in clientes:
-        usuarios = [
-            Usuario(cliente[0],cliente[1],cliente[2])
-        ]
+        usuarios.append(Usuario(cliente[0],cliente[1],cliente[2]))
     conn.close()
     return usuarios
