@@ -7,7 +7,7 @@ def crear_conexion():
             host='localhost',       
             user='root',     
             password='', 
-            database='franpalbd'    
+            database='franpalstore'    
         )
         if conn.is_connected():
             return conn
@@ -15,7 +15,7 @@ def crear_conexion():
         print(f"Error al conectarse a la base de datos: {e}")
         return None
 
-def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
+"""def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute(
@@ -34,7 +34,7 @@ def mostrar_productos():
     cursor.execute('SELECT * FROM productos')
     productos = cursor.fetchall()
     conn.close()
-    return productos
+    return productos"""
 
 """def mostrar_producto(id_producto):
     conn = sqlite3.connect('flaskr/KibaStore.db')
@@ -57,24 +57,25 @@ def reducir_stock(id_producto):
     else:
         return "Alguien compró antes que tú y se agotó :[ "
 
+"""
+
 # Area de Login
-def iniciar_sesionBD(usuario, contraseña):
+"""def iniciar_sesionBD(usuario, contraseña):
     conn = sqlite3.connect('flaskr/KibaStore.db')
     cursor = conn.cursor()
     cursor.execute('SELECT rol FROM cuentas WHERE usuario=? AND contraseña=?', (usuario, contraseña))
     resultado = cursor.fetchone()
     if resultado:
         resultado, = resultado
-        return resultado
+        return resultado"""
 
 # Area de Registro
-def registrar_cliente(usuario, contraseña, rol):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
+def registrar_cliente(usuario, correo, contraseña, rol):
+    conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute(
-        'INSERT INTO cuentas (usuario, contraseña, rol) VALUES (?, ?, ?)',
-        (usuario, contraseña, rol)
-        #el rol = 1 es cliente y rol = 2 es admin
+        'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
+        (usuario, correo, contraseña, rol)
     )
     conn.commit()
-    conn.close()"""
+    conn.close()
