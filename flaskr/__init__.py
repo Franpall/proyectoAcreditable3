@@ -33,6 +33,14 @@ def adminDashboard():
 def adminProductos():
     return render_template('admin/productos.html')
 
+@app.route('/clientes')
+def adminClientes():
+    return render_template('admin/clientes.html')
+
+@app.route('/admins')
+def adminAdmins():
+    return render_template('admin/admins.html')
+
 @app.route('/ventas')
 def adminVentas():
     return render_template('admin/ventas.html')
@@ -41,7 +49,7 @@ def adminVentas():
 def adminUpdateUI():
     return render_template('admin/editarProducto.html')
 
-# Lógica para el registro
+# Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
 def registerSolicitud():
     if request.method == 'POST':
@@ -52,3 +60,16 @@ def registerSolicitud():
         registrar_cliente(usuario, correo, contraseña, 1)
         #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
         return render_template('auth/login.html')
+    
+# Lógica para el registro de administradores
+
+@app.route('/addAdmin', methods=('GET', 'POST'))
+def registerAdmin():
+    if request.method == 'POST':
+        usuario = request.form['admin_name']
+        correo = request.form['admin_email']
+        contraseña = request.form['password']
+
+        registrar_cliente(usuario, correo, contraseña, 2)
+        #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
+        return render_template('admin/dashboard.html')
