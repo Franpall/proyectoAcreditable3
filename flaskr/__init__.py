@@ -1,5 +1,5 @@
-from flask import Flask, render_template, redirect, url_for
-# from flaskr.dbConexion import * deje esa vaina para después
+from flask import Flask, render_template, redirect, url_for, request
+from flaskr.dbConexion import * 
 
 app = Flask(__name__)
 
@@ -40,3 +40,15 @@ def adminVentas():
 @app.route('/editar-producto')
 def adminUpdateUI():
     return render_template('admin/editarProducto.html')
+
+# Lógica para el registro
+@app.route('/registerSolicitud', methods=('GET', 'POST'))
+def registerSolicitud():
+    if request.method == 'POST':
+        usuario = request.form['username']
+        correo = request.form['email']
+        contraseña = request.form['password']
+
+        registrar_cliente(usuario, correo, contraseña, 1)
+        #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
+        return render_template('auth/login.html')
