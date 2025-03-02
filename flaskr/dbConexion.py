@@ -118,6 +118,7 @@ def contarClientes():
     cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente';")
     resultado = cursor.fetchone()
     clientesLen = resultado[0]
+    conn.close()
     return clientesLen
 
 # Area de administradores
@@ -132,3 +133,12 @@ def mostrar_admins():
         usuarios.append(Usuario(admin[0],admin[1],admin[2]))
     conn.close()
     return usuarios
+
+def eliminar_admin(id):
+    conn = crear_conexion()
+    print(id)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
+    conn.commit()
+    conn.close()
+    return "Eliminado con exito"

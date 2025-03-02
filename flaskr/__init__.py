@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flaskr.dbConexion import * 
+from flaskr.dbConexion import *
 
 app = Flask(__name__)
 
@@ -75,3 +75,9 @@ def registerAdmin():
 
         registrar_cliente(usuario, correo, contraseña, 2)
         return adminAdmins()
+    
+# Lógica para eliminar usuarios
+@app.route("/delete/<int:id_admin>")
+def eliminarAdmin(id_admin):
+    eliminar_admin(id_admin)
+    return adminAdmins()
