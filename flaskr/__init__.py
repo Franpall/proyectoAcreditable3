@@ -34,6 +34,10 @@ def adminDashboard():
 def adminProductos():
     return render_template('admin/productos.html')
 
+@app.route('/categorias')
+def adminCategorias():
+    return render_template('admin/categorias.html')
+
 @app.route('/clientes')
 def adminClientes():
     usuarios = mostrar_clientes()
