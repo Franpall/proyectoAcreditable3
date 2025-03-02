@@ -15,7 +15,7 @@
     <main class="general_container">
         <div class="login-container">
             <h2>Inicio de Sesión</h2>
-            <form>
+            <form action="{{ url_for('loginSolicitud') }}" method="post" id="login-form">
                 <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="30" height="30">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" required>
