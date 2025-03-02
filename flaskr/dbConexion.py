@@ -61,14 +61,16 @@ def reducir_stock(id_producto):
 """
 
 # Area de Login
-"""def iniciar_sesionBD(usuario, contraseña):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
+def iniciar_sesion(usuario, contraseña):
+    conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT rol FROM cuentas WHERE usuario=? AND contraseña=?', (usuario, contraseña))
+
+    cursor.execute('SELECT rol FROM usuario WHERE usuario= %s AND contraseña= %s', (usuario, contraseña))
     resultado = cursor.fetchone()
+    conn.close()
     if resultado:
         resultado, = resultado
-        return resultado"""
+        return resultado
 
 # Area de Registro
 
@@ -84,12 +86,9 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     cursor.execute("SELECT correo FROM usuario WHERE correo = %s", (correo,))
     resultado_correo = cursor.fetchone()
 
-    if resultado_usuario:
+    if resultado_usuario or resultado_correo:
         conn.close()
-        return False, "El usuario ya existe"
-    if resultado_correo:
-        conn.close()
-        return False, "El correo ya existe"
+        return False
 
     cursor.execute(
         'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
@@ -97,7 +96,8 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     )
     conn.commit()
     conn.close()
-    return True, "Usuario registrado con exito"
+
+    return True
 
 # Area de clientes
 
