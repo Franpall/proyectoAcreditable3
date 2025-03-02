@@ -14,7 +14,7 @@
     <main class="general_container">
         <div class="register-container">
             <h2>Registro</h2>
-            <form>
+            <form action="{{ url_for('registerSolicitud') }}" method="post" id="registro-form">
                 <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="20" height="20">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" required>
@@ -35,11 +35,13 @@
                     <a class="btn" href="{{ url_for('iniciarSesion') }}">Ya tengo cuenta</a>
                     <button class="btn">Registrarse</button>
                 </div>
+                <p id="mensaje-error" style="color: red;"></p>
             </form>
         </div>
     </main>
         <footer>
             <p>Todos los derechos reservados - 2025</p>
         </footer>
+        <script src="{{ url_for('static', filename='validaciones.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">Categorias</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Categorias</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Todos Las Categorias
+                </div>
+                <div class="card-body">
+                    <div class="card mb-4">
+                        <div class="card-header"><b>Nueva Categoria</b></div>
+                        <div class="card-body">
+                            <form action="{{ url_for('registerAdmin') }}" method="post" id="admin-register-form">
+                                <div id="left_product_form" class="product_form_area">
+                                    <label for="admin_name" class="col-form-label">Nombre</label>
+                                    <input type="text" name="admin_name" id="admin_name">
+                                    <label for="categpria_img" class="col-form-label">Imagen</label>
+                                    <input type="file" name="categpria_img" id="categpria_img">
+                                    <br>
+                                    <input type="submit" value="Crear Categoria" class="btn btn-primary" >
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        {% if admins|length < 1 %}
+                        <h4>No hay Categorias registradas</h4>
+                        {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for admin in admins %}
+                                <tr>
+                                    <td>{{ admin.id }}</td>
+                                    <td>{{ admin.nombre }}</td>
+                                    <td class="actions_td">
+                                        <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin">Borrar</a>  
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="{{ url_for('static', filename='validaciones.js') }}"></script>
+{% endblock %}

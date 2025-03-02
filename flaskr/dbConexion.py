@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+from flaskr.models import Usuario
 
 def crear_conexion():
     try:
@@ -7,7 +8,7 @@ def crear_conexion():
             host='localhost',       
             user='root',     
             password='', 
-            database='franpalbd'    
+            database='franpalstore'    
         )
         if conn.is_connected():
             return conn
@@ -15,7 +16,7 @@ def crear_conexion():
         print(f"Error al conectarse a la base de datos: {e}")
         return None
 
-def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
+"""def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute(
@@ -34,7 +35,7 @@ def mostrar_productos():
     cursor.execute('SELECT * FROM productos')
     productos = cursor.fetchall()
     conn.close()
-    return productos
+    return productos"""
 
 """def mostrar_producto(id_producto):
     conn = sqlite3.connect('flaskr/KibaStore.db')
@@ -57,24 +58,87 @@ def reducir_stock(id_producto):
     else:
         return "Alguien compró antes que tú y se agotó :[ "
 
+"""
+
 # Area de Login
-def iniciar_sesionBD(usuario, contraseña):
+"""def iniciar_sesionBD(usuario, contraseña):
     conn = sqlite3.connect('flaskr/KibaStore.db')
     cursor = conn.cursor()
     cursor.execute('SELECT rol FROM cuentas WHERE usuario=? AND contraseña=?', (usuario, contraseña))
     resultado = cursor.fetchone()
     if resultado:
         resultado, = resultado
-        return resultado
+        return resultado"""
 
 # Area de Registro
-def registrar_cliente(usuario, contraseña, rol):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
+
+def registrar_cliente(usuario, correo, contraseña, rol):
+    conn = crear_conexion()
     cursor = conn.cursor()
+
+    # Verificar si el usuario ya existe
+    cursor.execute("SELECT usuario FROM usuario WHERE usuario = %s", (usuario,))
+    resultado_usuario = cursor.fetchone()
+
+    # Verificar si el correo ya existe
+    cursor.execute("SELECT correo FROM usuario WHERE correo = %s", (correo,))
+    resultado_correo = cursor.fetchone()
+
+    if resultado_usuario:
+        conn.close()
+        return False, "El usuario ya existe"
+    if resultado_correo:
+        conn.close()
+        return False, "El correo ya existe"
+
     cursor.execute(
-        'INSERT INTO cuentas (usuario, contraseña, rol) VALUES (?, ?, ?)',
-        (usuario, contraseña, rol)
-        #el rol = 1 es cliente y rol = 2 es admin
+        'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
+        (usuario, correo, contraseña, rol)
     )
     conn.commit()
-    conn.close()"""
+    conn.close()
+    return True, "Usuario registrado con exito"
+
+# Area de clientes
+
+def mostrar_clientes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'cliente'")
+    clientes = cursor.fetchall()
+    usuarios = list()
+    for cliente in clientes:
+        usuarios.append(Usuario(cliente[0],cliente[1],cliente[2]))
+    conn.close()
+    return usuarios
+
+def contarClientes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente';")
+    resultado = cursor.fetchone()
+    clientesLen = resultado[0]
+    conn.close()
+    return clientesLen
+
+# Area de administradores
+
+def mostrar_admins():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'admin'")
+    admins = cursor.fetchall()
+    usuarios = list()
+    for admin in admins:
+        usuarios.append(Usuario(admin[0],admin[1],admin[2]))
+    conn.close()
+    return usuarios
+
+def eliminar_admin(id):
+    conn = crear_conexion()
+    print(id)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
+    conn.commit()
+    conn.close()
+    return "Eliminado con exito"
