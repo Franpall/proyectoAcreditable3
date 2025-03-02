@@ -112,6 +112,14 @@ def mostrar_clientes():
     conn.close()
     return usuarios
 
+def contarClientes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente';")
+    resultado = cursor.fetchone()
+    clientesLen = resultado[0]
+    return clientesLen
+
 # Area de administradores
 
 def mostrar_admins():

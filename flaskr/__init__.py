@@ -27,7 +27,8 @@ def verProducto():
 
 @app.route('/dashboard')
 def adminDashboard():
-    return render_template('admin/dashboard.html')
+    clientes = contarClientes()
+    return render_template('admin/dashboard.html', clientes=clientes)
 
 @app.route('/productos')
 def adminProductos():
