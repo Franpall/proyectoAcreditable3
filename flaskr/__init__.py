@@ -64,10 +64,29 @@ def registerSolicitud():
         correo = request.form['email']
         contraseña = request.form['password']
 
-        registrar_cliente(usuario, correo, contraseña, 1)
-        #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
-        return render_template('auth/login.html')
-    
+        resultado = registrar_cliente(usuario, correo, contraseña, 1)
+        
+        if resultado:
+            return redirect(url_for('iniciarSesion')), print("Cuenta Creada Con Éxito, ahora Inicia Sesión")
+        else:
+            return render_template('auth/register.html'), print("Usuario o correo ya registrado")
+
+# Lógica para iniciar sesión
+@app.route('/loginSolicitud', methods=('GET', 'POST'))
+def loginSolicitud():
+    if request.method == 'POST':
+        usuario = request.form['username']
+        contraseña = request.form['password']
+
+        resultado = iniciar_sesion(usuario, contraseña)
+        if resultado == "cliente":
+            return redirect(url_for('index')), print("Inicion sesiada como cliente")
+        elif resultado == "admin":
+            return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
+        else:
+            return render_template('auth/login.html'), print("Usuario o contraseña incorrecta")
+    return render_template('auth/login.html')
+
 # Lógica para el registro de administradores
 
 @app.route('/addAdmin', methods=('GET', 'POST'))
