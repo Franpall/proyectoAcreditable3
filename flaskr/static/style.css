@@ -445,3 +445,28 @@ footer{
     }
 
 }
+
+/* ERRORES y Mensajes */
+
+.notificacionR{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: var(--fondoTarjeta);
+    color: rgb(179, 27, 27);
+    font-weight: bold;
+    font-size: 1.2rem;
+    gap: 10px;
+    animation: ocultar 7s forwards;
+    box-shadow: var(--sombrasDeCajas);
+}
+
+.notificacionR img{
+    width: 80px;
+    aspect-ratio: 1/1;
+}
