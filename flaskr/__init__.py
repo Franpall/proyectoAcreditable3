@@ -2,14 +2,21 @@ from flask import Flask, render_template, redirect, url_for, request
 from flaskr.dbConexion import *
 
 app = Flask(__name__)
+sesion = False
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('index.html', sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/login')
 def iniciarSesion():
-    return render_template('auth/login.html')
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('auth/login.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/register')
 def registrarse():
@@ -17,11 +24,11 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
-    return render_template('carrito.html')
+    return render_template('carrito.html', sesion=sesion)
 
 @app.route('/producto')
 def verProducto():
-    return render_template('producto.html')
+    return render_template('producto.html', sesion=sesion)
 
 # Rutas para administradores
 
@@ -63,11 +70,36 @@ def registerSolicitud():
         usuario = request.form['username']
         correo = request.form['email']
         contraseña = request.form['password']
+        confirmar_contraseña = request.form['confirm-password']
 
-        registrar_cliente(usuario, correo, contraseña, 1)
-        #mensaje = "Cuenta Creada Con Éxito, ahora Inicia Sesión"
-        return render_template('auth/login.html')
-    
+        if contraseña != confirmar_contraseña:
+            return render_template('auth/register.html', actionError=True, notificacion="La contraseña repetida no coincide")
+        
+        resultado = registrar_cliente(usuario, correo, contraseña, 1)
+        
+        if resultado:
+            return redirect(url_for('iniciarSesion', actionOK=True, notificacion="Cuenta Creada Con Éxito, ahora Inicia Sesión"))
+        else:
+            return render_template('auth/register.html', actionError=True, notificacion="El usuario o correo ya está registrado")
+
+# Lógica para iniciar sesión
+@app.route('/loginSolicitud', methods=('GET', 'POST'))
+def loginSolicitud():
+    global sesion
+    if request.method == 'POST':
+        usuario = request.form['username']
+        contraseña = request.form['password']
+
+        resultado = iniciar_sesion(usuario, contraseña)
+        if resultado == "cliente":
+            sesion = True
+            return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
+        elif resultado == "admin":
+            return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
+        else:
+            return render_template('auth/login.html', actionError=True, notificacion="Usuario o contraseña incorrecta")
+    return render_template('auth/login.html')
+
 # Lógica para el registro de administradores
 
 @app.route('/addAdmin', methods=('GET', 'POST'))
@@ -79,6 +111,13 @@ def registerAdmin():
 
         registrar_cliente(usuario, correo, contraseña, 2)
         return adminAdmins()
+    
+# Lógica para cerrar sesiones
+@app.route('/bye', methods=('GET', 'POST'))
+def cerrarSesionSolicitud():
+    global sesion
+    sesion = False
+    return render_template('auth/login.html', actionOK=True, notificacion="Sesion Cerrada con Exito")
     
 # Lógica para eliminar usuarios
 @app.route("/delete/<int:id_admin>")

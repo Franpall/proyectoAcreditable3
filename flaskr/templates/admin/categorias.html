@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        {% if admins|length < 1 %}
+                        {% if categorias|length < 1 %}
                         <h4>No hay Categorias registradas</h4>
                         {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -51,10 +51,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for admin in admins %}
+                                {% for categoria in categorias %}
                                 <tr>
-                                    <td>{{ admin.id }}</td>
-                                    <td>{{ admin.nombre }}</td>
+                                    <td>{{ categoria.id }}</td>
+                                    <td>{{ categoria.nombre }}</td>
                                     <td class="actions_td">
                                         <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin">Borrar</a>  
                                     </td>
@@ -70,5 +70,4 @@
         </div>
     </div>
 </main>
-<script src="{{ url_for('static', filename='validaciones.js') }}"></script>
 {% endblock %}

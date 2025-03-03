@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 from flaskr.models import Usuario
+import bcrypt
 
 def crear_conexion():
     try:
@@ -61,14 +62,34 @@ def reducir_stock(id_producto):
 """
 
 # Area de Login
-"""def iniciar_sesionBD(usuario, contraseña):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
+def iniciar_sesion(usuario, contraseña):
+    conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT rol FROM cuentas WHERE usuario=? AND contraseña=?', (usuario, contraseña))
-    resultado = cursor.fetchone()
-    if resultado:
-        resultado, = resultado
-        return resultado"""
+    cursor.execute('SELECT contraseña FROM usuario WHERE usuario= %s', (usuario,))
+    hash = cursor.fetchone()
+    if hash:
+        hash, = hash
+        if verificarHash(contraseña, hash):
+            cursor.execute('SELECT rol FROM usuario WHERE usuario= %s', (usuario,))
+            resultado = cursor.fetchone()
+            resultado, = resultado
+            conn.close()
+            return resultado
+    else:
+        return False
+
+# Funciones de encriptacion
+    
+def crearHash(contraseña_usuario):
+    salt = bcrypt.gensalt()
+    contraseña_hash = bcrypt.hashpw(contraseña_usuario.encode('utf-8'), salt)
+    return contraseña_hash
+
+def verificarHash(contraseña_usuario, contraseña_hash):
+    if bcrypt.checkpw(contraseña_usuario.encode('utf-8'), contraseña_hash):
+        return True
+    else:
+        return False
 
 # Area de Registro
 
@@ -84,20 +105,18 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     cursor.execute("SELECT correo FROM usuario WHERE correo = %s", (correo,))
     resultado_correo = cursor.fetchone()
 
-    if resultado_usuario:
+    if resultado_usuario or resultado_correo:
         conn.close()
-        return False, "El usuario ya existe"
-    if resultado_correo:
-        conn.close()
-        return False, "El correo ya existe"
-
+        return False
+    contraseña_encriptada = crearHash(contraseña)
     cursor.execute(
         'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
-        (usuario, correo, contraseña, rol)
+        (usuario, correo, contraseña_encriptada, rol)
     )
     conn.commit()
     conn.close()
-    return True, "Usuario registrado con exito"
+
+    return True
 
 # Area de clientes
 

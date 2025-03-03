@@ -35,13 +35,23 @@
                     <a class="btn" href="{{ url_for('iniciarSesion') }}">Ya tengo cuenta</a>
                     <button class="btn">Registrarse</button>
                 </div>
-                <p id="mensaje-error" style="color: red;"></p>
             </form>
         </div>
+        {% if actionError %}
+        <div class="notificacionR">
+            <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
+        {% if actionOK %}
+        <div class="notificacionR">
+            <img src="{{ url_for('static', filename='img/ok-circle-filled-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
     </main>
         <footer>
             <p>Todos los derechos reservados - 2025</p>
         </footer>
-        <script src="{{ url_for('static', filename='validaciones.js') }}"></script>
 </body>
 </html>

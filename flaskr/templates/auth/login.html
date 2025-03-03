@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
     <main class="general_container">
         <div class="login-container">
             <h2>Inicio de Sesión</h2>
-            <form>
+            <form action="{{ url_for('loginSolicitud') }}" method="post" id="login-form">
                 <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="30" height="30">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" required>
@@ -23,13 +22,22 @@
                 <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="30" height="30">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
-
-                <a href="#">¿Olvidó su contraseña?</a>
-
                 <button class="btn">Iniciar Sesión</button>
                 <a class="btn" href="{{ url_for('registrarse') }}">No tengo cuenta</a>
             </form>
         </div>
+        {% if actionError %}
+        <div class="notificacionR">
+            <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
+        {% if actionOK %}
+        <div class="notificacionR okColor">
+            <img src="{{ url_for('static', filename='img/ok-circle-filled-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
     </main>
     <footer>
         <p>Todos los derechos reservados - 2025</p>

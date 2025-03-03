@@ -26,14 +26,16 @@
                                 <label for="product_name" class="col-form-label">Modelo</label>
                                 <input type="text" name="product_name" id="product_name">
                                 <label for="product_name" class="col-form-label">Cantidad Disponible</label>
-                                <input type="number" name="product_name" id="product_name">
+                                <input type="number" name="product_name" id="product_name" min="1">
                                 <label for="product_name" class="col-form-label">Precio</label>
-                                <input type="number" name="product_name" id="product_name">
-                                <label for="opcionesGama" class="col-form-label">Gama del producto:</label>
+                                <input type="number" name="product_name" id="product_name" min="0">
+                                <label for="opcionesGama" class="col-form-label">Categoria:</label>
                                 <select id="opcionesGama" name="opcionesGama">
-                                <option value="opcion1">Económica</option>
-                                <option value="opcion2">Gamer</option>
-                                <option value="opcion3">Alta</option>
+                                <!-- si hay menos de 1 categoria -->
+                                <option disabled>No hay categorias</option>
+                                <!-- else -->
+                                <!-- aquí va un for con las categorias disponibles -->
+                                 <!-- end else -->
                                 </select>
                             </div>
                             <div id="right_product_form" class="product_form_area">
