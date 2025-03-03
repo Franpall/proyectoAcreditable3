@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flaskr.dbConexion import *
+import bcrypt
 
 app = Flask(__name__)
 sesion = False
@@ -69,7 +70,9 @@ def registerSolicitud():
         if contraseña != confirmar_contraseña:
             return render_template('auth/register.html'), print("Las contraseñas no coinciden")
 
-        resultado = registrar_cliente(usuario, correo, contraseña, 1)
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(contraseña.encode('utf-8'), salt)
+        resultado = registrar_cliente(usuario, correo, hashed_password, 1)
         
         if resultado:
             return redirect(url_for('iniciarSesion')), print("Cuenta Creada Con Éxito, ahora Inicia Sesión")
