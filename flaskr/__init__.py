@@ -64,6 +64,10 @@ def registerSolicitud():
         usuario = request.form['username']
         correo = request.form['email']
         contraseña = request.form['password']
+        confirmar_contraseña = request.form['confirm-password']
+
+        if contraseña != confirmar_contraseña:
+            return render_template('auth/register.html'), print("Las contraseñas no coinciden")
 
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
         
