@@ -6,11 +6,17 @@ sesion = False
 
 @app.route('/')
 def index():
-    return render_template('index.html', sesion=sesion)
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('index.html', sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/login')
 def iniciarSesion():
-    return render_template('auth/login.html')
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('auth/login.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/register')
 def registrarse():
@@ -72,7 +78,7 @@ def registerSolicitud():
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
         
         if resultado:
-            return redirect(url_for('iniciarSesion')), print("Cuenta Creada Con Éxito, ahora Inicia Sesión")
+            return redirect(url_for('iniciarSesion', actionOK=True, notificacion="Cuenta Creada Con Éxito, ahora Inicia Sesión"))
         else:
             return render_template('auth/register.html', actionError=True, notificacion="El usuario o correo ya está registrado")
 
@@ -87,7 +93,7 @@ def loginSolicitud():
         resultado = iniciar_sesion(usuario, contraseña)
         if resultado == "cliente":
             sesion = True
-            return redirect(url_for('index')), print("Inicion sesiada como cliente")
+            return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         elif resultado == "admin":
             return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
         else:
@@ -111,7 +117,7 @@ def registerAdmin():
 def cerrarSesionSolicitud():
     global sesion
     sesion = False
-    return iniciarSesion(), print("Sesión Cerrada")
+    return render_template('auth/login.html', actionOK=True, notificacion="Sesion Cerrada con Exito")
     
 # Lógica para eliminar usuarios
 @app.route("/delete/<int:id_admin>")
