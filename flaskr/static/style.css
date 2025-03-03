@@ -471,6 +471,10 @@ footer{
     aspect-ratio: 1/1;
 }
 
+.okColor{
+    color: rgb(58, 117, 24);
+}
+
 /* Animaciones */
 
 @keyframes ocultar {
