@@ -18,11 +18,11 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
-    return render_template('carrito.html')
+    return render_template('carrito.html', sesion=sesion)
 
 @app.route('/producto')
 def verProducto():
-    return render_template('producto.html')
+    return render_template('producto.html', sesion=sesion)
 
 # Rutas para administradores
 
