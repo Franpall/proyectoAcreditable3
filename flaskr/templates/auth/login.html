@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +22,16 @@
                 <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="30" height="30">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
-
-                <a href="#">¿Olvidó su contraseña?</a>
-
                 <button class="btn">Iniciar Sesión</button>
                 <a class="btn" href="{{ url_for('registrarse') }}">No tengo cuenta</a>
             </form>
         </div>
+        {% if passError %}
+        <div class="passError">
+            <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
+            <p>Usuario o Contraseña incorrecta!</p>
+        </div>
+        {% endif %}
     </main>
     <footer>
         <p>Todos los derechos reservados - 2025</p>
