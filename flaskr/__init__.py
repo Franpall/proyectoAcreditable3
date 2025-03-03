@@ -67,14 +67,14 @@ def registerSolicitud():
         confirmar_contraseña = request.form['confirm-password']
 
         if contraseña != confirmar_contraseña:
-            return render_template('auth/register.html'), print("Las contraseñas no coinciden")
+            return render_template('auth/register.html', actionError=True, notificacion="La contraseña repetida no coincide")
         
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
         
         if resultado:
             return redirect(url_for('iniciarSesion')), print("Cuenta Creada Con Éxito, ahora Inicia Sesión")
         else:
-            return render_template('auth/register.html'), print("Usuario o correo ya registrado")
+            return render_template('auth/register.html', actionError=True, notificacion="El usuario o correo ya está registrado")
 
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
@@ -91,7 +91,7 @@ def loginSolicitud():
         elif resultado == "admin":
             return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
         else:
-            return render_template('auth/login.html', passError=True), print("Usuario o contraseña incorrecta")
+            return render_template('auth/login.html', actionError=True, notificacion="Usuario o contraseña incorrecta")
     return render_template('auth/login.html')
 
 # Lógica para el registro de administradores
