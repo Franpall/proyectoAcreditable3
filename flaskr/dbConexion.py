@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 from flaskr.models import Usuario
+import bcrypt
 
 def crear_conexion():
     try:
@@ -64,13 +65,31 @@ def reducir_stock(id_producto):
 def iniciar_sesion(usuario, contraseña):
     conn = crear_conexion()
     cursor = conn.cursor()
+    cursor.execute('SELECT contraseña FROM usuario WHERE usuario= %s', (usuario,))
+    hash = cursor.fetchone()
+    if hash:
+        hash, = hash
+        if verificarHash(contraseña, hash):
+            cursor.execute('SELECT rol FROM usuario WHERE usuario= %s', (usuario,))
+            resultado = cursor.fetchone()
+            resultado, = resultado
+            conn.close()
+            return resultado
+    else:
+        return False
 
-    cursor.execute('SELECT rol FROM usuario WHERE usuario= %s AND contraseña= %s', (usuario, contraseña))
-    resultado = cursor.fetchone()
-    conn.close()
-    if resultado:
-        resultado, = resultado
-        return resultado
+# Funciones de encriptacion
+    
+def crearHash(contraseña_usuario):
+    salt = bcrypt.gensalt()
+    contraseña_hash = bcrypt.hashpw(contraseña_usuario.encode('utf-8'), salt)
+    return contraseña_hash
+
+def verificarHash(contraseña_usuario, contraseña_hash):
+    if bcrypt.checkpw(contraseña_usuario.encode('utf-8'), contraseña_hash):
+        return True
+    else:
+        return False
 
 # Area de Registro
 
@@ -89,10 +108,10 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     if resultado_usuario or resultado_correo:
         conn.close()
         return False
-
+    contraseña_encriptada = crearHash(contraseña)
     cursor.execute(
         'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
-        (usuario, correo, contraseña, rol)
+        (usuario, correo, contraseña_encriptada, rol)
     )
     conn.commit()
     conn.close()
