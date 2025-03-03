@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-02-2025 a las 18:35:55
+-- Tiempo de generación: 03-03-2025 a las 21:13:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -75,9 +75,16 @@ CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `usuario` varchar(20) NOT NULL,
   `correo` varchar(320) NOT NULL,
-  `contraseña` varchar(255) NOT NULL,
+  `contraseña` blob NOT NULL,
   `rol` enum('cliente','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `usuario`, `correo`, `contraseña`, `rol`) VALUES
+(13, 'franpal', 'skfranpal@gmail.com', 0x2432622431322473534c776a6a6d55587954373943504368634a4c41756b516468565556705765634b7668737855656f576142552e716973426d584f, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -149,7 +156,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
