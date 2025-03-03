@@ -2,10 +2,11 @@ from flask import Flask, render_template, redirect, url_for, request
 from flaskr.dbConexion import *
 
 app = Flask(__name__)
+sesion = False
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', sesion=sesion)
 
 @app.route('/login')
 def iniciarSesion():
@@ -63,13 +64,9 @@ def registerSolicitud():
         usuario = request.form['username']
         correo = request.form['email']
         contraseña = request.form['password']
-        confirmar_contraseña = request.form['confirm-password']
-
-        if contraseña != confirmar_contraseña:
-            return render_template('auth/register.html'), print("Las contraseñas no coinciden")
 
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
-
+        
         if resultado:
             return redirect(url_for('iniciarSesion')), print("Cuenta Creada Con Éxito, ahora Inicia Sesión")
         else:
@@ -78,17 +75,19 @@ def registerSolicitud():
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
 def loginSolicitud():
+    global sesion
     if request.method == 'POST':
         usuario = request.form['username']
         contraseña = request.form['password']
 
         resultado = iniciar_sesion(usuario, contraseña)
         if resultado == "cliente":
+            sesion = True
             return redirect(url_for('index')), print("Inicion sesiada como cliente")
         elif resultado == "admin":
             return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
         else:
-            return render_template('auth/login.html'), print("Usuario o contraseña incorrecta")
+            return render_template('auth/login.html', passError=True), print("Usuario o contraseña incorrecta")
     return render_template('auth/login.html')
 
 # Lógica para el registro de administradores
@@ -102,6 +101,13 @@ def registerAdmin():
 
         registrar_cliente(usuario, correo, contraseña, 2)
         return adminAdmins()
+    
+# Lógica para cerrar sesiones
+@app.route('/bye', methods=('GET', 'POST'))
+def cerrarSesionSolicitud():
+    global sesion
+    sesion = False
+    return iniciarSesion(), print("Sesión Cerrada")
     
 # Lógica para eliminar usuarios
 @app.route("/delete/<int:id_admin>")
