@@ -10421,3 +10421,12 @@ body {
   height: 100%;
   border-radius: 0.25rem;
 }
+
+/* Estilos de formulario  */
+.adminForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  max-width: 400px;
+}
