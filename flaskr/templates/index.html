@@ -36,19 +36,17 @@
             </div>
         </section>
         <section id="area_categorias">
-            <h2>¿Qué tipo de laptop buscas?</h2>
+            <h2>Categorías</h2>
             <div id="categorias">
-                <a class="categoria colorE">
-                    <p>Económica</p>
+                {% for categoria in categorias %}
+                <a class="categoria">
+                    <p>{{ categoria.nombre }}</p>
+                    <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}">
                 </a>
-                <a class="categoria colorG">
-                    <p>Gamer</p>
-                </a>
-                <a class="categoria colorA">
-                    <p>Gama alta</p>
-                </a>
+                {% endfor %}
             </div>
         </section>
+        
         <section id="area_ofertas">
             <h2>Ofertas</h2>
             <div id="scroll_productos">
