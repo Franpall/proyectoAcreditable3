@@ -1,9 +1,8 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}
-<title>Inventory Managmnet App</title>
+<title>Administrar Categorías</title>
 {% endblock %}
-
 
 {% block content %}
 <main>
@@ -11,61 +10,54 @@
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-            <li class="breadcrumb-item active">Categorias</li>
+            <li class="breadcrumb-item active">Categorías</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header">Categorias</div>
+            <div class="card-header"><b>Nueva Categoría</b></div>
             <div class="card-body">
-                <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Todos Las Categorias
-                </div>
-                <div class="card-body">
-                    <div class="card mb-4">
-                        <div class="card-header"><b>Nueva Categoria</b></div>
-                        <div class="card-body">
-                            <form action="{{ url_for('registerAdmin') }}" method="post" id="admin-register-form">
-                                <div id="left_product_form" class="product_form_area">
-                                    <label for="admin_name" class="col-form-label">Nombre</label>
-                                    <input type="text" name="admin_name" id="admin_name">
-                                    <label for="categpria_img" class="col-form-label">Imagen</label>
-                                    <input type="file" name="categpria_img" id="categpria_img">
-                                    <br>
-                                    <input type="submit" value="Crear Categoria" class="btn btn-primary" >
-                                </div>
+                <form action="{{ url_for('adminCategorias') }}" method="post" enctype="multipart/form-data">
+                    <label for="nombre" class="col-form-label">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" required>
 
-                            </form>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        {% if categorias|length < 1 %}
-                        <h4>No hay Categorias registradas</h4>
-                        {% else %}
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for categoria in categorias %}
-                                <tr>
-                                    <td>{{ categoria.id }}</td>
-                                    <td>{{ categoria.nombre }}</td>
-                                    <td class="actions_td">
-                                        <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin">Borrar</a>  
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
-                </div>
+                    <label for="imagen" class="col-form-label">Imagen</label>
+                    <input type="file" name="imagen" id="imagen" accept="image/*" required>
+                    
+                    <br>
+                    <input type="submit" value="Crear Categoría" class="btn btn-primary">
+                </form>
             </div>
-                </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">Categorías Registradas</div>
+            <div class="card-body">
+                {% if categorias|length < 1 %}
+                    <h4>No hay Categorías registradas</h4>
+                {% else %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in categorias %}
+                        <tr>
+                            <td>{{ categoria.id }}</td>
+                            <td>{{ categoria.nombre }}</td>
+                            <td>
+                                <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" width="100">
+                            </td>
+                            <td>
+                                <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
             </div>
         </div>
     </div>
