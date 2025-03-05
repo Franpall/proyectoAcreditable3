@@ -40,8 +40,8 @@
             <div id="categorias">
                 {% for categoria in categorias %}
                 <a class="categoria">
+                    <img class="categoriaImg" src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}">
                     <p>{{ categoria.nombre }}</p>
-                    <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}">
                 </a>
                 {% endfor %}
             </div>
