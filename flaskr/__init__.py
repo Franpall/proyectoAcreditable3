@@ -118,7 +118,7 @@ def eliminarAdmin(id_admin):
     return adminAdmins()
 
 
-# CATEGORIAS
+# Lógica para CATEGORIAS
 
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
 
@@ -169,6 +169,10 @@ def adminCategorias():
 def eliminarCategoria(id_categoria):
     conexion = crear_conexion()
     cursor = conexion.cursor()
+    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
+    filename, = cursor.fetchone()
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    os.remove(filepath)
     
     cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
     conexion.commit()
