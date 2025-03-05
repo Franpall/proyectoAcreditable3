@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='adminStyles.css')}}">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='notificacion.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     {% block title%}{% endblock %}
 </head>
@@ -45,7 +46,7 @@
                             Admins
                         </a>
                         <br>
-                        <a class="nav-link btn btn-danger" href="">
+                        <a class="nav-link btn btn-danger" href="/bye">
                             <div class="sb-nav-link-icon"><i class="fas fa-angle-left"></i></div>
                             Cerrar Sesión
                         </a>

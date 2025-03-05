@@ -71,5 +71,17 @@
             </div>
         </div>
     </div>
+    {% if actionError %}
+    <div class="notificacionR">
+        <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
+        <p>{{ notificacion }}</p>
+    </div>
+    {% endif %}
+    {% if actionOK %}
+    <div class="notificacionR okColor">
+        <img src="{{ url_for('static', filename='img/ok-circle-filled-svgrepo-com.svg') }}" alt="Error">
+        <p>{{ notificacion }}</p>
+    </div>
+    {% endif %}
 </main>
 {% endblock %}
