@@ -223,8 +223,9 @@ header h1 a{
 
 .categoria{
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
     border-radius: var(--radioGeneral);
     height: 120px;
     width: 100%;
@@ -235,26 +236,17 @@ header h1 a{
 }
 
 .categoria p{
-    margin: 10px;
+    margin-top: -32px;
+    margin-left: 8px;
 }
 
-.colorE{
-    background-image:url(img/laptopEconomica.jpg);
+.categoriaImg{
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center; 
     background-repeat: no-repeat;
-}
-.colorG{
-    background-image:url(img/laptopGamer.jpg);
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat; 
-}
-.colorA{
-    background-image:url(img/laptopAlta.jpg);
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat; 
+    border-radius: var(--radioGeneral);
 }
 
 
