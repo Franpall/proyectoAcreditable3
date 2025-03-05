@@ -30,7 +30,10 @@ def verProducto():
 @app.route('/dashboard')
 def adminDashboard():
     clientes = contarClientes()
-    return render_template('admin/dashboard.html', clientes=clientes)
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('admin/dashboard.html', clientes=clientes, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/productos')
 def adminProductos():
@@ -87,7 +90,7 @@ def loginSolicitud():
             sesion = True
             return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         elif resultado == "admin":
-            return redirect(url_for('adminDashboard')), print("Inicion sesiada como admin")
+            return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         else:
             return render_template('auth/login.html', actionError=True, notificacion="Usuario o contraseña incorrecta")
     return render_template('auth/login.html')
