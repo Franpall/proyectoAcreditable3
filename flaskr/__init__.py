@@ -37,7 +37,8 @@ def adminDashboard():
 
 @app.route('/productos')
 def adminProductos():
-    return render_template('admin/productos.html')
+    categorias = verCategorias()
+    return render_template('admin/productos.html', categorias=categorias)
 
 
 @app.route('/clientes')
@@ -175,7 +176,10 @@ def eliminarCategoria(id_categoria):
     cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
     filename, = cursor.fetchone()
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    os.remove(filepath)
+    try:
+        os.remove(filepath)
+    except FileNotFoundError:
+        print("No se encontró el archivo")
     
     cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
     conexion.commit()

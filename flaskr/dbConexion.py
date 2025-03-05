@@ -17,6 +17,8 @@ def crear_conexion():
         print(f"Error al conectarse a la base de datos: {e}")
         return None
 
+
+# Area de productos
 """def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
     conn = crear_conexion()
     cursor = conn.cursor()
@@ -74,6 +76,19 @@ def reducir_stock(id_producto):
         return "Alguien compró antes que tú y se agotó :[ "
 
 """
+
+# Area de categorias
+
+def verCategorias():
+    conexion = crear_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT nombre FROM categoria")
+    categorias = cursor.fetchall()
+    categoriasSTR = list()
+    for categoria in categorias:
+        categoriasSTR.append(categoria[0])
+    conexion.close()
+    return categoriasSTR
 
 # Area de Login
 def iniciar_sesion(usuario, contraseña):
