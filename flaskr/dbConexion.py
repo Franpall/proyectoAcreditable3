@@ -28,15 +28,18 @@ def crear_conexion():
     cursor.close()
     conn.close()
 
-#agregar_producto("Lenovo", "IdeaPad", "LAPTOP LENOVO 14 CELERON N4020 4GB", "#", 150, 10, 0)
+#agregar_producto("Lenovo", "IdeaPad", "LAPTOP LENOVO 14 CELERON N4020 4GB", "#", 150, 10, 0)"""
 
 def mostrar_productos():
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM productos')
+    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto WHERE recomendado = 1')
     productos = cursor.fetchall()
+    productosModel = list()
+    for producto in productos:
+        productosModel.append(Producto(producto[0], producto[1], producto[2], producto[3]))
     conn.close()
-    return productos"""
+    return productosModel
 
 """def mostrar_producto(id_producto):
     conn = sqlite3.connect('flaskr/KibaStore.db')
