@@ -31,11 +31,13 @@
                                 <input type="number" name="product_name" id="product_name" min="0">
                                 <label for="opcionesGama" class="col-form-label">Categoria:</label>
                                 <select id="opcionesGama" name="opcionesGama">
-                                <!-- si hay menos de 1 categoria -->
-                                <option disabled>No hay categorias</option>
-                                <!-- else -->
-                                <!-- aquí va un for con las categorias disponibles -->
-                                 <!-- end else -->
+                                    {% if categorias|length < 1 %}
+                                    <option disabled>No hay categorias</option>
+                                    {% else %}
+                                        {% for categoria in categorias %}
+                                        <option>{{categoria}}</option>
+                                        {% endfor %}
+                                    {% endif %}
                                 </select>
                             </div>
                             <div id="right_product_form" class="product_form_area">
