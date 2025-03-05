@@ -15,7 +15,7 @@
         <div class="card mb-4">
             <div class="card-header"><b>Nueva Categoría</b></div>
             <div class="card-body">
-                <form action="{{ url_for('adminCategorias') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url_for('adminCategorias') }}" method="post" enctype="multipart/form-data" class="adminForm">
                     <label for="nombre" class="col-form-label">Nombre</label>
                     <input type="text" name="nombre" id="nombre" required>
 
