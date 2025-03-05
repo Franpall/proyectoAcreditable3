@@ -142,7 +142,7 @@ def index():
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
 
-    return render_template('index.html', sesion=sesion, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    return render_template('index.html', productos=mostrar_productos(), sesion=sesion, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
