@@ -40,7 +40,6 @@ def adminProductos():
     categorias = verCategorias()
     return render_template('admin/productos.html', categorias=categorias)
 
-
 @app.route('/clientes')
 def adminClientes():
     usuarios = mostrar_clientes()
@@ -58,6 +57,30 @@ def adminVentas():
 @app.route('/editar-producto')
 def adminUpdateUI():
     return render_template('admin/editarProducto.html')
+
+#Logica para el registro de productos
+@app.route('/registrarProductos', methods=('GET', 'POST'))
+def registrarProductos():
+    if request.method == 'POST':
+        marca = request.form['marca']
+        modelo = request.form['modelo']
+        descripcion = request.form['descripcion']
+        categoria = request.form['categoria']
+        imagen = request.form['imagen']
+        precio = request.form['precio']
+        stock = request.form['stock']
+        recomendado = request.form['recomendado']
+
+        id_categoria = obtener_id_categoria(categoria)
+
+        #No se como hacer pa que sea igual a cero cuando no se clickea pq el checkbox no manda nada cuando no se clickea
+        if recomendado:
+            recomendado = 1
+
+        resultado = agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado)
+
+        if resultado:
+            return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Registrado con Éxito"))
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
