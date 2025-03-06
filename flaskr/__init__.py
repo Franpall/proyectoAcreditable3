@@ -69,13 +69,15 @@ def registrarProductos():
         imagen = request.form['imagen']
         precio = request.form['precio']
         stock = request.form['stock']
-        recomendado = request.form['recomendado']
+        try:
+            recomendado = request.form['recomendado']
+        except KeyError:
+            recomendado = 0
 
-        id_categoria = obtener_id_categoria(categoria)
-
-        #No se como hacer pa que sea igual a cero cuando no se clickea pq el checkbox no manda nada cuando no se clickea
         if recomendado:
             recomendado = 1
+
+        id_categoria = obtener_id_categoria(categoria)
 
         resultado = agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado)
 

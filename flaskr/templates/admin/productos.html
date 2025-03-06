@@ -19,18 +19,18 @@
                 <div class="card mb-4">
                     <div class="card-header"><b>Nuevo Producto</b></div>
                     <div class="card-body">
-                        <form action="/products/" method="POST" id="product_form">
+                        <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form">
                             <div id="left_product_form" class="product_form_area">
-                                <label for="product_name" class="col-form-label">Marca</label>
-                                <input type="text" name="product_name" id="product_name">
-                                <label for="product_name" class="col-form-label">Modelo</label>
-                                <input type="text" name="product_name" id="product_name">
-                                <label for="product_name" class="col-form-label">Cantidad Disponible</label>
-                                <input type="number" name="product_name" id="product_name" min="1">
-                                <label for="product_name" class="col-form-label">Precio</label>
-                                <input type="number" name="product_name" id="product_name" min="0">
-                                <label for="opcionesGama" class="col-form-label">Categoria:</label>
-                                <select id="opcionesGama" name="opcionesGama">
+                                <label for="marca" class="col-form-label">Marca</label>
+                                <input type="text" name="marca" id="marca">
+                                <label for="modelo" class="col-form-label">Modelo</label>
+                                <input type="text" name="modelo" id="modelo">
+                                <label for="stock" class="col-form-label">Cantidad Disponible</label>
+                                <input type="number" name="stock" id="stock" min="1">
+                                <label for="precio" class="col-form-label">Precio</label>
+                                <input type="number" name="precio" id="precio" min="0">
+                                <label for="categoria" class="col-form-label">Categoria:</label>
+                                <select id="categoria" name="categoria">
                                     {% if categorias|length < 1 %}
                                     <option disabled>No hay categorias</option>
                                     {% else %}
@@ -41,14 +41,14 @@
                                 </select>
                             </div>
                             <div id="right_product_form" class="product_form_area">
-                                <label for="product_descripcion_input">Descripcion</label>
-                                <textarea type="text" name="product_descripcion_input" id="product_descripcion_input"></textarea>
+                                <label for="descripcion">Descripcion</label>
+                                <textarea type="text" name="descripcion" id="descripcion"></textarea>
                                 <div id="checkbox_producto">
-                                    <label for="product_name" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
-                                    <input type="checkbox" name="product_name" id="product_name">
+                                    <label for="recomendado" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
+                                    <input type="checkbox" name="recomendado" id="recomendado">
                                 </div>
-                                <label for="product_name" class="col-form-label imagen_label">Imagen:</label>
-                                <input type="file" name="product_name" id="product_name">
+                                <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
+                                <input type="file" name="imagen" id="imagen">
                                 <br>
                                 <input type="submit" value="Añadir Producto" class="btn btn-primary" >
                             </div>
