@@ -47,13 +47,6 @@ $(document).ready(function() {
       });
     });
 
-    $("#product_form").submit(function (e) {
-        if (!$("#product_name").val()) {
-          e.preventDefault();
-          alert("Please fill the Prodcut first");
-        }
-    });
-
     $("#movements_from").submit(function (e) {
         var msg = ''
         if ($("#qty").val() && $("#qty").val() <=0 ){
