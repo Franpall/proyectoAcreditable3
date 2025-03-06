@@ -19,18 +19,17 @@ def crear_conexion():
 
 
 # Area de productos
-"""def agregar_producto(marca, modelo, descripción, imagen, precio, stock, oferta):
+def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute(
-        'INSERT INTO productos (marca, modelo, descripcion, imagen, precio, stock, oferta) VALUES (%s, %s, %s, %s, %s, %s, %s)',
-        (marca, modelo, descripción, imagen, precio, stock, oferta)
+        'INSERT INTO producto (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+        (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado)
     )
     conn.commit()
     cursor.close()
     conn.close()
-
-agregar_producto("Lenovo", "IdeaPad", "LAPTOP LENOVO 14 CELERON N4020 4GB", "#", 150, 10, 0)"""
+    return True
 
 def mostrar_productos():
     conn = crear_conexion()
@@ -89,6 +88,14 @@ def verCategorias():
         categoriasSTR.append(categoria[0])
     conexion.close()
     return categoriasSTR
+
+def obtener_id_categoria(nombre_categoria):
+    conexion = crear_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT id FROM categoria WHERE nombre = %s", (nombre_categoria,))
+    id_categoria = cursor.fetchone()
+    conexion.close()
+    return id_categoria[0]
 
 # Area de Login
 def iniciar_sesion(usuario, contraseña):
