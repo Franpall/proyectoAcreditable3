@@ -38,7 +38,10 @@ def adminDashboard():
 @app.route('/productos')
 def adminProductos():
     categorias = verCategorias()
-    return render_template('admin/productos.html', categorias=categorias)
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('admin/productos.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/clientes')
 def adminClientes():
@@ -172,6 +175,9 @@ def index():
 
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
     conexion = crear_conexion()
     cursor = conexion.cursor(dictionary=True)
 
@@ -192,7 +198,7 @@ def adminCategorias():
     cursor.close()
     conexion.close()
     
-    return render_template('admin/categorias.html', categorias=categorias)
+    return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/delete_categoria/<int:id_categoria>')
 def eliminarCategoria(id_categoria):
@@ -212,4 +218,4 @@ def eliminarCategoria(id_categoria):
     cursor.close()
     conexion.close()
 
-    return redirect(url_for('adminCategorias'))
+    return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la categoría"))
