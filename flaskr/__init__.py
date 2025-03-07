@@ -163,28 +163,21 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
     
 @app.route('/')
 def index():
-    conexion = crear_conexion()
-    cursor = conexion.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM categoria")
-    categorias = cursor.fetchall()
-    cursor.close()
-    conexion.close()
+    categorias = obtener_categorias()
 
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
 
-    return render_template('index.html', productos=mostrar_productos(), productos_recomendados=mostrar_productos_recomendados(), sesion=sesion, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
-
+    return render_template('index.html', productos=mostrar_productos(), productos_recomendados=mostrar_productos_recomendados(), sesion=sesion, 
+        categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK
+    )
+    
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-
-    # Esto tendria más sentido en dbConexion, pero solo la parte de conexion y cursor nada mas
-    conexion = crear_conexion()
-    cursor = conexion.cursor(dictionary=True)
 
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -194,34 +187,15 @@ def adminCategorias():
             filename = imagen.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
-
-            cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, filename))
-            conexion.commit()
+            agregar_categoria(nombre, filename)
             return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Agregó la categoría"))
-
-    cursor.execute("SELECT * FROM categoria")
-    categorias = cursor.fetchall()
-    cursor.close()
-    conexion.close()
+    
+    categorias = obtener_categorias()
     
     return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/delete_categoria/<int:id_categoria>')
 def eliminarCategoria(id_categoria):
-    conexion = crear_conexion()
-    cursor = conexion.cursor()
-    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
-    filename, = cursor.fetchone()
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    try:
-        os.remove(filepath)
-    except FileNotFoundError:
-        print("No se encontró el archivo")
-    
-    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
-    conexion.commit()
-
-    cursor.close()
-    conexion.close()
+    eliminar_categoria(id_categoria)
 
     return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la categoría"))
