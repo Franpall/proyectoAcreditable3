@@ -22,15 +22,15 @@
                         <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form">
                             <div id="left_product_form" class="product_form_area">
                                 <label for="marca" class="col-form-label">Marca</label>
-                                <input type="text" name="marca" id="marca">
+                                <input type="text" name="marca" id="marca" required>
                                 <label for="modelo" class="col-form-label">Modelo</label>
-                                <input type="text" name="modelo" id="modelo">
+                                <input type="text" name="modelo" id="modelo" required>
                                 <label for="stock" class="col-form-label">Cantidad Disponible</label>
-                                <input type="number" name="stock" id="stock" min="1">
+                                <input type="number" name="stock" id="stock" min="1" required>
                                 <label for="precio" class="col-form-label">Precio</label>
-                                <input type="number" name="precio" id="precio" min="0">
+                                <input type="number" name="precio" id="precio" min="0" required>
                                 <label for="categoria" class="col-form-label">Categoria:</label>
-                                <select id="categoria" name="categoria">
+                                <select id="categoria" name="categoria" required>
                                     {% if categorias|length < 1 %}
                                     <option disabled>No hay categorias</option>
                                     {% else %}
@@ -48,7 +48,7 @@
                                     <input type="checkbox" name="recomendado" id="recomendado">
                                 </div>
                                 <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
-                                <input type="file" name="imagen" id="imagen">
+                                <input type="file" name="imagen" id="imagen" required>
                                 <br>
                                 <input type="submit" value="Añadir Producto" class="btn btn-primary" >
                             </div>
