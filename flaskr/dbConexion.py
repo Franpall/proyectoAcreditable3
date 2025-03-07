@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 from flaskr.models import Usuario, Producto
 import bcrypt
+import os
 
 def crear_conexion():
     try:
@@ -197,3 +198,45 @@ def eliminar_admin(id):
     conn.commit()
     conn.close()
     return "Eliminado con exito"
+
+# Area de crear Categorias
+
+def obtener_categorias():
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM categoria")
+    categorias = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return categorias
+
+def agregar_categoria(nombre, imagen):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, imagen))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
+
+def eliminar_categoria(id_categoria):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+
+    # Obtener la imagen antes de eliminar la categoría
+    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
+    filename = cursor.fetchone()
+    
+    if filename:
+        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
+        try:
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("No se encontró el archivo")
+
+    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+    return True
