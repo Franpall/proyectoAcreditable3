@@ -51,7 +51,10 @@ def adminClientes():
 @app.route('/admins')
 def adminAdmins():
     usuarios = mostrar_admins()
-    return render_template('admin/admins.html', admins=usuarios)
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('admin/admins.html', admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/ventas')
 def adminVentas():
@@ -134,7 +137,7 @@ def registerAdmin():
         contraseña = request.form['password']
 
         registrar_cliente(usuario, correo, contraseña, 2)
-        return adminAdmins()
+        return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador registrado con exito"))
     
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
@@ -143,11 +146,11 @@ def cerrarSesionSolicitud():
     sesion = False
     return render_template('auth/login.html', actionOK=True, notificacion="Sesion Cerrada con Exito")
     
-# Lógica para eliminar usuarios
+# Lógica para eliminar Administradores
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
-    return adminAdmins()
+    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con exito"))
 
 
 # Lógica para CATEGORIAS
@@ -178,6 +181,8 @@ def adminCategorias():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+
+    # Esto tendria más sentido en dbConexion, pero solo la parte de conexion y cursor nada mas
     conexion = crear_conexion()
     cursor = conexion.cursor(dictionary=True)
 
@@ -192,6 +197,7 @@ def adminCategorias():
 
             cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, filename))
             conexion.commit()
+            return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Agregó la categoría"))
 
     cursor.execute("SELECT * FROM categoria")
     categorias = cursor.fetchall()
