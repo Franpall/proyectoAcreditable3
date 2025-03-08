@@ -266,13 +266,31 @@ header h1 a{
 }
 
 /* Categorias dinamicas */
-
-#all_ctg_card.visible{
+#all_ctg_box.visible{
     display: flex;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+#all_ctg_card{
+    display: flex;
+    min-width: 300px;
+    width: 90%;
+    max-height: 800px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    background-color: var(--linkColor);
+    border: solid 1px whitesmoke;
+    border-radius: var(--radioGeneral);
 }
 
 .hint{
@@ -280,13 +298,13 @@ header h1 a{
 }
 
 #categorias_list{
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
+    overflow: auto;
 }
 
 .categoria_list{
@@ -304,9 +322,9 @@ header h1 a{
     padding: 10px;
 }
 
-.all_ctg_h2{
+/* .all_ctg_h2{
     margin-top: -40px;
-}
+} */
 
 
 /* Ofertas */

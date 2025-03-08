@@ -38,31 +38,32 @@
         <section id="area_categorias">
             <h2>Categorías Destacadas</h2>
             <div id="categorias">
-                {% for categoria in categorias %}
+                {% for categoria in categorias[:3] %}
                 <a class="categoria">
                     <img class="categoriaImg" src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}">
                     <p>{{ categoria.nombre }}</p>
                 </a>
                 {% endfor %}
             </div>
-            <a id="open_all_ctg_button" class="ver_mas_ctg hint">
+            <a id="open_all_ctg_button" class="ver_mas_ctg">
                 <img src="{{ url_for('static', filename='img/plus-square-svgrepo-com.svg') }}">
                 <p>Ver Todas</p>        
             </a>
-            <a id="close_all_ctg_button" class="ver_mas_ctg">
-                <img src="{{ url_for('static', filename='img/minus-square-svgrepo-com.svg') }}">
-                <p>Ver Menos</p>        
-            </a>
-            <div id="all_ctg_card" class="visible">
-
-                <h2 class="all_ctg_h2">Todas Las Categorías</h2>
-                <div id="categorias_list">
-                    {% for categoria in categorias %}
-                    <a class="categoria_list">
-                        <p>{{ categoria.nombre }}</p>
-                    </a>
-                    {% endfor %}
+            <div id="all_ctg_box" class="hint">
+                <div id="all_ctg_card">
+                    <h2 class="all_ctg_h2">Todas Las Categorías</h2>
+                    <div id="categorias_list">
+                        {% for categoria in categorias %}
+                        <a class="categoria_list">
+                            <p>{{ categoria.nombre }}</p>
+                        </a>
+                        {% endfor %}
+                    </div>
                 </div>
+                <a id="close_all_ctg_button" class="ver_mas_ctg">
+                    <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}">
+                    <p>Cerrar</p>        
+                </a>
             </div>
         </section>
         
@@ -124,5 +125,6 @@
         <p>Todos los derechos reservados - 2025</p>
     </footer>
     <script src="{{ url_for('static', filename='menus.js') }}"></script>
+    <script src="{{ url_for('static', filename='categorias.js') }}"></script>
 </body>
 </html>
