@@ -36,7 +36,7 @@
             </div>
         </section>
         <section id="area_categorias">
-            <h2>Categorías</h2>
+            <h2>Categorías Destacadas</h2>
             <div id="categorias">
                 {% for categoria in categorias %}
                 <a class="categoria">
@@ -45,10 +45,25 @@
                 </a>
                 {% endfor %}
             </div>
-            <a class="ver_mas_ctg">
+            <a id="open_all_ctg_button" class="ver_mas_ctg hint">
                 <img src="{{ url_for('static', filename='img/plus-square-svgrepo-com.svg') }}">
                 <p>Ver Todas</p>        
             </a>
+            <a id="close_all_ctg_button" class="ver_mas_ctg">
+                <img src="{{ url_for('static', filename='img/minus-square-svgrepo-com.svg') }}">
+                <p>Ver Menos</p>        
+            </a>
+            <div id="all_ctg_card" class="visible">
+
+                <h2 class="all_ctg_h2">Todas Las Categorías</h2>
+                <div id="categorias_list">
+                    {% for categoria in categorias %}
+                    <a class="categoria_list">
+                        <p>{{ categoria.nombre }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
         </section>
         
         <section id="area_ofertas">

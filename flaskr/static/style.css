@@ -90,7 +90,7 @@ header h1 a{
 
 /* Menu flotante dinámico */
 
-.visible{
+#float_menu.visible{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -263,6 +263,49 @@ header h1 a{
 
 .ver_mas_ctg:hover{
     cursor: pointer;
+}
+
+/* Categorias dinamicas */
+
+#all_ctg_card.visible{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.hint{
+    display: none;
+}
+
+#categorias_list{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.categoria_list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: var(--radioGeneral);
+    height: 30px;
+    width: 300px;
+    color: white;
+    font-size: 1.3rem;
+    text-shadow: 3px 3px 6px black;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.all_ctg_h2{
+    margin-top: -40px;
 }
 
 
@@ -440,7 +483,31 @@ footer{
         flex-wrap: wrap;
         margin: 0 auto;
     }
+
+    /* Categorias dinamicas */
+
+    #categorias_list{
+        width: 650px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .categoria_list{
+        align-items: flex-start;
+    }
     
+}
+
+@media (min-width:1000px){
+    /* Categorias dinamicas */
+
+    #categorias_list{
+        width: 975px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
 }
 
 @media (min-width:1035px){
