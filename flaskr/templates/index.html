@@ -51,7 +51,7 @@
             </a>
             <div id="all_ctg_box" class="hint">
                 <div id="all_ctg_card">
-                    <h2 class="all_ctg_h2">Todas Las Categorías</h2>
+                    <h2 class="all_ctg_title">Todas Las Categorías</h2>
                     <div id="categorias_list">
                         {% for categoria in categorias %}
                         <a class="categoria_list">
@@ -61,8 +61,7 @@
                     </div>
                 </div>
                 <a id="close_all_ctg_button" class="ver_mas_ctg">
-                    <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}">
-                    <p>Cerrar</p>        
+                    <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}">   
                 </a>
             </div>
         </section>
