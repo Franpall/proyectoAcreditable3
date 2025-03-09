@@ -31,7 +31,7 @@
             <img class="imagen-banner" src="{{ url_for('static', filename='img/banner.jpg') }}" alt="Banner">
             <div class="banner-content">
                 <h2>¡Bienvenido a Franpal Store!</h2>
-                <p>Encuentra las mejores laptops al mejor precio.</p>
+                <p>Encuentra los mejores productos al mejor precio.</p>
                 <a class="btn-banner" href="#area_categorias">Ver Ahora</a>
             </div>
         </section>
@@ -67,29 +67,39 @@
         </section>
         
         <section id="area_ofertas">
-            <h2>Ofertas</h2>
-            <div id="scroll_productos">
-                {% for producto in productos_recomendados %}
-                <article class="tarjeta_producto">
-                    <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto') }}">
-                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}">
-                        <div class="detalles_producto">
-                            <p class="marca">{{producto.marca}}</p>
-                            <p class="modelo">{{producto.modelo}}</p>
-                            <p class="precio"> <span>US$</span> {{producto.precio}}</p>
-                            <div class="acciones_producto">
-                                <button class="add_cart_button">Agregar Al Carrito</button>
+            {% if productos_recomendados|length > 0 %}
+                <h2>Ofertas</h2>
+                <div id="scroll_productos">
+                    {% for producto in productos_recomendados %}
+                    <article class="tarjeta_producto">
+                        <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto') }}">
+                            <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}">
+                            <div class="detalles_producto">
+                                <p class="marca">{{producto.marca}}</p>
+                                <p class="modelo">{{producto.modelo}}</p>
+                                <p class="precio"> <span>US$</span> {{producto.precio}}</p>
+                                <div class="acciones_producto">
+                                    <button class="add_cart_button">Agregar Al Carrito</button>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </article>
-                {% endfor %}
-            </div>
+                        </a>
+                    </article>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </section>
         
         <section id="area_productos">
             <h2>Todos Nuestros Productos</h2>
             <div id="all_productos">
+                {% if productos|length < 1 %}
+                <article class="errorLengthZero">
+                    <p>Vaya! No hay ningún producto registrado</p>
+                    <img src="{{ url_for('static', filename='img/avatar-thinking-7-svgrepo-com.svg') }}" alt="Joven Pensativo">
+                </article>
+                {% else %}
+                {% endif %}
+
                 {% for producto in productos %}
                 <article class="tarjeta_producto">
                     <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto') }}">
