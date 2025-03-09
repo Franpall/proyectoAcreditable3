@@ -18,6 +18,7 @@ def crear_conexion():
         print(f"Error al conectarse a la base de datos: {e}")
         return None
 
+# Area de productos
 
 # Area de productos Admin
 def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
@@ -44,7 +45,6 @@ def mostrar_productos_admin():
     return productosModel
 
 # Area de productos Index
-
 def mostrar_productos():
     conn = crear_conexion()
     cursor = conn.cursor()
@@ -67,6 +67,30 @@ def mostrar_productos_recomendados():
     conn.close()
     return productosModel
 
+# Eliminar Productos
+def eliminar_producto(id_producto):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+
+    # Obtener la imagen antes de eliminar la categoría
+    cursor.execute("SELECT imagen FROM producto WHERE id = %s", (id_producto,))
+    filename = cursor.fetchone()
+    
+    if filename:
+        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
+        try:
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("No se encontró el archivo")
+
+    cursor.execute("DELETE FROM producto WHERE id = %s", (id_producto,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+    return True
+
+
 # Area de categorias
 
 def verCategorias():
@@ -87,6 +111,48 @@ def obtener_id_categoria(nombre_categoria):
     id_categoria = cursor.fetchone()
     conexion.close()
     return id_categoria[0]
+
+# Area de crear Categorias
+def obtener_categorias():
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM categoria")
+    categorias = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return categorias
+
+def agregar_categoria(nombre, imagen):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, imagen))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
+
+def eliminar_categoria(id_categoria):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+
+    # Obtener la imagen antes de eliminar la categoría
+    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
+    filename = cursor.fetchone()
+    
+    if filename:
+        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
+        try:
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("No se encontró el archivo")
+
+    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+    return True
+
 
 # Area de Login
 def iniciar_sesion(usuario, contraseña):
@@ -188,45 +254,3 @@ def eliminar_admin(id):
     conn.commit()
     conn.close()
     return "Eliminado con exito"
-
-# Area de crear Categorias
-
-def obtener_categorias():
-    conn = crear_conexion()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM categoria")
-    categorias = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return categorias
-
-def agregar_categoria(nombre, imagen):
-    conn = crear_conexion()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, imagen))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return True
-
-def eliminar_categoria(id_categoria):
-    conn = crear_conexion()
-    cursor = conn.cursor()
-
-    # Obtener la imagen antes de eliminar la categoría
-    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
-    filename = cursor.fetchone()
-    
-    if filename:
-        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
-        try:
-            os.remove(filepath)
-        except FileNotFoundError:
-            print("No se encontró el archivo")
-
-    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
-    conn.commit()
-
-    cursor.close()
-    conn.close()
-    return True
