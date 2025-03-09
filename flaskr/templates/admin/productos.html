@@ -19,7 +19,7 @@
                 <div class="card mb-4">
                     <div class="card-header"><b>Nuevo Producto</b></div>
                     <div class="card-body">
-                        <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form">
+                        <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form" enctype="multipart/form-data">
                             <div id="left_product_form" class="product_form_area">
                                 <label for="marca" class="col-form-label">Marca</label>
                                 <input type="text" name="marca" id="marca" required>
@@ -63,7 +63,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         {% if productos|length < 1 %} 
-                        <h4>No hay productos en el inventario, registre sus productos ahora!</h4>
+                        <h4>No hay productos en el inventario</h4>
                         {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -83,11 +83,13 @@
                                     <td>{{ producto.id }}</td>
                                     <td>{{ producto.marca }}</td>
                                     <td>{{ producto.modelo }}</td>
-                                    <td>{{ producto.imagen }}</td>
+                                    <td>
+                                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}" width="100">
+                                    </td>
                                     <td>{{ producto.precio }}</td>
                                     <td>{{ producto.stock }}</td>
                                     <td class="actions_td">
-                                        <a href="" class="delete_btn_admin">Borrar</a>
+                                        <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a>
                                         <br>
                                         <a href="" class="update_btn_admin">Editar</a>  
                                     </td>
@@ -96,8 +98,8 @@
                             </tbody>
                         </table>
                         {% endif %}
+                    </div>
                 </div>
-            </div>
                 </div>
             </div>
         </div>
