@@ -227,7 +227,7 @@ header h1 a{
     align-items: flex-start;
     flex-direction: column;
     border-radius: var(--radioGeneral);
-    height: 160px;
+    height: 200px;
     width: 300px;
     color: white;
     font-size: 1.3rem;
@@ -266,13 +266,41 @@ header h1 a{
 }
 
 /* Categorias dinamicas */
-
-#all_ctg_card.visible{
+#all_ctg_box.visible{
     display: flex;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.493);
+    gap: 20px;
+}
+
+#all_ctg_card{
+    display: flex;
+    min-width: 300px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 800px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    background-color: var(--fondoTarjeta);
+    box-shadow: 2px 2px 5px black;
+    border-radius: var(--radioGeneral);
+    color: var(--textColor);
+    padding-bottom: 20px;
+    overflow-y: auto;
+}
+
+#all_ctg_card h2{
+    color: black;
+    font-weight: bold;
 }
 
 .hint{
@@ -280,13 +308,13 @@ header h1 a{
 }
 
 #categorias_list{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .categoria_list{
@@ -296,16 +324,19 @@ header h1 a{
     flex-direction: column;
     border-radius: var(--radioGeneral);
     height: 30px;
-    width: 300px;
-    color: white;
+    max-width: 300px;
+    color: var(--textColor);
     font-size: 1.3rem;
-    text-shadow: 3px 3px 6px black;
     cursor: pointer;
     padding: 10px;
 }
 
-.all_ctg_h2{
-    margin-top: -40px;
+#close_all_ctg_button{
+    background-color: var(--fondoTarjeta);
+    border-radius: 50px;
+    padding: 5px;
+    box-shadow: 2px 2px 5px black;
+    color: var(--textColor);
 }
 
 
@@ -491,16 +522,24 @@ footer{
 
     /* Categorias dinamicas */
 
+    #all_ctg_card{
+        min-width: none;
+        max-width: none;
+        width: 680px;
+        overflow-y: auto;
+    }
+
     #categorias_list{
         width: 650px;
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
     }
 
     .categoria_list{
         align-items: flex-start;
+        width: 300px;
     }
+
+
     
 }
 
