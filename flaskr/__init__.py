@@ -40,7 +40,7 @@ def adminProductos():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    return render_template('admin/productos.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    return render_template('admin/productos.html', productos=mostrar_productos_admin(), categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/clientes')
 def adminClientes():

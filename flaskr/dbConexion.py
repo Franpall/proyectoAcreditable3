@@ -1,7 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from flaskr.models import Usuario, Producto
-import bcrypt
+from flaskr.models import Usuario, Producto, ProductoAuxiliar
 import os
 
 def crear_conexion():
@@ -19,7 +18,7 @@ def crear_conexion():
         return None
 
 
-# Area de productos
+# Area de productos Admin
 def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
     conn = crear_conexion()
     cursor = conn.cursor()
@@ -32,6 +31,19 @@ def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, s
     conn.close()
     return True
 
+def mostrar_productos_admin():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, marca, modelo, imagen, precio, stock FROM producto')
+    productos = cursor.fetchall()
+    productosModel = list()
+    for producto in productos:
+        productosModel.append(Producto(producto[0], producto[1], producto[2], producto[3], producto[4], producto[5]))
+    conn.close()
+    return productosModel
+
+# Area de productos Index
+
 def mostrar_productos():
     conn = crear_conexion()
     cursor = conn.cursor()
@@ -39,7 +51,7 @@ def mostrar_productos():
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
-        productosModel.append(Producto(producto[0], producto[1], producto[2], producto[3]))
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
     conn.close()
     return productosModel
 
@@ -50,32 +62,9 @@ def mostrar_productos_recomendados():
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
-        productosModel.append(Producto(producto[0], producto[1], producto[2], producto[3]))
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
     conn.close()
     return productosModel
-
-"""def mostrar_producto(id_producto):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM productos WHERE id_producto = ?', (id_producto,))
-    producto = cursor.fetchone()
-    conn.close()
-    return producto
-
-def reducir_stock(id_producto):
-    conn = sqlite3.connect('flaskr/KibaStore.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT stock FROM productos WHERE id_producto=?', (id_producto,))
-    stock = cursor.fetchone()
-    if stock[0] > 0:
-        cursor.execute('UPDATE productos SET stock = stock - 1 WHERE id_producto = ?', (id_producto,))
-        conn.commit()
-        conn.close()
-        return "Se agregó al Carrito :]"
-    else:
-        return "Alguien compró antes que tú y se agotó :[ "
-
-"""
 
 # Area de categorias
 
