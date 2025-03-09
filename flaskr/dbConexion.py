@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 from flaskr.models import Usuario, Producto, ProductoAuxiliar
+import bcrypt
 import os
 
 def crear_conexion():
