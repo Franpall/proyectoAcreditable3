@@ -39,7 +39,7 @@
             <h2>Categorías Destacadas</h2>
             <div id="categorias">
                 {% for categoria in categorias[:3] %}
-                <a class="categoria">
+                <a href="{{ url_for('verProductosCategoria', categoria=categoria.nombre) }}" class="categoria">
                     <img class="categoriaImg" src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}">
                     <p>{{ categoria.nombre }}</p>
                 </a>
@@ -54,7 +54,7 @@
                     <h2 class="all_ctg_title">Todas Las Categorías</h2>
                     <div id="categorias_list">
                         {% for categoria in categorias %}
-                        <a class="categoria_list">
+                        <a href="{{ url_for('verProductosCategoria', categoria=categoria.nombre) }}" class="categoria_list">
                             <p>{{ categoria.nombre }}</p>
                         </a>
                         {% endfor %}

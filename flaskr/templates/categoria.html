@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franpal Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">Franpal Store</a></h1>
+        <div id="contralogo_area">
+            {% if sesion == True %}
+            <a class="user_btn" href="{{ url_for('verCarrito')}}"><img class="user_btn_icon" src="{{ url_for('static', filename='img/cart-large-2-svgrepo-com.svg') }}" alt=""></a>        
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="{{ url_for('cerrarSesionSolicitud') }}">Cerrar Sesión</a>
+            </div>
+            {% else %}
+            <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
+            <div id="float_menu" class="hint">
+                <a href="{{ url_for('iniciarSesion') }}">Iniciar Sesión</a>
+                <hr>   
+                <a href="{{ url_for('registrarse') }}">Registrarse</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+        <section id="area_banner_categoria">
+            <img class="imagen-banner_categoria" src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="Banner">
+            <div class="banner-content_categoria">
+                <h2>{{ categoria.nombre }}</h2>
+                <a class="btn-banner" href="#area_productos">Ver Ahora</a>
+            </div>
+        </section>
+        <section id="area_productos">
+            <div id="all_productos">
+                {% if productos|length < 1 %}
+                <article class="errorLengthZero">
+                    <p>Vaya! No hay ningún producto registrado</p>
+                    <img src="{{ url_for('static', filename='img/avatar-thinking-7-svgrepo-com.svg') }}" alt="Joven Pensativo">
+                </article>
+                {% else %}
+                {% endif %}
+
+                {% for producto in productos %}
+                <article class="tarjeta_producto">
+                    <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto') }}">
+                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}">
+                        <div class="detalles_producto">
+                            <p class="marca">{{producto.marca}}</p>
+                            <p class="modelo">{{producto.modelo}}</p>
+                            <p class="precio"> <span>US$</span> {{producto.precio}}</p>
+                            <div class="acciones_producto">
+                                <button class="add_cart_button">Agregar Al Carrito</button>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% if actionError %}
+        <div class="notificacionR">
+            <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
+        {% if actionOK %}
+        <div class="notificacionR okColor">
+            <img src="{{ url_for('static', filename='img/ok-circle-filled-svgrepo-com.svg') }}" alt="Error">
+            <p>{{ notificacion }}</p>
+        </div>
+        {% endif %}
+    </main>
+    
+    <footer>
+        <p>Todos los derechos reservados - 2025</p>
+    </footer>
+    <script src="{{ url_for('static', filename='menus.js') }}"></script>
+    <script src="{{ url_for('static', filename='categorias.js') }}"></script>
+</body>
+</html>

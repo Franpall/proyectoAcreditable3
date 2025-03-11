@@ -45,6 +45,17 @@ def verCarrito():
 def verProducto():
     return render_template('producto.html', sesion=sesion)
 
+@app.route('/<categoria>')
+def verProductosCategoria(categoria):
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    id_categoria = obtener_id_categoria(categoria)
+    print(id_categoria)
+    categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
+    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
+        )
+
 # Rutas para administradores
 
 @app.route('/dashboard')

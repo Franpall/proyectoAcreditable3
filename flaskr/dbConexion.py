@@ -74,6 +74,17 @@ def mostrar_productos():
     conn.close()
     return productosModel
 
+def mostrar_productos_categoria(id_categoria):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto WHERE id_categoria = %s', (id_categoria,))
+    productos = cursor.fetchall()
+    productosModel = list()
+    for producto in productos:
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
+    conn.close()
+    return productosModel
+
 def mostrar_productos_recomendados():
     conn = crear_conexion()
     cursor = conn.cursor()
@@ -139,6 +150,16 @@ def obtener_categorias():
     cursor.close()
     conn.close()
     return categorias
+
+# Area de crear Categorias
+def obtener_categoria_especifica(id):
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT nombre, imagen FROM categoria WHERE id = %s", (id,))
+    categoria = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return categoria
 
 def agregar_categoria(nombre, imagen):
     conn = crear_conexion()
