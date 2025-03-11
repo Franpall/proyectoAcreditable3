@@ -182,12 +182,6 @@ def editarProductoSend(id_producto):
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
             print(imagen)
-        # if 'imagen' in request.files:
-        #     imagen = request.files['imagen']
-        #     if imagen.filename != '':
-        #         filename = imagen.filename
-        #         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        #         imagen.save(filepath) 
         else:
             filename = obtener_producto_por_id(id_producto).imagen
         actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
