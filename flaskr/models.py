@@ -13,6 +13,18 @@ class Producto:
         self.precio = precio
         self.stock = stock
 
+# class ProductoEditar:
+#     def __init__(self, id, marca, modelo, descripcion, id_categoria, imagen, precio, stock):
+#         self.id = id
+#         self.marca = marca
+#         self.modelo = modelo
+#         self.descripcion = descripcion
+#         self.id_categoria =id_categoria
+#         self.imagen = imagen
+#         self.precio = precio
+#         self.stock = stock
+
+
 class ProductoAuxiliar:
     def __init__(self, marca, modelo, imagen, precio):
         self.marca = marca
