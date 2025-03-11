@@ -36,8 +36,6 @@
                                 {% endfor %}
                             {% endif %}
                         </select>
-                    </div>
-                    <div id="right_product_form" class="product_form_area">
                         <label for="descripcion">Descripcion</label>
                         <textarea type="text" name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
                         <div id="checkbox_producto">
@@ -48,7 +46,11 @@
                             <input type="checkbox" name="recomendado" id="recomendado">
                             {% endif %}
                         </div>
-                        <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
+                    </div>
+
+                    <div id="right_product_form" class="product_form_area">
+                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" width="400px" height="400px" alt="{{ producto.modelo }}">
+                        <label for="imagen" class="col-form-label imagen_label">Actualizar Imagen:</label>
                         <input type="file" name="imagen" id="imagen" required>
                         <br>
                         <input type="submit" value="Añadir Producto" class="btn btn-primary" >
