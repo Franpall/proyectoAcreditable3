@@ -16,34 +16,42 @@
         <div class="card mb-4">
             <div class="card-header">Actualizar Producto</div>
             <div class="card-body">
-                <form action="/products/" method="POST" id="product_form">
+                <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form" enctype="multipart/form-data">
                     <div id="left_product_form" class="product_form_area">
-                        <label for="product_name" class="col-form-label">Marca</label>
-                        <input type="text" name="product_name" id="product_name">
-                        <label for="product_name" class="col-form-label">Modelo</label>
-                        <input type="text" name="product_name" id="product_name">
-                        <label for="product_name" class="col-form-label">Cantidad Disponible</label>
-                        <input type="number" name="product_name" id="product_name">
-                        <label for="product_name" class="col-form-label">Precio</label>
-                        <input type="number" name="product_name" id="product_name">
-                        <label for="opcionesGama" class="col-form-label">Gama del producto:</label>
-                        <select id="opcionesGama" name="opcionesGama">
-                        <option value="opcion1">Económica</option>
-                        <option value="opcion2">Gamer</option>
-                        <option value="opcion3">Alta</option>
+                        <label for="marca" class="col-form-label">Marca</label>
+                        <input type="text" name="marca" id="marca" value="{{ producto.marca }}" required>
+                        <label for="modelo" class="col-form-label">Modelo</label>
+                        <input type="text" name="modelo" id="modelo" value="{{ producto.modelo }}" required>
+                        <label for="stock" class="col-form-label">Cantidad Disponible</label>
+                        <input type="number" name="stock" id="stock" min="1" value="{{ producto.stock }}" required>
+                        <label for="precio" class="col-form-label">Precio</label>
+                        <input type="number" name="precio" id="precio" min="0" value="{{ producto.precio }}" required>
+                        <label for="categoria" class="col-form-label">Categoria:</label>
+                        <select id="categoria" name="categoria" required>
+                            {% if categorias|length < 1 %}
+                            <option disabled>No hay categorias</option>
+                            {% else %}
+                                {% for categoria in categorias %}
+                                <option>{{categoria}}</option>
+                                {% endfor %}
+                            {% endif %}
                         </select>
                     </div>
                     <div id="right_product_form" class="product_form_area">
-                        <label for="product_descripcion_input">Descripcion</label>
-                        <textarea type="text" name="product_descripcion_input" id="product_descripcion_input"></textarea>
+                        <label for="descripcion">Descripcion</label>
+                        <textarea type="text" name="descripcion" id="descripcion">{{ producto.descripcion }}</textarea>
                         <div id="checkbox_producto">
-                            <label for="product_name" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
-                            <input type="checkbox" name="product_name" id="product_name">
+                            <label for="recomendado" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
+                            {% if producto.recomendado %}
+                            <input type="checkbox" name="recomendado" id="recomendado" checked>
+                            {% else %}
+                            <input type="checkbox" name="recomendado" id="recomendado">
+                            {% endif %}
                         </div>
-                        <label for="product_name" class="col-form-label imagen_label">Imagen:</label>
-                        <input type="file" name="product_name" id="product_name">
+                        <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
+                        <input type="file" name="imagen" id="imagen" required>
                         <br>
-                        <input id="submitProduct" value="Añadir Producto" class="btn btn-primary">
+                        <input type="submit" value="Añadir Producto" class="btn btn-primary" >
                     </div>
                 </form>
             </div>
