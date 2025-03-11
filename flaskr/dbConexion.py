@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from flaskr.models import Usuario, Producto, ProductoAuxiliar
+from flaskr.models import Usuario, Producto, ProductoAuxiliar, ProductoEditar
 import bcrypt
 import os
 
@@ -19,6 +19,31 @@ def crear_conexion():
         return None
 
 # Area de productos
+# def obtener_producto_por_id(id_producto):
+#     conn = crear_conexion()
+#     if conn is None:
+#         print("No se pudo establecer la conexión a la base de datos.")
+#         return None
+#     cursor = conn.cursor()
+#     cursor.execute('SELECT id, marca, modelo, descripcion, id_categoria, imagen, precio, stock FROM producto WHERE id = %s', (id_producto,))
+#     producto = cursor.fetchone()
+#     conn.close()
+#     if producto:
+#         return ProductoEditar(producto[0], producto[1], producto[2], producto[3], producto[4], producto[5], producto[6], producto[7])
+#     else:
+#         return None
+
+# def actualizar_producto(id_producto, marca, modelo, stock, precio, categoria, descripcion, imagen):
+#     conn = crear_conexion()
+#     cursor = conn.cursor()
+#     cursor.execute(
+#         'UPDATE producto SET marca = %s, modelo = %s, stock = %s, precio = %s, id_categoria = %s, descripcion = %s, imagen = %s WHERE id = %s',
+#         (marca, modelo, stock, precio, obtener_id_categoria(categoria), descripcion, imagen, id_producto)
+#     )
+#     conn.commit()
+#     cursor.close()
+#     conn.close()
+#     return True
 
 # Area de productos Admin
 def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
