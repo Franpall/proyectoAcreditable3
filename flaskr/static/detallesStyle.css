@@ -69,6 +69,7 @@
     box-sizing: content-box;
     aspect-ratio: 1/1;
     align-items: left;
+    object-fit: cover;
 }
 
 .detalles_preview{
