@@ -41,9 +41,14 @@ def registrarse():
 def verCarrito():
     return render_template('carrito.html', sesion=sesion)
 
-@app.route('/producto')
-def verProducto():
-    return render_template('producto.html', sesion=sesion)
+# @app.route('/producto')
+# def verProducto():
+#     return render_template('producto.html', sesion=sesion)
+
+@app.route('/verProducto/<id>')
+def verProducto(id):
+    producto = obtener_producto_por_id(id)
+    return render_template('producto.html', sesion=sesion, producto = producto)
 
 @app.route('/<categoria>')
 def verProductosCategoria(categoria):

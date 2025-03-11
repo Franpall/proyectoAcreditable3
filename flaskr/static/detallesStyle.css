@@ -101,6 +101,12 @@
     font-weight: 700;
 }
 
+.detalles_preview .stock_preview{
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin: 2px 0;
+}
+
 .detalles_preview .cantidad_preview{
     font-weight: 500;
     font-size: 1.5rem;
@@ -136,7 +142,7 @@
 #descripcion_article{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     width: 90%;
     max-width: 950px;

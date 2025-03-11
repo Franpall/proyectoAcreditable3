@@ -4,6 +4,7 @@ class Usuario:
         self.nombre = nombre
         self.correo = correo
 
+# Para las tarjetas del producto
 class Producto:
     def __init__(self, id, marca, modelo, imagen, precio, stock):
         self.id = id
@@ -13,6 +14,7 @@ class Producto:
         self.precio = precio
         self.stock = stock
 
+# Para Detalles completos o editar producto
 class ProductoEditar:
     def __init__(self, id, marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
         self.id = id
@@ -27,7 +29,8 @@ class ProductoEditar:
 
 
 class ProductoAuxiliar:
-    def __init__(self, marca, modelo, imagen, precio):
+    def __init__(self, id, marca, modelo, imagen, precio):
+        self.id = id
         self.marca = marca
         self.modelo = modelo
         self.imagen = imagen

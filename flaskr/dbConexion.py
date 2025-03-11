@@ -66,33 +66,33 @@ def actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, i
 def mostrar_productos():
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto')
+    cursor.execute('SELECT id, marca, modelo, imagen, precio FROM producto')
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
-        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3], producto[4]))
     conn.close()
     return productosModel
 
 def mostrar_productos_categoria(id_categoria):
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto WHERE id_categoria = %s', (id_categoria,))
+    cursor.execute('SELECT id, marca, modelo, imagen, precio FROM producto WHERE id_categoria = %s', (id_categoria,))
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
-        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3], producto[4]))
     conn.close()
     return productosModel
 
 def mostrar_productos_recomendados():
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto WHERE recomendado = 1')
+    cursor.execute('SELECT id, marca, modelo, imagen, precio FROM producto WHERE recomendado = 1')
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
-        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3]))
+        productosModel.append(ProductoAuxiliar(producto[0], producto[1], producto[2], producto[3], producto[4]))
     conn.close()
     return productosModel
 

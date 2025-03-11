@@ -46,7 +46,7 @@
 
                 {% for producto in productos %}
                 <article class="tarjeta_producto">
-                    <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto') }}">
+                    <a class="tarjeta_producto_clickeable" href="{{ url_for('verProducto', id=producto.id) }}">
                         <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}">
                         <div class="detalles_producto">
                             <p class="marca">{{producto.marca}}</p>

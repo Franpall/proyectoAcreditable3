@@ -31,12 +31,13 @@
             <article class="preview_producto">
                 <div class="imagen-descripcion">
                     <div id="imagen_box">
-                        <img class="imagen_preview" src="{{ url_for('static', filename='img/productos/lenovo-ideapad.jpg') }}" alt="Lenovo ideapad">
+                        <img class="imagen_preview" src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}">
                     </div>
                     <div class="detalles_preview">
-                        <p class="marca_preview">Lenovo</p>
-                        <p class="modelo_preview">Ideapad 3</p>
-                        <p class="precio_preview"> <span>US$</span> 250</p>
+                        <p class="marca_preview">{{ producto.marca }}</p>
+                        <p class="modelo_preview">{{ producto.modelo }}</p>
+                        <p class="precio_preview"> <span>US$</span> {{ producto.precio }} </p>
+                        <p class="stock_preview">Quedan {{ producto.stock }} unidades en stock</p>
                         <p class="cantidad_preview">Cantidad</p>
                         <div class="cantidad-selector">
                             <button id="decremento">-</button>
@@ -52,30 +53,7 @@
             <article id="descripcion_article">
                 <h2>Descripción del Producto</h2>
                 <section id="descripcion_completa">
-                    <p>LENOVO IDEAPAD 3 14ITL05 I5 1135G7 8GB 256GB 81X700FVUS
-
-                        Lenovo IdeaPad 3 14ITL05: Rendimiento Versátil, Almacenamiento Rápido y Diseño Elegante con Intel i5, 8GB RAM y SSD de 256GB
-                        
-                        Especificaciones Completas:
-                        
-                        Procesador: Intel Core i5-1135G7 de 11ª generación
-                        Memoria RAM: 8GB DDR4
-                        Almacenamiento: Unidad de estado sólido (SSD) de 256GB
-                        Pantalla: HD de 14 pulgadas (1366 x 768)
-                        Gráficos: Intel Iris Xe Graphics
-                        Conectividad: Wi-Fi 6 y Bluetooth 5.0
-                        Puertos:
-                        2x USB 3.2 Gen 1
-                        1x USB 2.0
-                        1x HDMI
-                        1x Lector de tarjetas SD
-                        1x Conector de audio de 3,5 mm
-                        Batería: Hasta 8 horas de autonomía
-                        Cámara web: HD 720p
-                        Seguridad: Ranura para bloqueo Kensington
-                        Sistema operativo: Windows 11 Home
-                        Dimensiones: 35.85 x 23.7 x 1.93 cm
-                        Peso: 1.74 kg</p>
+                    <p>{{ producto.descripcion }}</p>
                 </section>
             </article>
             <div id="btn_regresar">
