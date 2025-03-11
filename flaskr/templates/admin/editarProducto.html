@@ -32,7 +32,11 @@
                             <option disabled>No hay categorias</option>
                             {% else %}
                                 {% for categoria in categorias %}
-                                <option>{{categoria}}</option>
+                                    {% if categoria.id == producto.id_categoria %}
+                                    <option selected>{{categoria.nombre}}</option>
+                                    {% else %}
+                                    <option>{{categoria.nombre}}</option>
+                                    {% endif %}
                                 {% endfor %}
                             {% endif %}
                         </select>
@@ -51,9 +55,9 @@
                     <div id="right_product_form" class="product_form_area">
                         <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" width="400px" height="400px" alt="{{ producto.modelo }}">
                         <label for="imagen" class="col-form-label imagen_label">Actualizar Imagen:</label>
-                        <input type="file" name="imagen" id="imagen" required>
+                        <input type="file" name="imagen" id="imagen">
                         <br>
-                        <input type="submit" value="Añadir Producto" class="btn btn-primary" >
+                        <input type="submit" value="Actualizar Producto" class="btn btn-primary" >
                     </div>
                 </form>
             </div>
