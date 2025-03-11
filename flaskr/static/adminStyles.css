@@ -10430,3 +10430,9 @@ body {
   gap: 10px;
   max-width: 400px;
 }
+
+/* Estilos de imagen de formulario */
+
+.editarProductoImg{
+  object-fit: cover;
+}

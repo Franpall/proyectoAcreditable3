@@ -53,9 +53,9 @@
                     </div>
 
                     <div id="right_product_form" class="product_form_area">
-                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" width="400px" height="400px" alt="{{ producto.modelo }}">
+                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" class="editarProductoImg" width="300px" height="300px" alt="{{ producto.modelo }}">
                         <label for="imagen" class="col-form-label imagen_label">Actualizar Imagen:</label>
-                        <input type="file" name="imagen" id="imagen" dirname="{{ producto.imagen }}">
+                        <input type="file" name="imagen" id="imagen">
                         <br>
                         <input type="submit" value="Actualizar Producto" class="btn btn-primary" >
                     </div>
