@@ -12,7 +12,33 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 
 # Crear carpeta uploads si no existe
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
-    
+
+# # Ruta para editar productos
+# @app.route('/editarProducto/<int:id_producto>', methods=['GET', 'POST'])
+# def editarProducto(id_producto):
+#     producto = obtener_producto_por_id(id_producto)
+
+#     if request.method == 'POST':
+#         marca = request.form['marca']
+#         modelo = request.form['modelo']
+#         stock = request.form['stock']
+#         precio = request.form['precio']
+#         categoria = request.form['categoria']
+#         descripcion = request.form['descripcion']
+#         if 'imagen' in request.files:
+#             imagen = request.files['imagen']
+#             if imagen.filename != '':  # Si hay una nueva imagen
+#                 filename = imagen.filename
+#                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#                 imagen.save(filepath)
+#                 producto.imagen = filename  # Actualiza la imagen en el producto
+
+#         actualizar_producto(id_producto, marca, modelo, stock, precio, categoria, descripcion, producto.imagen)
+#         return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Actualizado con Éxito"))
+
+#     categorias = obtener_categorias()
+#     return render_template('admin/editarProducto.html', producto=producto, categorias=categorias)
+
 @app.route('/')
 def index():
     categorias = obtener_categorias()
