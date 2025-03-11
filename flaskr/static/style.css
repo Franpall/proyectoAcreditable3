@@ -365,6 +365,7 @@ header h1 a{
     font-size: 1.3rem;
     cursor: pointer;
     padding: 10px;
+    text-decoration: none;
 }
 
 #close_all_ctg_button{
