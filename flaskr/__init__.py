@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flaskr.dbConexion import *
 import os
+from flaskr.models import Producto
 
 app = Flask(__name__)
 sesion = False
@@ -153,37 +154,44 @@ def registrarProductos():
 @app.route('/editarProducto/<int:id_producto>')
 def editarProductoView(id_producto):
     producto = obtener_producto_por_id(id_producto)
-    print(producto)
-
     categorias = obtener_categorias()
-
-    print(categorias)
     return render_template('admin/editarProducto.html', producto=producto, categorias=categorias)
 
 @app.route('/subirActualizacion/<int:id_producto>', methods=['GET', 'POST'])
 def editarProductoSend(id_producto):
-    producto = obtener_producto_por_id(id_producto)
-
     if request.method == 'POST':
         marca = request.form['marca']
         modelo = request.form['modelo']
         stock = request.form['stock']
         precio = request.form['precio']
         categoria = request.form['categoria']
+        imagen = request.files['imagen']
         descripcion = request.form['descripcion']
-        if 'imagen' in request.files:
-            imagen = request.files['imagen']
-            if imagen.filename != '':  # Si hay una nueva imagen
-                filename = imagen.filename
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                imagen.save(filepath)
-                producto.imagen = filename  # Actualiza la imagen en el producto
+        try:
+            recomendado = request.form['recomendado']
+            print(recomendado)
+        except KeyError:
+            recomendado = 0
 
-        actualizar_producto(id_producto, marca, modelo, stock, precio, categoria, descripcion, producto.imagen)
+        if recomendado:
+            recomendado = 1
+
+        id_categoria = obtener_id_categoria(categoria)
+        if imagen:
+            filename = imagen.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            imagen.save(filepath)
+            print(imagen)
+        # if 'imagen' in request.files:
+        #     imagen = request.files['imagen']
+        #     if imagen.filename != '':
+        #         filename = imagen.filename
+        #         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        #         imagen.save(filepath) 
+        else:
+            filename = obtener_producto_por_id(id_producto).imagen
+        actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
         return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Actualizado con Éxito"))
-
-    categorias = obtener_categorias()
-    return render_template('admin/editarProducto.html', producto=producto, categorias=categorias)
 
 # Eliminar Productos
 @app.route('/delete_producto/<int:id_producto>')

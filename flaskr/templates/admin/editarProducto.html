@@ -16,7 +16,7 @@
         <div class="card mb-4">
             <div class="card-header">Actualizar Producto</div>
             <div class="card-body">
-                <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form" enctype="multipart/form-data">
+                <form action="{{ url_for('editarProductoSend', id_producto=producto.id) }}" method="POST" id="product_form" enctype="multipart/form-data">
                     <div id="left_product_form" class="product_form_area">
                         <label for="marca" class="col-form-label">Marca</label>
                         <input type="text" name="marca" id="marca" value="{{ producto.marca }}" required>
@@ -55,7 +55,7 @@
                     <div id="right_product_form" class="product_form_area">
                         <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" width="400px" height="400px" alt="{{ producto.modelo }}">
                         <label for="imagen" class="col-form-label imagen_label">Actualizar Imagen:</label>
-                        <input type="file" name="imagen" id="imagen">
+                        <input type="file" name="imagen" id="imagen" dirname="{{ producto.imagen }}">
                         <br>
                         <input type="submit" value="Actualizar Producto" class="btn btn-primary" >
                     </div>
