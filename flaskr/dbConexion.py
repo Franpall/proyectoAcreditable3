@@ -50,12 +50,12 @@ def obtener_producto_por_id(id_producto):
     conn.close()
     return ProductoEditar(producto[0], producto[1], producto[2], producto[3], producto[4], producto[5], producto[6], producto[7], producto[8])
 
-def actualizar_producto(id_producto, marca, modelo, stock, precio, categoria, descripcion, imagen):
+def actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute(
-        'UPDATE producto SET marca = %s, modelo = %s, stock = %s, precio = %s, id_categoria = %s, descripcion = %s, imagen = %s WHERE id = %s',
-        (marca, modelo, stock, precio, obtener_id_categoria(categoria), descripcion, imagen, id_producto)
+        'UPDATE producto SET marca = %s, modelo = %s, descripcion = %s, id_categoria = %s, imagen = %s, precio = %s, stock = %s, recomendado = %s WHERE id = %s',
+        (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado, id_producto)
     )
     conn.commit()
     cursor.close()
