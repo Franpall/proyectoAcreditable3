@@ -66,7 +66,7 @@ def actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, i
 def mostrar_productos():
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto WHERE recomendado = 0')
+    cursor.execute('SELECT marca, modelo, imagen, precio FROM producto')
     productos = cursor.fetchall()
     productosModel = list()
     for producto in productos:
