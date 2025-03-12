@@ -41,22 +41,17 @@ def registrarse():
 def verCarrito():
     return render_template('carrito.html', sesion=sesion)
 
-# @app.route('/producto')
-# def verProducto():
-#     return render_template('producto.html', sesion=sesion)
-
-@app.route('/verProducto/<id>')
+@app.route('/verProducto/<int:id>')
 def verProducto(id):
     producto = obtener_producto_por_id(id)
     return render_template('producto.html', sesion=sesion, producto = producto)
 
-@app.route('/verCategoria/<categoria>')
+@app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
-    notificacion = request.args.get('notificacion', False)
+    notificacion = request.args.get('notificacio n', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     id_categoria = obtener_id_categoria(categoria)
-    print(id_categoria)
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
         )
