@@ -139,7 +139,7 @@ def obtener_id_categoria(nombre_categoria):
     cursor.execute("SELECT id FROM categoria WHERE nombre = %s", (nombre_categoria,))
     id_categoria = cursor.fetchone()
     conexion.close()
-    return id_categoria[0]
+    return id_categoria[0] if id_categoria else None
 
 # Area de crear Categorias
 def obtener_categorias():

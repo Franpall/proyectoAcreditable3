@@ -55,9 +55,15 @@ def verProductosCategoria(categoria):
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
     print(f"Categoría solicitada: {categoria}")  # Depuración
+    
     id_categoria = obtener_id_categoria(categoria)
+    
+    if id_categoria is None:  # Si la categoría no existe
+        return redirect(url_for('index', actionError=True, notificacion="Categoría no encontrada"))
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
+    
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
         )
 
