@@ -50,7 +50,7 @@ def verProducto(id):
     producto = obtener_producto_por_id(id)
     return render_template('producto.html', sesion=sesion, producto = producto)
 
-@app.route('/<categoria>')
+@app.route('/verCategoria/<categoria>')
 def verProductosCategoria(categoria):
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
