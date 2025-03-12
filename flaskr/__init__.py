@@ -48,7 +48,7 @@ def verProducto(id):
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
-    notificacion = request.args.get('notificacio n', False)
+    notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     id_categoria = obtener_id_categoria(categoria)
