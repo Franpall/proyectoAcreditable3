@@ -41,6 +41,10 @@ def registrarse():
 def verCarrito():
     return render_template('carrito.html', sesion=sesion)
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('img/favicon.ico') # Evitar llamar un icono en vez del id_categoria
+
 @app.route('/verProducto/<int:id>')
 def verProducto(id):
     producto = obtener_producto_por_id(id)
@@ -51,6 +55,7 @@ def verProductosCategoria(categoria):
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    print(f"Categoría solicitada: {categoria}")  # Depuración
     id_categoria = obtener_id_categoria(categoria)
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
