@@ -322,6 +322,24 @@ h2{
     background-color: var(--botonHover);
     box-shadow: var(--sombrasDeCajas);
 }
+
+.carrito_vacio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.carrito_vacio img{
+    min-width: 200px;
+    width: 30%;
+    max-width: 400px;
+    aspect-ratio: 1/1;
+}
+
 /* Responsive Carrito */
 
 @media (min-width:700px){
@@ -333,6 +351,10 @@ h2{
         padding-right: 20px;
         border-right: 1px solid #dddddd;
         border-bottom: none;
+    }
+
+    .error_carrito{
+        border-right: none;
     }
     
     .info{

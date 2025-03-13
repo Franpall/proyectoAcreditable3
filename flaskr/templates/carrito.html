@@ -30,40 +30,25 @@
         <section class="area-carrito">
             <article class="contenido-carrito">
                 <div class="carrito">
+                {% if productos|length > 0 %}
                     <div class="compra">
                         <h2>Carrito de Compras</h2>
+                        {% for producto in productos %}
                         <div class="producto">
                             <div id="elemento_del_carrito">
                                 <div class="producto-detalles"><br><br>
-                                    <h2>Lenovo</h2><br>
-                                    LENOVO IDEAPAD 3 14ITL05 I5 1135G7 8GB 256GB<br>
+                                    <h2>{{ producto.marca }}</h2><br>
+                                    {{ producto.marca + " " + producto.modelo }} <span>x {{ producto.cantidad }}</span><br>
                                 </div>
                                 <div class="producto-precio"><br>
-                                    $250,00
+                                    <span>US$</span> {{producto.precio}} c/u
                                 </div>
                             </div>
                             <div id="btn_borrar_del_carrito">
                                 <a href="" class="btn_borrar_icon"><img src="{{ url_for('static', filename='img/delete-svgrepo-com.svg') }}" alt=""></a>
                             </div>
                         </div>
-
-<!-- Codigo de prueba -->
-
-                        <div class="producto">
-                            <div id="elemento_del_carrito">
-                                <div class="producto-detalles"><br><br>
-                                    <h2>Lenovo</h2><br>
-                                    LENOVO IDEAPAD 3 14ITL05 I5 1135G7 8GB 256GB<br>
-                                </div>
-                                <div class="producto-precio"><br>
-                                    $250,00
-                                </div>
-                            </div>
-                            <div id="btn_borrar_del_carrito">
-                                <a href="" class="btn_borrar_icon"><img src="{{ url_for('static', filename='img/delete-svgrepo-com.svg') }}" alt=""></a>
-                            </div>
-                        </div>
-
+                        {% endfor %}
                     </div>
                     <div class="info">
                         <h2>Información de la compra</h2><br>
@@ -75,6 +60,15 @@
                         </div>
                         <button class="checkout-button">COMPRAR</button>
                     </div>
+                {% else %}
+                    <div class="compra error_carrito">
+                        <h2>Carrito de Compras</h2>
+                        <div class="carrito_vacio">
+                            <h2>Vaya! Aún no has añadido nada al carrito</h2>
+                            <img src="{{ url_for('static', filename='img/cart-svgrepo-com.svg') }}" alt="">
+                        </div>
+                    </div>
+                {% endif %}
                 </div>
             </article>
             <div id="btn_regresar">
