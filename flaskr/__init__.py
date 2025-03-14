@@ -103,10 +103,6 @@ def adminAdmins():
 def adminVentas():
     return render_template('admin/ventas.html')
 
-@app.route('/editar-producto')
-def adminUpdateUI():
-    return render_template('admin/editarProducto.html')
-
 # <-- Area de categorias -->
 
 # Agregar categorias
