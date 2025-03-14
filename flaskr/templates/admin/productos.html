@@ -80,15 +80,15 @@
                             <tbody>
                                 {% for producto in productos %}
                                 <tr>
-                                    <td>{{ producto.id }}</td>
-                                    <td>{{ producto.marca }}</td>
-                                    <td>{{ producto.modelo }}</td>
-                                    <td>
-                                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}" width="100">
+                                    <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.id }}</p></td>
+                                    <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.marca }}</p></td>
+                                    <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.modelo }}</p></td>
+                                    <td class="text-center">
+                                        <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}" style=" width: 100px; margin: none; padding: none; aspect-ratio:1/1; object-fit: cover;">
                                     </td>
-                                    <td>{{ producto.precio }}</td>
-                                    <td>{{ producto.stock }}</td>
-                                    <td class="actions_td">
+                                    <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.precio }}</p></td>
+                                    <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.stock }}</p></td>
+                                    <td class="actions_td" height="90px">
                                         <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
                                         <br>
                                         <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
