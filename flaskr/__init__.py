@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flaskr.dbConexion import *
 import os
-from flaskr.models import Producto
 
 app = Flask(__name__)
 sesion = False
