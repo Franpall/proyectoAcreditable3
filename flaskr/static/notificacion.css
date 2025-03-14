@@ -35,58 +35,64 @@
       opacity: 1; /* El elemento es completamente visible al inicio */
     }
     10% {
-      opacity: 0.9;
+      opacity: 0.95;
     }
     15% {
-      opacity: 0.85;
+      opacity: 0.90;
     }
     20% {
-      opacity: 0.8;
+      opacity: 0.85;
     }
     25% {
-      opacity: 0.75;
+      opacity: 0.80;
     }
     30% {
-      opacity: 0.7;
+      opacity: 0.75;
     }
     35% {
-      opacity: 0.65;
+      opacity: 0.70;
     }
     40% {
-      opacity: 0.6;
+      opacity: 0.65;
     }
     45% {
-      opacity: 0.55;
+      opacity: 0.60;
     }
     50% {
-      opacity: 0.5;
+      opacity: 0.55;
     }
     55% {
-      opacity: 0.45;
+      opacity: 0.50;
     }
     60% {
-      opacity: 0.4;
+      opacity: 0.45;
     }
     65% {
-      opacity: 0.35;
+      opacity: 0.40;
     }
     70% {
-      opacity: 0.3;
+      opacity: 0.35;
     }
     75% {
-      opacity: 0.25;
+      opacity: 0.30;
     }
     80% {
-      opacity: 0.2;
+      opacity: 0.25;
     }
     85% {
-      opacity: 0.15;
+      opacity: 0.20;
     }
     90% {
-      opacity: 0.1;
+      opacity: 0.15;
+    }
+    93% {
+      opacity: 0.10;
     }
     95% {
       opacity: 0.05;
+    }
+    97% {
+      opacity: 0.03;
     }
     100% {
       opacity: 0; /* El elemento se vuelve completamente invisible al final */
