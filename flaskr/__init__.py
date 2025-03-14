@@ -125,7 +125,7 @@ def adminCategorias():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
             agregar_categoria(nombre, filename)
-            return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Agregó la categoría"))
+            return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Registrada con Éxito"))
     
     categorias = obtener_categorias()
     
@@ -162,7 +162,7 @@ def editarCategoriaSend(id_categoria):
         else:
             filename = obtener_id_categoria(id_categoria)
         actualizar_categoria(id_categoria, nombre, filename)
-        return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoria Actualizada con Éxito"))
+        return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Actualizada con Éxito"))
 
 # Eliminar Categorias
 @app.route('/delete_categoria/<int:id_categoria>')
@@ -194,7 +194,7 @@ def eliminarCategoria(id_categoria):
     
     eliminar_categoria(id_categoria)
 
-    return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la categoría"))
+    return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Eliminó la Categoría"))
 
 
 # <-- Area de productos -->
@@ -296,7 +296,7 @@ def eliminarProducto(id_producto):
     
     eliminar_producto(id_producto)
 
-    return redirect(url_for('adminProductos', actionOK=True, notificacion="Se eliminó el producto"))
+    return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
 
 
 # Lógica para el registro de clientes
@@ -309,14 +309,14 @@ def registerSolicitud():
         confirmar_contraseña = request.form['confirm-password']
 
         if contraseña != confirmar_contraseña:
-            return render_template('auth/register.html', actionError=True, notificacion="La contraseña repetida no coincide")
+            return render_template('auth/register.html', actionError=True, notificacion="La Contraseña Repetida no Coincide")
         
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
         
         if resultado:
             return redirect(url_for('iniciarSesion', actionOK=True, notificacion="Cuenta Creada Con Éxito, ahora Inicia Sesión"))
         else:
-            return render_template('auth/register.html', actionError=True, notificacion="El usuario o correo ya está registrado")
+            return render_template('auth/register.html', actionError=True, notificacion="El Usuario o Correo ya está Registrado")
 
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
@@ -333,7 +333,7 @@ def loginSolicitud():
         elif resultado == "admin":
             return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         else:
-            return render_template('auth/login.html', actionError=True, notificacion="Usuario o contraseña incorrecta")
+            return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña Incorrectos")
     return render_template('auth/login.html')
 
 # Lógica para el registro de administradores
@@ -346,18 +346,18 @@ def registerAdmin():
         contraseña = request.form['password']
 
         registrar_cliente(usuario, correo, contraseña, 2)
-        return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador registrado con exito"))
+        return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
     
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
 def cerrarSesionSolicitud():
     global sesion
     sesion = False
-    return render_template('auth/login.html', actionOK=True, notificacion="Sesion Cerrada con Exito")
+    return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
     
 # Lógica para eliminar Administradores
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
-    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con exito"))
+    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con Éxito"))
 
