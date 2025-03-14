@@ -33,7 +33,7 @@
                 {% if categorias|length < 1 %}
                     <h4>No hay Categorías registradas</h4>
                 {% else %}
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -44,13 +44,13 @@
                     </thead>
                     <tbody>
                         {% for categoria in categorias %}
-                        <tr>
+                        <tr height="150px">
                             <td>{{ categoria.id }}</td>
                             <td>{{ categoria.nombre }}</td>
                             <td>
-                                <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" width="100">
+                                <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" height="150px">
                             </td>
-                            <td>
+                            <td class="actions_td">
                                 <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
                                 <br>
                                 <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a> 
