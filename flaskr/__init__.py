@@ -155,8 +155,6 @@ def editarCategoriaSend(id_categoria):
             filename = imagen.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
-        else:
-            filename = obtener_id_categoria(id_categoria)
         actualizar_categoria(id_categoria, nombre, filename)
         return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Actualizada con Éxito"))
 
