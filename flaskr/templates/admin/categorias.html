@@ -44,13 +44,13 @@
                     </thead>
                     <tbody>
                         {% for categoria in categorias %}
-                        <tr height="150px">
-                            <td>{{ categoria.id }}</td>
-                            <td>{{ categoria.nombre }}</td>
-                            <td>
-                                <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" height="150px">
+                        <tr height="120px">
+                            <td><p style="height: 120px; display: flex; align-items: center; justify-content: center;">{{ categoria.id }}</p></td>
+                            <td><p style="height: 120px; display: flex; align-items: center; justify-content: center;">{{ categoria.nombre }}</p></td>
+                            <td class="text-center">
+                                <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" style=" height: 120px; margin: none; padding: none; aspect-ratio:6/4; object-fit: cover;">
                             </td>
-                            <td class="actions_td">
+                            <td class="actions_td" height="140px">
                                 <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
                                 <br>
                                 <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a> 
