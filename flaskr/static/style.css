@@ -1,6 +1,8 @@
 /* Método First Mobile */
 
 /* Ajustes generales */
+@import url(notificacion.css);
+
 
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap');
 
@@ -618,33 +620,6 @@ footer{
 
 /* ERRORES y Mensajes */
 
-.notificacionR{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: var(--fondoTarjeta);
-    color: rgb(179, 27, 27);
-    font-weight: bold;
-    font-size: 1.2rem;
-    gap: 10px;
-    animation: ocultar 7s forwards;
-    box-shadow: var(--sombrasDeCajas);
-}
-
-.notificacionR img{
-    width: 80px;
-    aspect-ratio: 1/1;
-}
-
-.okColor{
-    color: rgb(58, 117, 24);
-}
-
 .errorLengthZero{
     width: 80vw;
     margin: 0 auto;
@@ -667,21 +642,3 @@ footer{
     width: 30%;
     aspect-ratio: 1/1;
 }
-
-/* Animaciones */
-
-@keyframes ocultar {
-    0% {
-      opacity: 1; /* El elemento es completamente visible al inicio */
-    }
-    80% {
-        opacity: 0.7; /* Mantiene la visibilidad hasta casi el final */
-      }
-    90% {
-      opacity: 0.5; /* Mantiene la visibilidad hasta casi el final */
-    }
-    100% {
-      opacity: 0; /* El elemento se vuelve completamente invisible al final */
-      display: none; /* Opcional: elimina el elemento del flujo del documento */
-    }
-  }

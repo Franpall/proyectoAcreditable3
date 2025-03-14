@@ -14,8 +14,9 @@
     font-weight: bold;
     font-size: 1.2rem;
     gap: 10px;
-    animation: ocultar 7s forwards;
+    animation: ocultar 3s forwards;
     box-shadow: 2px 2px 10px #cacaca;
+    z-index: 3;
 }
 
 .notificacionR img{
@@ -33,11 +34,11 @@
     0% {
       opacity: 1; /* El elemento es completamente visible al inicio */
     }
-    80% {
-        opacity: 0.7; /* Mantiene la visibilidad hasta casi el final */
-      }
     90% {
-      opacity: 0.5; /* Mantiene la visibilidad hasta casi el final */
+      opacity: 0.9; /* Mantiene la visibilidad hasta casi el final */
+    }
+    95% {
+      opacity: 0.8; /* Mantiene la visibilidad hasta casi el final */
     }
     100% {
       opacity: 0; /* El elemento se vuelve completamente invisible al final */
