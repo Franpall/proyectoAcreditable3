@@ -84,28 +84,8 @@ def actualizar_categoria(id_categoria, nombre, imagen):
 def eliminar_categoria(id_categoria):
     conn = crear_conexion()
     cursor = conn.cursor()
-    
-    # Eliminar todos los productos de la categoría primero
-    cursor.execute("SELECT id FROM producto WHERE id_categoria = %s", (id_categoria,))
-    productos = cursor.fetchall()
-    
-    for producto in productos:
-        eliminar_producto(producto[0])  #Función existente que ya elimina imagenes de productos
-
-    # Eliminar la categoría con su imagen
-    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
-    filename = cursor.fetchone()
-    
-    if filename:
-        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
-        try:
-            os.remove(filepath)
-        except FileNotFoundError:
-            print("No se encontró el archivo")
-
     cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
     conn.commit()
-
     cursor.close()
     conn.close()
     return True
@@ -195,21 +175,8 @@ def mostrar_productos_recomendados():
 def eliminar_producto(id_producto):
     conn = crear_conexion()
     cursor = conn.cursor()
-
-    # Obtener la imagen antes de eliminar la categoría
-    cursor.execute("SELECT imagen FROM producto WHERE id = %s", (id_producto,))
-    filename = cursor.fetchone()
-    
-    if filename:
-        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
-        try:
-            os.remove(filepath)
-        except FileNotFoundError:
-            print("No se encontró el archivo")
-
     cursor.execute("DELETE FROM producto WHERE id = %s", (id_producto,))
     conn.commit()
-
     cursor.close()
     conn.close()
     return True

@@ -167,6 +167,31 @@ def editarCategoriaSend(id_categoria):
 # Eliminar Categorias
 @app.route('/delete_categoria/<int:id_categoria>')
 def eliminarCategoria(id_categoria):
+    
+    categoria = obtener_categoria_especifica(id_categoria)
+    productos = mostrar_productos_categoria(id_categoria)
+    
+    # Eliminar imagen de categoria
+    if categoria['imagen']:
+        try:
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], categoria['imagen'])
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("Imagen de categoría no encontrada")
+    
+    # Eliminar imagenes de los productos
+    for producto in productos:
+        if producto.imagen:
+            try:
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], producto.imagen)
+                os.remove(filepath)
+            except FileNotFoundError:
+                print(f"Imagen de producto {producto.id} no encontrada")
+                
+    print(productos)  # Verifica qué se está devolviendo
+    for producto in productos:
+        print(vars(producto))  # Imprime los atributos del objeto
+    
     eliminar_categoria(id_categoria)
 
     return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la categoría"))
@@ -259,6 +284,16 @@ def editarProductoSend(id_producto):
 # Eliminar Productos
 @app.route('/delete_producto/<int:id_producto>')
 def eliminarProducto(id_producto):
+    
+    producto = obtener_producto_por_id(id_producto)
+    
+    if producto and producto.imagen:
+        filepath = os.remove(os.path.join(app.config['UPLOAD_FOLDER'], producto.imagen))
+        try:
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("Imagen de producto no encontrada")
+    
     eliminar_producto(id_producto)
 
     return redirect(url_for('adminProductos', actionOK=True, notificacion="Se eliminó el producto"))
