@@ -88,8 +88,11 @@
     93% {
       opacity: 0.10;
     }
-    96% {
+    95% {
       opacity: 0.05;
+    }
+    97% {
+      opacity: 0.03;
     }
     100% {
       opacity: 0; /* El elemento se vuelve completamente invisible al final */
