@@ -26,6 +26,12 @@ def index():
         categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK
     )
 
+
+# Capturar error 404 para mostrar html personalizado
+@app.errorhandler(404)
+def errorURL(e):
+    return render_template('404error.html')
+
 @app.route('/login')
 def iniciarSesion():
     notificacion = request.args.get('notificacion', False)

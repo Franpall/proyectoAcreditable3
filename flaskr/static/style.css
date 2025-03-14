@@ -642,3 +642,31 @@ footer{
     width: 30%;
     aspect-ratio: 1/1;
 }
+
+#area_404_error{
+    padding: 20px 0;
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#area_404_error h2{
+    font-size: 2rem;
+}
+
+#area_404_error a{
+    color: rgb(10, 34, 167);
+    font-size: 1.2rem;
+}
+
+#area_404_error img{
+    width: 80%;
+    max-width: 400px;
+    aspect-ratio: 1/1;
+}
