@@ -14,15 +14,18 @@ app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
+# Inicio
 @app.route('/')
 def index():
-    categorias = obtener_categorias()
-
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
+    categorias = obtener_categorias()
+    productos = mostrar_productos()
+    productos_recomendados = mostrar_productos_recomendados()
 
-    return render_template('index.html', productos=mostrar_productos(), productos_recomendados=mostrar_productos_recomendados(), sesion=sesion, 
+    return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=sesion, 
         categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK
     )
 
