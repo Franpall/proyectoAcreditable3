@@ -51,9 +51,9 @@
                                 <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" style=" height: 120px; margin: none; padding: none; aspect-ratio:6/4; object-fit: cover;">
                             </td>
                             <td class="actions_td" height="140px">
-                                <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
+                                <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a>
                                 <br>
-                                <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a> 
+                                <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
                             </td>
                         </tr>
                         {% endfor %}

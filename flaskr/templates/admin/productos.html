@@ -89,9 +89,9 @@
                                     <td>{{ producto.precio }}</td>
                                     <td>{{ producto.stock }}</td>
                                     <td class="actions_td">
-                                        <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a>
+                                        <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
                                         <br>
-                                        <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>  
+                                        <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
                                     </td>
                                 </tr>
                                 {% endfor %}
