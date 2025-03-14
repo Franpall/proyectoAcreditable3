@@ -84,8 +84,15 @@ def actualizar_categoria(id_categoria, nombre, imagen):
 def eliminar_categoria(id_categoria):
     conn = crear_conexion()
     cursor = conn.cursor()
+    
+    # Eliminar todos los productos de la categoría primero
+    cursor.execute("SELECT id FROM producto WHERE id_categoria = %s", (id_categoria,))
+    productos = cursor.fetchall()
+    
+    for producto in productos:
+        eliminar_producto(producto[0])  #Función existente que ya elimina imagenes de productos
 
-    # Obtener la imagen antes de eliminar la categoría
+    # Eliminar la categoría con su imagen
     cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
     filename = cursor.fetchone()
     
