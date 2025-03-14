@@ -143,13 +143,24 @@ def editarCategoriaSend(id_categoria):
         nombre = request.form['nombre']
         imagen = request.files['imagen']
 
-        if imagen:
+        categoria_actual = obtener_categoria_especifica(id_categoria)
+
+        filename = categoria_actual['imagen']
+        
+        if imagen and imagen.filename != '':
+            # Eliminar la imagen anterior
+            if categoria_actual['imagen']:
+                try:
+                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], categoria_actual['imagen'])
+                    os.remove(filepath)
+                except FileNotFoundError:
+                    print("No se encontró la imagen anterior")
+                
             filename = imagen.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
-            print(imagen)
         else:
-            filename = obtener_id_categoria(id_categoria).imagen
+            filename = obtener_id_categoria(id_categoria)
         actualizar_categoria(id_categoria, nombre, filename)
         return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoria Actualizada con Éxito"))
 
@@ -224,11 +235,22 @@ def editarProductoSend(id_producto):
             recomendado = 1
 
         id_categoria = obtener_id_categoria(categoria)
+        producto_actual = obtener_producto_por_id(id_producto)
+        filename = producto_actual.imagen
+        
+        if imagen and imagen.filename != '':
+            # Eliminar la imagen anterior
+            if producto_actual.imagen:
+                try:
+                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], producto_actual.imagen)
+                    os.remove(filepath)
+                except FileNotFoundError:
+                    print("No se encontró la imagen anterior")
+        
         if imagen:
             filename = imagen.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
-            print(imagen)
         else:
             filename = obtener_producto_por_id(id_producto).imagen
         actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
