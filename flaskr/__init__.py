@@ -107,8 +107,9 @@ def adminVentas():
 def adminUpdateUI():
     return render_template('admin/editarProducto.html')
 
+# <-- Area de categorias -->
 
-# Lógica para agregar categorias
+# Agregar categorias
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
     notificacion = request.args.get('notificacion', False)
@@ -130,6 +131,28 @@ def adminCategorias():
     
     return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
+# Editar categorias
+@app.route('/editarCategoria/<int:id_categoria>')
+def editarCategoriaView(id_categoria):
+    categoria = obtener_categoria_especifica(id_categoria)
+    return render_template('admin/editarCategoria.html', categoria=categoria)
+
+@app.route('/subirActualizacionC/<int:id_categoria>', methods=['GET', 'POST'])
+def editarCategoriaSend(id_categoria):
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        imagen = request.files['imagen']
+
+        if imagen:
+            filename = imagen.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            imagen.save(filepath)
+            print(imagen)
+        else:
+            filename = obtener_id_categoria(id_categoria).imagen
+        actualizar_categoria(id_categoria, nombre, filename)
+        return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoria Actualizada con Éxito"))
+
 # Eliminar Categorias
 @app.route('/delete_categoria/<int:id_categoria>')
 def eliminarCategoria(id_categoria):
@@ -137,6 +160,8 @@ def eliminarCategoria(id_categoria):
 
     return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la categoría"))
 
+
+# <-- Area de productos -->
 
 # Registro de productos
 @app.route('/registrarProductos', methods=('GET', 'POST'))

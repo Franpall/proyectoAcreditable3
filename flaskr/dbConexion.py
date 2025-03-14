@@ -17,6 +17,94 @@ def crear_conexion():
     except Error as e:
         print(f"Error al conectarse a la base de datos: {e}")
         return None
+    
+
+# <-- Area de categorias -->
+
+def verCategorias():
+    conexion = crear_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT nombre FROM categoria")
+    categorias = cursor.fetchall()
+    categoriasSTR = list()
+    for categoria in categorias:
+        categoriasSTR.append(categoria[0])
+    conexion.close()
+    return categoriasSTR
+
+def obtener_id_categoria(nombre_categoria):
+    conexion = crear_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT id FROM categoria WHERE nombre = %s", (nombre_categoria,))
+    id_categoria = cursor.fetchone()
+    conexion.close()
+    return id_categoria[0] if id_categoria else None
+
+# Area de crear Categorias
+def obtener_categorias():
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM categoria")
+    categorias = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return categorias
+
+# Area de crear Categorias
+def obtener_categoria_especifica(id):
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT id, nombre, imagen FROM categoria WHERE id = %s", (id,))
+    categoria = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return categoria
+
+def agregar_categoria(nombre, imagen):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, imagen))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
+
+def actualizar_categoria(id_categoria, nombre, imagen):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute(
+        'UPDATE categoria SET nombre = %s, imagen = %s WHERE id = %s',
+        (nombre, imagen, id_categoria)
+    )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
+
+def eliminar_categoria(id_categoria):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+
+    # Obtener la imagen antes de eliminar la categoría
+    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
+    filename = cursor.fetchone()
+    
+    if filename:
+        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
+        try:
+            os.remove(filepath)
+        except FileNotFoundError:
+            print("No se encontró el archivo")
+
+    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+    return True
+
+
+# <-- Area de productos -->
 
 # Area de productos Admin
 def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):
@@ -120,79 +208,6 @@ def eliminar_producto(id_producto):
     return True
 
 
-# Area de categorias
-
-def verCategorias():
-    conexion = crear_conexion()
-    cursor = conexion.cursor()
-    cursor.execute("SELECT nombre FROM categoria")
-    categorias = cursor.fetchall()
-    categoriasSTR = list()
-    for categoria in categorias:
-        categoriasSTR.append(categoria[0])
-    conexion.close()
-    return categoriasSTR
-
-def obtener_id_categoria(nombre_categoria):
-    conexion = crear_conexion()
-    cursor = conexion.cursor()
-    cursor.execute("SELECT id FROM categoria WHERE nombre = %s", (nombre_categoria,))
-    id_categoria = cursor.fetchone()
-    conexion.close()
-    return id_categoria[0] if id_categoria else None
-
-# Area de crear Categorias
-def obtener_categorias():
-    conn = crear_conexion()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM categoria")
-    categorias = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return categorias
-
-# Area de crear Categorias
-def obtener_categoria_especifica(id):
-    conn = crear_conexion()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT nombre, imagen FROM categoria WHERE id = %s", (id,))
-    categoria = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return categoria
-
-def agregar_categoria(nombre, imagen):
-    conn = crear_conexion()
-    cursor = conn.cursor()
-    cursor.execute("INSERT INTO categoria (nombre, imagen) VALUES (%s, %s)", (nombre, imagen))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return True
-
-def eliminar_categoria(id_categoria):
-    conn = crear_conexion()
-    cursor = conn.cursor()
-
-    # Obtener la imagen antes de eliminar la categoría
-    cursor.execute("SELECT imagen FROM categoria WHERE id = %s", (id_categoria,))
-    filename = cursor.fetchone()
-    
-    if filename:
-        filepath = os.path.join(os.path.dirname(__file__), 'static', 'uploads', filename[0])
-        try:
-            os.remove(filepath)
-        except FileNotFoundError:
-            print("No se encontró el archivo")
-
-    cursor.execute("DELETE FROM categoria WHERE id = %s", (id_categoria,))
-    conn.commit()
-
-    cursor.close()
-    conn.close()
-    return True
-
-
 # Area de Login
 def iniciar_sesion(usuario, contraseña):
     conn = crear_conexion()
@@ -211,7 +226,6 @@ def iniciar_sesion(usuario, contraseña):
         return False
 
 # Funciones de encriptacion
-    
 def crearHash(contraseña_usuario):
     salt = bcrypt.gensalt()
     contraseña_hash = bcrypt.hashpw(contraseña_usuario.encode('utf-8'), salt)

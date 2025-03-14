@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+
+{% block title%}
+<title>Update Category</title>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/categorias">Categorias</a></li>
+            <li class="breadcrumb-item active">Actualizar Categoría</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Actualizar Categoría</div>
+            <div class="card-body">
+                <form action="{{ url_for('editarCategoriaSend', id_categoria=categoria['id']) }}" method="POST" id="category_form" enctype="multipart/form-data">
+                    <div id="left_product_form" class="product_form_area">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" value="{{ categoria['nombre'] }}" required>
+                    </div>
+
+                    <div id="right_product_form" class="product_form_area">
+                        <img src="{{ url_for('static', filename='uploads/' + categoria['imagen']) }}" class="editarProductoImg" width="300px" height="300px" alt="{{ categoria['nombre'] }}">
+                        <label for="imagen" class="col-form-label imagen_label">Actualizar Imagen:</label>
+                        <input type="file" name="imagen" id="imagen">
+                        <br>
+                        <input type="submit" value="Actualizar Categoría" class="btn btn-primary" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
