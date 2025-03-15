@@ -1,12 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
 from flaskr.dbConexion import *
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
-sesion = False
+
+# Aspectos de seguridad y almacenamiento temporal
+app.secret_key = "XDV2025"
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 
 # Creación de carpeta para subir las imagenes
-
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
 
 # Crear carpeta uploads si no existe
@@ -24,7 +27,7 @@ def index():
     productos = mostrar_productos()
     productos_recomendados = mostrar_productos_recomendados()
 
-    return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=sesion, 
+    return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=session.get('sesion_iniciada', False), 
         categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK
     )
 
@@ -47,7 +50,7 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
-    return render_template('carrito.html', sesion=sesion)
+    return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
 
 @app.route('/favicon.ico')
 def favicon():
@@ -56,7 +59,7 @@ def favicon():
 @app.route('/verProducto/<int:id>')
 def verProducto(id):
     producto = obtener_producto_por_id(id)
-    return render_template('producto.html', sesion=sesion, producto = producto)
+    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto)
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -72,7 +75,7 @@ def verProductosCategoria(categoria):
         return redirect(url_for('index', actionError=True, notificacion="Categoría no encontrada"))
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     
-    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=sesion, notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
+    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
         )
 
 # Rutas para administradores
@@ -83,7 +86,10 @@ def adminDashboard():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    return render_template('admin/dashboard.html', clientes=clientes, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    if session.get('sesion_admin', False):
+        return render_template('admin/dashboard.html', clientes=clientes, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    else:
+        return render_template('404error.html')
 
 @app.route('/productos')
 def adminProductos():
@@ -92,12 +98,18 @@ def adminProductos():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    return render_template('admin/productos.html', productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    if session.get('sesion_admin', False):
+        return render_template('admin/productos.html', productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    else:
+        return render_template('404error.html')
 
 @app.route('/clientes')
 def adminClientes():
     usuarios = mostrar_clientes()
-    return render_template('admin/clientes.html', clientes=usuarios)
+    if session.get('sesion_admin', False):
+        return render_template('admin/clientes.html', clientes=usuarios, sesion=session.get('sesion_admin', False))
+    else:
+        return render_template('404error.html')
 
 @app.route('/admins')
 def adminAdmins():
@@ -105,11 +117,17 @@ def adminAdmins():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    return render_template('admin/admins.html', admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    if session.get('sesion_admin', False):
+        return render_template('admin/admins.html', admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    else:
+        return render_template('404error.html')
 
 @app.route('/ventas')
 def adminVentas():
-    return render_template('admin/ventas.html')
+    if session.get('sesion_admin', False):
+        return render_template('admin/ventas.html', sesion=session.get('sesion_admin', False))
+    else:
+        return render_template('404error.html')
 
 # <-- Area de categorias -->
 
@@ -133,13 +151,13 @@ def adminCategorias():
     
     categorias = obtener_categorias()
     
-    return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
 
 # Editar categorias
 @app.route('/editarCategoria/<int:id_categoria>')
 def editarCategoriaView(id_categoria):
     categoria = obtener_categoria_especifica(id_categoria)
-    return render_template('admin/editarCategoria.html', categoria=categoria)
+    return render_template('admin/editarCategoria.html', categoria=categoria, sesion=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacionC/<int:id_categoria>', methods=['GET', 'POST'])
 def editarCategoriaSend(id_categoria):
@@ -233,14 +251,14 @@ def registrarProductos():
             agregar_producto(marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
             return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Registrado con Éxito"))
         
-    return render_template('admin/productos.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+    return render_template('admin/productos.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
 
 # Editar productos
 @app.route('/editarProducto/<int:id_producto>')
 def editarProductoView(id_producto):
     producto = obtener_producto_por_id(id_producto)
     categorias = obtener_categorias()
-    return render_template('admin/editarProducto.html', producto=producto, categorias=categorias)
+    return render_template('admin/editarProducto.html', producto=producto, categorias=categorias, sesion=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacion/<int:id_producto>', methods=['GET', 'POST'])
 def editarProductoSend(id_producto):
@@ -321,16 +339,16 @@ def registerSolicitud():
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
 def loginSolicitud():
-    global sesion
     if request.method == 'POST':
         usuario = request.form['username']
         contraseña = request.form['password']
 
         resultado = iniciar_sesion(usuario, contraseña)
         if resultado == "cliente":
-            sesion = True
+            session['sesion_iniciada'] = True
             return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         elif resultado == "admin":
+            session['sesion_admin'] = True
             return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         else:
             return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña Incorrectos")
@@ -351,8 +369,7 @@ def registerAdmin():
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
 def cerrarSesionSolicitud():
-    global sesion
-    sesion = False
+    session.clear()
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
     
 # Lógica para eliminar Administradores

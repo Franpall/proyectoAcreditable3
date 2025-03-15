@@ -62,7 +62,11 @@
                                     <td>{{ admin.nombre }}</td>
                                     <td>{{ admin.correo }}</td>
                                     <td class="actions_td">
+                                        {% if admin.nombre == "admin" %}
+                                        <p><i class="fas fa-lock"></i> Cuenta Permanente</p>
+                                        {% else %}
                                         <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin">Borrar</a>  
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
