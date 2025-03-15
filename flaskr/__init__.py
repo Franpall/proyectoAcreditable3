@@ -8,27 +8,6 @@ app = Flask(__name__)
 # Aspectos de seguridad y almacenamiento temporal
 app.secret_key = "XDV2025"
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
-@app.route('/agregar_al_carrito', methods=['POST'])
-def agregar_al_carrito():
-    # Obtén el ID del producto y la cantidad desde el formulario
-    producto_id = request.form.get('producto_id')
-    cantidad = request.form.get('cantidad')
-
-    if not producto_id or not cantidad:
-        return "Faltan datos", 400
-
-    # Guarda los datos en la sesión para uso temporal
-    if 'carrito' not in session:
-        session['carrito'] = []
-
-    session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
-
-    # Muestra los datos en la consola
-    print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
-    print(f"Estado actual del carrito: {session['carrito']}")
-
-    return "Producto agregado al carrito"
-
 
 # Creación de carpeta para subir las imagenes
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
@@ -342,6 +321,28 @@ def eliminarProducto(id_producto):
 
     return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
 
+# area de carrito
+
+@app.route('/agregar_al_carrito', methods=['POST'])
+def agregar_al_carrito():
+    # Obtén el ID del producto y la cantidad desde el formulario
+    producto_id = request.form.get('producto_id')
+    cantidad = request.form.get('cantidad')
+
+    if not producto_id or not cantidad:
+        return "Faltan datos", 400
+
+    # Guarda los datos en la sesión para uso temporal
+    if 'carrito' not in session:
+        session['carrito'] = []
+
+    session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
+
+    # Muestra los datos en la consola
+    print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
+    print(f"Estado actual del carrito: {session['carrito']}")
+
+    return "Producto agregado al carrito"
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
