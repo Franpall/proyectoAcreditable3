@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franpal Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">Franpal Store</a></h1>
+    </header>
+    <main>
+        {% if error == "404" %}
+        <section id="area_404_error">
+            <h2>Error 404</h2>
+            <p>Vaya! Esta URL no existe, tal vez escribista algo mal</p>
+            <a href="{{ url_for('index') }}">Volver al inicio</a>
+            <img src="{{ url_for('static', filename='img/avatar-thinking-7-svgrepo-com.svg') }}" alt="Joven Pensativo">
+            <p>(o tal vez no tienes permisos para ver esta página)</p>
+        </section>
+        {% endif %}
+        {% if error == "502" %}
+        <section id="area_404_error">
+            <h2>Error 502</h2>
+            <p>Lo sentimos, pero nuestro servidor tiene un problema en este momento</p>
+            <img src="{{ url_for('static', filename='img/fire-extinguisher-svgrepo-com.svg') }}" alt="Extintor">
+            <p>Quizás los bomberos estén apagando el incendio del servidor ahora mismo...</p>
+        </section>
+        {% endif %}
+        {% if error == "401" %}
+        <section id="area_404_error">
+            <h2>Error 401</h2>
+            <p>No tienes permisos para acceder a esta página</p>
+            <img src="{{ url_for('static', filename='img/door-svgrepo-com.svg') }}" alt="Puerta">
+            <p>Si eres administrador, debes iniciar sesión</p>
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>

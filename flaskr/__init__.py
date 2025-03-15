@@ -19,6 +19,9 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
 # Inicio
 @app.route('/')
 def index():
+    # Comprobar que la conexión funciona
+    if not crear_conexion():
+        return render_template('error.html', error="502")
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
@@ -35,7 +38,7 @@ def index():
 # Capturar error 404 para mostrar html personalizado
 @app.errorhandler(404)
 def errorURL(e):
-    return render_template('404error.html')
+    return render_template('error.html', error="404")
 
 @app.route('/login')
 def iniciarSesion():
@@ -89,7 +92,7 @@ def adminDashboard():
     if session.get('sesion_admin', False):
         return render_template('admin/dashboard.html', clientes=clientes, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 @app.route('/productos')
 def adminProductos():
@@ -101,7 +104,7 @@ def adminProductos():
     if session.get('sesion_admin', False):
         return render_template('admin/productos.html', productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 @app.route('/clientes')
 def adminClientes():
@@ -109,7 +112,7 @@ def adminClientes():
     if session.get('sesion_admin', False):
         return render_template('admin/clientes.html', clientes=usuarios, sesion=session.get('sesion_admin', False))
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 @app.route('/admins')
 def adminAdmins():
@@ -120,14 +123,14 @@ def adminAdmins():
     if session.get('sesion_admin', False):
         return render_template('admin/admins.html', admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 @app.route('/ventas')
 def adminVentas():
     if session.get('sesion_admin', False):
         return render_template('admin/ventas.html', sesion=session.get('sesion_admin', False))
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 # <-- Area de categorias -->
 
@@ -153,7 +156,7 @@ def adminCategorias():
     if session.get('sesion_admin', False):
         return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
-        return render_template('404error.html')
+        return render_template('error.html', error="401")
 
 # Editar categorias
 @app.route('/editarCategoria/<int:id_categoria>')
