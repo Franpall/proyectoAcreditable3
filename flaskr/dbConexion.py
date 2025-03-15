@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from flaskr.models import Usuario, Producto, ProductoAuxiliar, ProductoEditar
+from flaskr.models import ElementoCarrito, Producto, ProductoAuxiliar, ProductoEditar, Usuario
 import bcrypt
 
 def crear_conexion():
@@ -180,6 +180,15 @@ def eliminar_producto(id_producto):
     conn.close()
     return True
 
+
+# Area de carrito
+def obtenerElementosCarrito(carritoSession):
+    elementos = []
+    for elemento in carritoSession:
+        producto = obtener_producto_por_id(elemento['producto_id'])
+        item = ElementoCarrito(elemento['producto_id'], producto.marca, producto.modelo, producto.precio, elemento['cantidad'])
+        elementos.append(item)
+    return elementos
 
 # Area de Login
 def iniciar_sesion(usuario, contraseña):

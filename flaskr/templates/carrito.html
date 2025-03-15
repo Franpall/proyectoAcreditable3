@@ -30,18 +30,18 @@
         <section class="area-carrito">
             <article class="contenido-carrito">
                 <div class="carrito">
-                {% if productos|length > 0 %}
+                {% if elementos|length > 0 %}
                     <div class="compra">
                         <h2>Carrito de Compras</h2>
-                        {% for producto in productos %}
+                        {% for elemento in elementos %}
                         <div class="producto">
                             <div id="elemento_del_carrito">
                                 <div class="producto-detalles"><br><br>
-                                    <h2>{{ producto.marca }}</h2><br>
-                                    {{ producto.marca + " " + producto.modelo }} <span>x {{ producto.cantidad }}</span><br>
+                                    <h2>{{ elemento.marca }}</h2><br>
+                                    {{ elemento.marca + " " + elemento.modelo }} <b>X{{ elemento.cantidad }}</b><br>
                                 </div>
                                 <div class="producto-precio"><br>
-                                    <span>US$</span> {{producto.precio}} c/u
+                                    <span>US$</span> {{elemento.precio}} c/u
                                 </div>
                             </div>
                             <div id="btn_borrar_del_carrito">

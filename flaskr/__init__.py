@@ -25,7 +25,8 @@ def index():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    
+    print(app.secret_key)
+    print(f"Estado actual del carrito: {session.get('carrito', False)}")
     categorias = obtener_categorias()
     productos = mostrar_productos()
     productos_recomendados = mostrar_productos_recomendados()
@@ -53,7 +54,15 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
-    return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
+    carritoActual = session.get('carrito', False)
+    for item in carritoActual:
+        print(item)
+    if carritoActual:
+        elementos=obtenerElementosCarrito(session.get('carrito'))
+        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos)
+    else:
+        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
+    
 
 @app.route('/favicon.ico')
 def favicon():
