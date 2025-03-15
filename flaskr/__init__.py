@@ -329,8 +329,7 @@ def eliminarProducto(id_producto):
 
     return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
 
-# area de carrito
-
+# Área de carrito
 @app.route('/addItem', methods=['POST'])
 def agregarAlCarrito():
     # Obtén el ID del producto y la cantidad desde el formulario
@@ -353,6 +352,17 @@ def agregarAlCarrito():
         return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
     else:
         return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
+
+# Eliminar elementos del carrito
+@app.route('/removeItem/<int:index>')
+def eliminarDelCarrito(index):
+    if 'carrito' in session:
+        # Verificar que el índice exista en la lista
+        if 0 <= index < len(session['carrito']):
+            del session['carrito'][index]
+            
+            session.modified = True
+    return redirect(url_for('verCarrito'))
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))

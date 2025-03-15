@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div id="btn_borrar_del_carrito">
-                                <a href="" class="btn_borrar_icon"><img src="{{ url_for('static', filename='img/delete-svgrepo-com.svg') }}" alt=""></a>
+                                <a href="{{ url_for('eliminarDelCarrito', index=loop.index0) }}" class="btn_borrar_icon"><img src="{{ url_for('static', filename='img/delete-svgrepo-com.svg') }}" alt=""></a>
                             </div>
                         </div>
                         {% endfor %}
