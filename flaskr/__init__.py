@@ -340,20 +340,20 @@ def agregarAlCarrito():
         producto_id = request.form.get('producto_id')
         cantidad = request.form.get('cantidad')
 
-    if not producto_id or not cantidad:
-        return "Faltan datos", 400
+    if session.get('sesion_iniciada', False):
+        # Guarda los datos en la sesión para uso temporal
+        if 'carrito' not in session:
+            session['carrito'] = []
 
-    # Guarda los datos en la sesión para uso temporal
-    if 'carrito' not in session:
-        session['carrito'] = []
+        session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
 
-    session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
+        # Muestra los datos en la consola
+        print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
+        print(f"Estado actual del carrito: {session['carrito']}")
 
-    # Muestra los datos en la consola
-    print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
-    print(f"Estado actual del carrito: {session['carrito']}")
-
-    return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
+        return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
+    else:
+        return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
