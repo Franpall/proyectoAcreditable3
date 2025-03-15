@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2025 a las 21:13:23
+-- Tiempo de generación: 15-03-2025 a las 01:06:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -84,7 +84,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `usuario`, `correo`, `contraseña`, `rol`) VALUES
-(13, 'franpal', 'skfranpal@gmail.com', 0x2432622431322473534c776a6a6d55587954373943504368634a4c41756b516468565556705765634b7668737855656f576142552e716973426d584f, 'cliente');
+(1, 'admin', 'admin@gmail.com', 0x2432622431322473583777685744386f734278496b47514f6d504a322e48596f53756a715831653268745756454a79624569484755674e3343593553, 'admin'),
+(2, 'franpal', 'skfranpal@gmail.com', 0x2432622431322473534c776a6a6d55587954373943504368634a4c41756b516468565556705765634b7668737855656f576142552e716973426d584f, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -144,19 +145,19 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
