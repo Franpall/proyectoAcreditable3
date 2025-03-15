@@ -346,6 +346,7 @@ def agregarAlCarrito():
             session['carrito'] = []
 
         session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
+        session.modified = True
 
         # Muestra los datos en la consola
         print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
