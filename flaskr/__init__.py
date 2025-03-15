@@ -75,7 +75,8 @@ def verProductosCategoria(categoria):
     id_categoria = obtener_id_categoria(categoria)
     
     if id_categoria is None:  # Si la categoría no existe
-        return redirect(url_for('index', actionError=True, notificacion="Categoría no encontrada"))
+        return render_template('error.html', error="404")
+    
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
