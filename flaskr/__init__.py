@@ -421,7 +421,9 @@ def registerAdmin():
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
 def cerrarSesionSolicitud():
-    session.clear()
+    session['sesion_iniciada'] = False
+    session['sesion_admin'] = False
+    session.modified = True
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
     
 # Lógica para eliminar Administradores
