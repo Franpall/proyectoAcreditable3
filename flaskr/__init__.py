@@ -341,13 +341,18 @@ def agregarAlCarrito():
         # Guarda los datos en la sesión para uso temporal
         if 'carrito' not in session:
             session['carrito'] = []
-
-        session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
-        session.modified = True
-
-        # Muestra los datos en la consola
-        print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
-        print(f"Estado actual del carrito: {session['carrito']}")
+        count = 0
+        existente = False
+        for i in session['carrito']:
+            if i['producto_id'] == producto_id:
+                session['carrito'].append({'producto_id': producto_id, 'cantidad': int(i['cantidad']) + int(cantidad)})
+                del session['carrito'][count]
+                existente = True
+                session.modified = True
+            count += 1
+        if not existente:
+            session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
+            session.modified = True
 
         return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
     else:

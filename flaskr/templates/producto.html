@@ -42,7 +42,7 @@
                         <form action="{{ url_for('agregarAlCarrito') }}" method="POST">
                             <div class="cantidad-selector">
                                 <button type="button" id="decremento">-</button>
-                                <input type="number" id="cantidad" name="cantidad" value="1" min="1" readonly>
+                                <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ producto.stock }}" readonly>
                                 <button type="button" id="incremento">+</button>
                             </div>
                             <div class="acciones_producto_preview">
