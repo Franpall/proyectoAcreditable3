@@ -55,14 +55,11 @@ def registrarse():
 @app.route('/carrito')
 def verCarrito():
     carritoActual = session.get('carrito', False)
-    for item in carritoActual:
-        print(item)
     if carritoActual:
-        elementos=obtenerElementosCarrito(session.get('carrito'))
+        elementos=obtenerElementosCarrito(carritoActual)
         return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos)
     else:
         return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
-    
 
 @app.route('/favicon.ico')
 def favicon():
