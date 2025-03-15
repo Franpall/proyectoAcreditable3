@@ -57,7 +57,8 @@ def verCarrito():
     carritoActual = session.get('carrito', False)
     if carritoActual:
         elementos=obtenerElementosCarrito(carritoActual)
-        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos)
+        total = sumarElementos(elementos)
+        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos, total=total)
     else:
         return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
 

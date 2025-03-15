@@ -190,6 +190,15 @@ def obtenerElementosCarrito(carritoSession):
         elementos.append(item)
     return elementos
 
+def sumarElementos(elementos):
+    total = 0.00
+    for elemento in elementos:
+        try:
+            total += float(elemento.precio) * float(elemento.cantidad)
+        except ValueError:
+            print("error crítico: tipo de dato incorrecto")
+    return total
+
 # Area de Login
 def iniciar_sesion(usuario, contraseña):
     conn = crear_conexion()
