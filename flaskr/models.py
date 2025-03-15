@@ -27,7 +27,6 @@ class ProductoEditar:
         self.stock = stock
         self.recomendado = recomendado
 
-
 class ProductoAuxiliar:
     def __init__(self, id, marca, modelo, imagen, precio):
         self.id = id
@@ -35,3 +34,11 @@ class ProductoAuxiliar:
         self.modelo = modelo
         self.imagen = imagen
         self.precio = precio
+
+class ElementoCarrito:
+    def __init__(self, id, marca, modelo, precio, cantidad):
+        self.id = id
+        self.marca = marca
+        self.modelo = modelo
+        self.precio = precio
+        self.cantidad = cantidad

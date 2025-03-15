@@ -324,11 +324,12 @@ def eliminarProducto(id_producto):
 
 # area de carrito
 
-@app.route('/agregar_al_carrito', methods=['POST'])
-def agregar_al_carrito():
+@app.route('/addItem', methods=['POST'])
+def agregarAlCarrito():
     # Obtén el ID del producto y la cantidad desde el formulario
-    producto_id = request.form.get('producto_id')
-    cantidad = request.form.get('cantidad')
+    if request.method == 'POST':
+        producto_id = request.form.get('producto_id')
+        cantidad = request.form.get('cantidad')
 
     if not producto_id or not cantidad:
         return "Faltan datos", 400
@@ -343,7 +344,7 @@ def agregar_al_carrito():
     print(f"Producto agregado: ID - {producto_id}, Cantidad - {cantidad}")
     print(f"Estado actual del carrito: {session['carrito']}")
 
-    return "Producto agregado al carrito"
+    return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
