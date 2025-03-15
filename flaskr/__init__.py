@@ -150,8 +150,10 @@ def adminCategorias():
             return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Registrada con Éxito"))
     
     categorias = obtener_categorias()
-    
-    return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    if session.get('sesion_admin', False):
+        return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    else:
+        return render_template('404error.html')
 
 # Editar categorias
 @app.route('/editarCategoria/<int:id_categoria>')
