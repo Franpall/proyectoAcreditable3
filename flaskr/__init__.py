@@ -94,11 +94,12 @@ def verProductosCategoria(categoria):
 @app.route('/dashboard')
 def adminDashboard():
     clientes = contarClientes()
+    productos_disponibles = contarProductosDisponibles()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     if session.get('sesion_admin', False):
-        return render_template('admin/dashboard.html', clientes=clientes, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+        return render_template('admin/dashboard.html', clientes=clientes, productos_disponibles=productos_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
     else:
         return render_template('error.html', error="401")
 

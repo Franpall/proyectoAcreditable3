@@ -180,6 +180,14 @@ def eliminar_producto(id_producto):
     conn.close()
     return True
 
+def contarProductosDisponibles():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(id) FROM producto WHERE stock > 0;")
+    resultado = cursor.fetchone()
+    productosLen = resultado[0]
+    conn.close()
+    return productosLen
 
 # Area de carrito
 def obtenerElementosCarrito(carritoSession):
