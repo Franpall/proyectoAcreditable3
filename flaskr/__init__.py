@@ -68,8 +68,10 @@ def favicon():
 
 @app.route('/verProducto/<int:id>')
 def verProducto(id):
+    notificacion = request.args.get('notificacion', False)
+    actionOK = request.args.get('actionOK', False)
     producto = obtener_producto_por_id(id)
-    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto)
+    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK)
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -331,12 +333,12 @@ def eliminarProducto(id_producto):
     return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
 
 # Área de carrito
-@app.route('/addItem', methods=['POST'])
-def agregarAlCarrito():
+def manejar_carrito():
     # Obtén el ID del producto y la cantidad desde el formulario
     if request.method == 'POST':
         producto_id = request.form.get('producto_id')
         cantidad = request.form.get('cantidad')
+        next_url = request.form.get('next', 'index')  # Si no hay "next", redirige a 'index'
 
     if session.get('sesion_iniciada', False):
         # Guarda los datos en la sesión para uso temporal
@@ -355,9 +357,24 @@ def agregarAlCarrito():
             session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
             session.modified = True
 
-        return redirect(url_for('index', actionOK=True, notificacion="Producto añadido al carrito"))
+        return redirect(f"{next_url}?actionOK=True&notificacion=Producto añadido al carrito")
     else:
         return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
+
+# Ruta para HTML 1 (index)
+@app.route('/addItemIndex', methods=['POST'])
+def agregarAlCarritoIndex():
+    return manejar_carrito()  # Redirige a 'index'
+
+# Ruta para HTML 2 (caregoria)
+@app.route('/addItemCategoria', methods=['POST'])
+def agregarAlCarritoCategoria():
+    return manejar_carrito()  # Redirige categoria'
+
+# Ruta para HTML 3 (producto)
+@app.route('/addItemProducto', methods=['POST'])
+def agregarAlCarritoProducto():
+    return manejar_carrito()  # Redirige a 'verProducto'
 
 # Eliminar elementos del carrito
 @app.route('/removeItem/<int:index>')
