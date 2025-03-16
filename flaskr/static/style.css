@@ -500,7 +500,7 @@ header h1 a{
 }
 
 .acciones_producto{
-    width: 100%;
+    width: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
