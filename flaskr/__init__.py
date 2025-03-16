@@ -415,8 +415,10 @@ def registerAdmin():
         correo = request.form['admin_email']
         contraseña = request.form['password']
 
-        registrar_cliente(usuario, correo, contraseña, 2)
-        return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
+        if not registrar_cliente(usuario, correo, contraseña, 2):
+            return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está Registrado"))
+        else:
+            return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
     
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
