@@ -137,7 +137,7 @@ header h1 a{
     text-align: center;
     display: flex; 
     justify-content: center; 
-    align-items: center; 
+    align-items: center;
 }
 
 .imagen-banner{
@@ -154,6 +154,11 @@ header h1 a{
     transform: translate(-50%, -50%);
     color: var(--textInverso);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .banner-content h2{
@@ -181,6 +186,7 @@ header h1 a{
     cursor: pointer;
     outline: none;
     text-decoration: none;
+    width: 200px;
 }
 
 .btn-banner:hover{
