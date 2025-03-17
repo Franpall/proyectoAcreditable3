@@ -516,7 +516,7 @@ header h1 a{
 .add_cart_button{
     border-radius: 10px;
     background-color: var(--botonGeneral);
-    margin-top: 5px;
+    margin-top: 12px;
     padding: 5px 10px;
     color: var(--textInverso);
     border: none;
