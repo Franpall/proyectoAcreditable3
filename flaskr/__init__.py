@@ -32,7 +32,7 @@ def index():
     productos_recomendados = mostrar_productos_recomendados()
 
     return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=session.get('sesion_iniciada', False), 
-        categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK
+        categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, modoAdmin=session.get('sesion_admin', False)
     )
 
 
