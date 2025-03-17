@@ -72,7 +72,7 @@ def verProducto(id):
     actionOK = request.args.get('actionOK', False)
     actionError = request.args.get('actionError', False)
     producto = obtener_producto_por_id(id)
-    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError)
+    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError, modoAdmin=session.get('sesion_admin', False))
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -89,7 +89,7 @@ def verProductosCategoria(categoria):
     
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     
-    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada
+    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada, modoAdmin=session.get('sesion_admin', False)
         )
 
 # Rutas para administradores
@@ -366,7 +366,10 @@ def manejar_carrito():
 
         return redirect(f"{next_url}?actionOK=True&notificacion=Producto añadido al carrito")
     else:
-        return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
+        if session.get('sesion_admin', False):
+            return redirect(f"{next_url}?actionError=True&notificacion=El admin no puede realizar compras")
+        else:
+            return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
 
 # Ruta para HTML 1 (index)
 @app.route('/addItemIndex', methods=['POST'])
