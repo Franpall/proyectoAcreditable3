@@ -89,6 +89,15 @@ def eliminar_categoria(id_categoria):
     conn.close()
     return True
 
+def contarCategoriasDisponibles():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(id) FROM categoria;")
+    resultado = cursor.fetchone()
+    productosLen = resultado[0]
+    conn.close()
+    return productosLen
+
 
 # <-- Area de productos -->
 

@@ -10335,12 +10335,14 @@ body {
 }
 
 .estadisticas{
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
   flex-wrap: wrap;
   gap: 20px;
-  width: 100%;
+  width: 640px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 /* Estilos tarjetas de estadisticas */
