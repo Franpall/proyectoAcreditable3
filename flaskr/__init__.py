@@ -340,6 +340,9 @@ def manejar_carrito():
         cantidad = request.form.get('cantidad')
         next_url = request.form.get('next', 'index')  # Si no hay "next", redirige a 'index'
 
+    if obtener_producto_por_id(producto_id).stock < int(cantidad):
+        return redirect(f"{next_url}?actionOK=True&notificacion=No contamos con esa cantidad en nuestro stock")
+
     if session.get('sesion_iniciada', False):
         # Guarda los datos en la sesión para uso temporal
         if 'carrito' not in session:
@@ -366,7 +369,7 @@ def manejar_carrito():
 def agregarAlCarritoIndex():
     return manejar_carrito()  # Redirige a 'index'
 
-# Ruta para HTML 2 (caregoria)
+# Ruta para HTML 2 (categoria)
 @app.route('/addItemCategoria', methods=['POST'])
 def agregarAlCarritoCategoria():
     return manejar_carrito()  # Redirige categoria'
