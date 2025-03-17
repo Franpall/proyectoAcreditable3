@@ -78,7 +78,7 @@
     align-items: start;
     flex-direction: column;
     width: 90%;
-    gap: 15px;
+    gap: 13px;
 }
 
 .detalles_preview .marca_preview{
@@ -89,12 +89,12 @@
 .detalles_preview .modelo_preview{
     font-weight: 600;
     font-size: 1.2rem;
+    margin: 5px 0;
 }
 
 .detalles_preview .precio_preview{
     font-weight: 600;
     font-size: 1.6rem;
-    margin-top: 10px;
 }
 
 .detalles_preview .precio_preview span{
@@ -111,7 +111,7 @@
 .detalles_preview .cantidad_preview{
     font-weight: 500;
     font-size: 1.5rem;
-    margin: 2px 0;
+    margin-top: 2px;
 }
 
 .acciones_producto_preview{
@@ -124,7 +124,7 @@
 .add_cart_button_preview{
     border-radius: 10px;
     background-color: var(--botonGeneral);
-    margin-top: 5px;
+    margin-top: 15px;
     padding: 5px 10px;
     color: var(--textInverso);
     border: none;
