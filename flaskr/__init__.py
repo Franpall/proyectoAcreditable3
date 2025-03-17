@@ -235,7 +235,7 @@ def eliminarCategoria(id_categoria):
     return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Eliminó la Categoría"))
 
 
-# <-- Area de productos -->
+# <-- Área de productos -->
 
 # Registro de productos
 @app.route('/registrarProductos', methods=('GET', 'POST'))
@@ -334,7 +334,9 @@ def eliminarProducto(id_producto):
 
     return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
 
-# Área de carrito
+
+# <-- Área de Carrito -->
+
 def manejar_carrito():
     # Obtén el ID del producto y la cantidad desde el formulario
     if request.method == 'POST':
@@ -392,6 +394,23 @@ def eliminarDelCarrito(index):
             session.modified = True
     return redirect(url_for('verCarrito'))
 
+
+# <-- Área de registros y cuentas -->
+
+# Lógica para el registro de administradores
+@app.route('/addAdmin', methods=('GET', 'POST'))
+def registerAdmin():
+    if request.method == 'POST':
+        usuario = request.form['admin_name']
+        correo = request.form['admin_email']
+        contraseña = request.form['password']
+
+        if not registrar_cliente(usuario, correo, contraseña, 2):
+            return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está Registrado"))
+        else:
+            return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
+
+
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
 def registerSolicitud():
@@ -411,6 +430,12 @@ def registerSolicitud():
         else:
             return render_template('auth/register.html', actionError=True, notificacion="El Usuario o Correo ya está Registrado")
 
+# Lógica para eliminar Administradores
+@app.route("/delete/<int:id_admin>")
+def eliminarAdmin(id_admin):
+    eliminar_admin(id_admin)
+    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con Éxito"))
+
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
 def loginSolicitud():
@@ -429,20 +454,6 @@ def loginSolicitud():
             return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña Incorrectos")
     return render_template('auth/login.html')
 
-# Lógica para el registro de administradores
-
-@app.route('/addAdmin', methods=('GET', 'POST'))
-def registerAdmin():
-    if request.method == 'POST':
-        usuario = request.form['admin_name']
-        correo = request.form['admin_email']
-        contraseña = request.form['password']
-
-        if not registrar_cliente(usuario, correo, contraseña, 2):
-            return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está Registrado"))
-        else:
-            return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
-    
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
 def cerrarSesionSolicitud():
@@ -450,10 +461,3 @@ def cerrarSesionSolicitud():
     session['sesion_admin'] = False
     session.modified = True
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
-    
-# Lógica para eliminar Administradores
-@app.route("/delete/<int:id_admin>")
-def eliminarAdmin(id_admin):
-    eliminar_admin(id_admin)
-    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con Éxito"))
-
