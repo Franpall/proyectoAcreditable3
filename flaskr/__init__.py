@@ -70,8 +70,9 @@ def favicon():
 def verProducto(id):
     notificacion = request.args.get('notificacion', False)
     actionOK = request.args.get('actionOK', False)
+    actionError = request.args.get('actionError', False)
     producto = obtener_producto_por_id(id)
-    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK)
+    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError)
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -341,7 +342,7 @@ def manejar_carrito():
         next_url = request.form.get('next', 'index')  # Si no hay "next", redirige a 'index'
 
     if obtener_producto_por_id(producto_id).stock < int(cantidad):
-        return redirect(f"{next_url}?actionOK=True&notificacion=No contamos con esa cantidad en nuestro stock")
+        return redirect(f"{next_url}?actionError=True&notificacion=No contamos con esa cantidad en nuestro stock")
 
     if session.get('sesion_iniciada', False):
         # Guarda los datos en la sesión para uso temporal
