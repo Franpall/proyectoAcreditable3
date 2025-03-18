@@ -317,14 +317,14 @@ def guardar_venta(id_usuario, carrito, total, metodo_pago):
     conn = crear_conexion()
     cursor = conn.cursor()
     try:
-        # Insertar la venta en la tabla venta
+        # Agregar la venta en la tabla venta
         cursor.execute(
             'INSERT INTO venta (id_usuario, fecha, hora, total, metodo_de_pago) VALUES (%s, CURDATE(), CURTIME(), %s, %s)',
             (id_usuario, total, metodo_pago)
         )
         venta_id = cursor.lastrowid  # Obtener el ID de la venta recién insertada
 
-        # Insertar los productos de la venta en la tabla venta_productos (si existe)
+        # Agregar los productos de la venta en la tabla detalle_venta
         for item in carrito:
             producto = obtener_producto_por_id(item['producto_id'])
             cantidad = item['cantidad']
