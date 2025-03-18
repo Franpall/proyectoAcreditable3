@@ -1,0 +1,73 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/ventas">Ventas</a></li>
+            <li class="breadcrumb-item active">Detalles de la Venta</li>
+        </ol>
+        <div class="card mb-4">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Detalles de la Venta
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <!-- {% if products|length < 1 %} -->
+                        <!-- <h4>No se han registrado ventas, espere a que los clientes realicen compras</h4> -->
+                        <!-- {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Costo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td>{{ ventas.id }}</td>
+                                    <td>{{ ventas.fecha }}</td>
+                                    <td>{{ ventas.hora }}</td>
+                                    <td>{{ ventas.producto }}</td>
+                                    <td>{{ ventas.cantidad }}</td>
+                                    <td>{{ ventas.costo }}</td>
+                                    <td>{{ ventas.estado }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %} -->
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
