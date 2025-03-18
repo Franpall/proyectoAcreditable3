@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-03-2025 a las 21:08:15
+-- Tiempo de generación: 19-03-2025 a las 00:05:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,6 +32,13 @@ CREATE TABLE `categoria` (
   `nombre` varchar(30) NOT NULL,
   `imagen` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`, `imagen`) VALUES
+(32, 'Laptops', 'laptopAlta.jpg');
 
 -- --------------------------------------------------------
 
@@ -65,6 +72,13 @@ CREATE TABLE `producto` (
   `recomendado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `marca`, `modelo`, `descripcion`, `id_categoria`, `imagen`, `precio`, `stock`, `recomendado`) VALUES
+(19, 'Lenovo', 'Ideapad 1', 'Lenovo IdeaPad 1 15IAU7 15.6 pulgadas Full HD portátil, Intel Core i5-1235U 1.3GHz, 8GB RAM, 256GB SSD, Windows 11 Home, gris nube, 82QD003VUS', 32, 'Lenovo IdeaPad 1 15IAU7 15.6 pulgadas Full HD portátil, Intel Core i5-1235U 1.3GHz, 8GB RAM, 256GB SSD, Windows 11 Home, gris nube, 82QD003VUS.jpg', 200, 5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -85,7 +99,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `usuario`, `correo`, `contraseña`, `rol`) VALUES
 (1, 'admin', 'admin@gmail.com', 0x2432622431322473583777685744386f734278496b47514f6d504a322e48596f53756a715831653268745756454a79624569484755674e3343593553, 'admin'),
-(2, 'franpal', 'skfranpal@gmail.com', 0x2432622431322473534c776a6a6d55587954373943504368634a4c41756b516468565556705765634b7668737855656f576142552e716973426d584f, 'cliente');
+(2, 'franpal', 'skfranpal@gmail.com', 0x2432622431322473534c776a6a6d55587954373943504368634a4c41756b516468565556705765634b7668737855656f576142552e716973426d584f, 'cliente'),
+(23, 'keiver', 'keiver@gmail.com', 0x243262243132246b364a464f6b6b7937777073474c69366944354e4e4f4b6f5239394636525943763058707468544f2e45613642374e4f575156614b, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -98,7 +113,7 @@ CREATE TABLE `venta` (
   `id_usuario` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `metodo de pago` enum('paypal','tarjeta de crédito','','') NOT NULL,
+  `metodo_de_pago` enum('Paypal','Tarjeta de crédito') NOT NULL,
   `total` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -116,6 +131,7 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_detalle_producto` (`id_producto`),
   ADD KEY `fk_detalle_venta` (`id_venta`);
 
@@ -147,25 +163,31 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
