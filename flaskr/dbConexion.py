@@ -317,27 +317,35 @@ def guardar_venta(id_usuario, carrito, total, metodo_pago):
     conn = crear_conexion()
     cursor = conn.cursor()
     try:
-        # Insertar la venta en la tabla venta
+        # Agregar la venta en la tabla venta
         cursor.execute(
             'INSERT INTO venta (id_usuario, fecha, hora, total, metodo_de_pago) VALUES (%s, CURDATE(), CURTIME(), %s, %s)',
             (id_usuario, total, metodo_pago)
         )
         venta_id = cursor.lastrowid  # Obtener el ID de la venta recién insertada
 
-        # Insertar los productos de la venta en la tabla venta_productos (si existe)
+        # Agregar los productos de la venta en la tabla detalle_venta
         for item in carrito:
             producto = obtener_producto_por_id(item['producto_id'])
+            cantidad = item['cantidad']
+            
             cursor.execute(
                 'INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
                 (venta_id, item['producto_id'], item['cantidad'], producto.precio)
             )
+            
+            # Restar el stock del producto
+            nuevo_stock = producto.stock - int(cantidad)
+            if nuevo_stock < 0:
+                raise ValueError("No hay suficiente stock para el producto con ID {}".format(item['producto_id']))
+
+            cursor.execute(
+                'UPDATE producto SET stock = %s WHERE id = %s',
+                (nuevo_stock, item['producto_id'])
+            )
 
         conn.commit()
         return True
-    except Error as e:
-        print(f"Error al guardar la venta: {e}")
-        conn.rollback()
-        return False
     finally:
         cursor.close()
         conn.close()
