@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2025 a las 00:05:31
+-- Tiempo de generación: 19-03-2025 a las 00:12:02
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,13 +32,6 @@ CREATE TABLE `categoria` (
   `nombre` varchar(30) NOT NULL,
   `imagen` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`id`, `nombre`, `imagen`) VALUES
-(32, 'Laptops', 'laptopAlta.jpg');
 
 -- --------------------------------------------------------
 
@@ -71,13 +64,6 @@ CREATE TABLE `producto` (
   `stock` int(11) NOT NULL,
   `recomendado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`id`, `marca`, `modelo`, `descripcion`, `id_categoria`, `imagen`, `precio`, `stock`, `recomendado`) VALUES
-(19, 'Lenovo', 'Ideapad 1', 'Lenovo IdeaPad 1 15IAU7 15.6 pulgadas Full HD portátil, Intel Core i5-1235U 1.3GHz, 8GB RAM, 256GB SSD, Windows 11 Home, gris nube, 82QD003VUS', 32, 'Lenovo IdeaPad 1 15IAU7 15.6 pulgadas Full HD portátil, Intel Core i5-1235U 1.3GHz, 8GB RAM, 256GB SSD, Windows 11 Home, gris nube, 82QD003VUS.jpg', 200, 5, 1);
 
 -- --------------------------------------------------------
 
