@@ -141,7 +141,8 @@ def adminAdmins():
 @app.route('/ventas')
 def adminVentas():
     if session.get('sesion_admin', False):
-        return render_template('admin/ventas.html', sesion=session.get('sesion_admin', False))
+        ventas = obtener_ventas()
+        return render_template('admin/ventas.html', ventas=ventas, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
@@ -447,12 +448,16 @@ def loginSolicitud():
         contraseña = request.form['password']
 
         resultado = iniciar_sesion(usuario, contraseña)
-        if resultado == "cliente":
-            session['sesion_iniciada'] = True
-            return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
-        elif resultado == "admin":
-            session['sesion_admin'] = True
-            return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
+        if resultado:
+            rol, id_usuario = resultado
+            if rol == "cliente":
+                session['sesion_iniciada'] = True
+                session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
+                return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
+            elif rol == "admin":
+                session['sesion_admin'] = True
+                session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
+                return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
         else:
             return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña Incorrectos")
     return render_template('auth/login.html')
@@ -464,3 +469,23 @@ def cerrarSesionSolicitud():
     session['sesion_admin'] = False
     session.modified = True
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
+
+@app.route('/realizarCompra', methods=['POST'])
+def realizarCompra():
+    if not session.get('sesion_iniciada', False):
+        return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para realizar la compra"))
+
+    metodo_pago = request.form['metodo_pago']
+    carrito = session.get('carrito', [])
+    total = sumarElementos(obtenerElementosCarrito(carrito))
+    id_usuario = session.get('id_usuario')  # Asegúrate de que el id_usuario esté en la sesión
+
+    if not carrito:
+        return redirect(url_for('verCarrito', actionError=True, notificacion="El carrito está vacío"))
+
+    # Guardar la venta en la base de datos
+    if guardar_venta(id_usuario, carrito, total, metodo_pago):
+        session['carrito'] = []  # Vaciar el carrito después de la compra
+        return redirect(url_for('verCarrito', actionOK=True, notificacion="Compra realizada con éxito"))
+    else:
+        return redirect(url_for('verCarrito', actionError=True, notificacion="Error al realizar la compra"))

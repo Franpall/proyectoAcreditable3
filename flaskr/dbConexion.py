@@ -220,18 +220,15 @@ def sumarElementos(elementos):
 def iniciar_sesion(usuario, contraseña):
     conn = crear_conexion()
     cursor = conn.cursor()
-    cursor.execute('SELECT contraseña FROM usuario WHERE usuario= %s', (usuario,))
-    hash = cursor.fetchone()
-    if hash:
-        hash, = hash
+    cursor.execute('SELECT id, contraseña, rol FROM usuario WHERE usuario= %s', (usuario,))
+    resultado = cursor.fetchone()
+    if resultado:
+        id_usuario, hash, rol = resultado
         if verificarHash(contraseña, hash):
-            cursor.execute('SELECT rol FROM usuario WHERE usuario= %s', (usuario,))
-            resultado = cursor.fetchone()
-            resultado, = resultado
             conn.close()
-            return resultado
-    else:
-        return False
+            return rol, id_usuario  # Devuelve el rol y el id_usuario
+    conn.close()
+    return False
 
 # Funciones de encriptacion
 def crearHash(contraseña_usuario):
@@ -315,3 +312,40 @@ def eliminar_admin(id):
     conn.commit()
     conn.close()
     return "Eliminado con exito"
+
+def guardar_venta(id_usuario, carrito, total, metodo_pago):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    try:
+        # Insertar la venta en la tabla venta
+        cursor.execute(
+            'INSERT INTO venta (id_usuario, fecha, hora, total, metodo_de_pago) VALUES (%s, CURDATE(), CURTIME(), %s, %s)',
+            (id_usuario, total, metodo_pago)
+        )
+        venta_id = cursor.lastrowid  # Obtener el ID de la venta recién insertada
+
+        # Insertar los productos de la venta en la tabla venta_productos (si existe)
+        for item in carrito:
+            producto = obtener_producto_por_id(item['producto_id'])
+            cursor.execute(
+                'INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
+                (venta_id, item['producto_id'], item['cantidad'], producto.precio)
+            )
+
+        conn.commit()
+        return True
+    except Error as e:
+        print(f"Error al guardar la venta: {e}")
+        conn.rollback()
+        return False
+    finally:
+        cursor.close()
+        conn.close()
+        
+def obtener_ventas():
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT id, id_usuario, fecha, hora, total, metodo_de_pago FROM venta')
+    ventas = cursor.fetchall()
+    conn.close()
+    return ventas

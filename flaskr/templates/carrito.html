@@ -58,7 +58,14 @@
                         <div class="total">
                             Total: {{ total }} <span>US$</span>
                         </div>
-                        <button class="checkout-button">COMPRAR</button>
+                        <form action="{{ url_for('realizarCompra') }}" method="POST">
+                            <label for="metodo_pago">Método de Pago:</label>
+                            <select name="metodo_pago" id="metodo_pago" required>
+                                <option value="paypal">PayPal</option>
+                                <option value="tarjeta de crédito">Tarjeta de Crédito</option>
+                            </select>
+                            <button type="submit" class="checkout-button">COMPRAR</button>
+                        </form>
                     </div>
                 {% else %}
                     <div class="compra error_carrito">
