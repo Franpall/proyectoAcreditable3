@@ -478,7 +478,7 @@ def realizarCompra():
     metodo_pago = request.form['metodo_pago']
     carrito = session.get('carrito', [])
     total = sumarElementos(obtenerElementosCarrito(carrito))
-    id_usuario = session.get('id_usuario')  # Asegúrate de que el id_usuario esté en la sesión
+    id_usuario = session.get('id_usuario')  # Obtener el id_usuario de la sesión
 
     if not carrito:
         return redirect(url_for('verCarrito', actionError=True, notificacion="El carrito está vacío"))
@@ -488,4 +488,4 @@ def realizarCompra():
         session['carrito'] = []  # Vaciar el carrito después de la compra
         return redirect(url_for('verCarrito', actionOK=True, notificacion="Compra realizada con éxito"))
     else:
-        return redirect(url_for('verCarrito', actionError=True, notificacion="Error al realizar la compra"))
+        return redirect(url_for('verCarrito', actionError=True, notificacion="Error al realizar la compra: Stock insuficiente"))
