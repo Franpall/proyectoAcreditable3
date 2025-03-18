@@ -349,3 +349,12 @@ def obtener_ventas():
     ventas = cursor.fetchall()
     conn.close()
     return ventas
+
+def obtenerDetallesVenta(id):
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT marca, modelo, cantidad, precio_unitario FROM detalle_venta INNER JOIN producto ON producto.id = detalle_venta.id_producto WHERE id_venta = %s;', (id,))
+    ventas = cursor.fetchall()
+    conn.close()
+    print(ventas)
+    return ventas

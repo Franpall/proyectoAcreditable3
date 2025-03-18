@@ -146,6 +146,14 @@ def adminVentas():
     else:
         return render_template('error.html', error="401")
 
+@app.route('/detallesVenta/<int:id>')
+def verDetallesVenta(id):
+    if session.get('sesion_admin', False):
+        detallesVenta = obtenerDetallesVenta(id)
+        return render_template('admin/verDetallesVenta.html', sesion=session.get('sesion_admin', False), detallesVenta=detallesVenta)
+    else:
+        return render_template('error.html', error="401")
+
 # <-- Area de categorias -->
 
 # Agregar categorias
