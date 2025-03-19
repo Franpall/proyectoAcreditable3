@@ -85,7 +85,7 @@
                                     <td>US$ {{ venta.total }}</td>
                                     <td>{{ venta.metodo_de_pago }}</td>
                                     <td class="actions_td" height="90px">
-                                        <a href="" class="update_btn_admin">Ver Detalles</a>
+                                        <a href="{{ url_for('verDetallesVenta', id=venta.id) }}" class="update_btn_admin">Ver Detalles</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
