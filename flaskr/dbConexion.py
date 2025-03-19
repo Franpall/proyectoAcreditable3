@@ -374,3 +374,21 @@ def obtenerTotal(id):
     total = cursor.fetchone()
     conn.close()
     return total[0]
+
+def contarVentasMes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(id) FROM venta;")
+    resultado = cursor.fetchone()
+    ventasLen = resultado[0]
+    conn.close()
+    return ventasLen
+
+def sumarVentasMes():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute("SELECT SUM(total) FROM venta;")
+    resultado = cursor.fetchone()
+    ventasTotal = resultado[0]
+    conn.close()
+    return ventasTotal

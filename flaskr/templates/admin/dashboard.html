@@ -73,7 +73,27 @@
                     
                 </div>
             </a>
-            <!-- Productos Vendidos -->
+            <!-- Cantidad de Ventas realizadas -->
+            <a href="/ventas" class="card_estadisticas">
+                <div class="title">
+                    <p class="title-text">
+                        Ventas del Mes
+                    </p>
+                    <p class="percent">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" fill="currentColor" height="20" width="20">
+                            <path d="M1408 1216q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z">
+                            </path>
+                        </svg>
+                    </p>
+                </div>
+                <div class="data">
+                    <p>
+                        {{ ventas_mes }}
+                    </p>
+                    
+                </div>
+            </a>
+            <!-- Ventas del mes -->
             <a href="/ventas" class="card_estadisticas">
                 <div class="title">
                     <span>
@@ -94,7 +114,7 @@
                 </div>
                 <div class="data">
                     <p>
-                        20.500 
+                        {{ingresos_mes}} <b>$US</b>
                     </p>
                     
                     <div class="range">
@@ -105,6 +125,7 @@
             </a>
         </div>
     </div>
+    <br>
     {% if actionError %}
     <div class="notificacionR">
         <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">
