@@ -103,13 +103,13 @@ def adminDashboard():
     clientes = contarClientes()
     productos_disponibles = contarProductosDisponibles()
     categorias_disponibles = contarCategoriasDisponibles()
-    ventas_mes = contarVentasMes()
-    ingresos_mes = sumarVentasMes()
+    ventas_totales = contarVentasMes()
+    ingresos_totales = sumarVentasMes()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     if session.get('sesion_admin', False):
-        return render_template('admin/dashboard.html', clientes=clientes, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_mes=ventas_mes, ingresos_mes=ingresos_mes)
+        return render_template('admin/dashboard.html', clientes=clientes, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales)
     else:
         return render_template('error.html', error="401")
 
