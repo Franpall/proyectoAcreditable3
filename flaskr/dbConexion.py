@@ -375,7 +375,7 @@ def obtenerTotal(id):
     conn.close()
     return total[0]
 
-def contarVentasMes():
+def contarVentasTotales():
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(id) FROM venta;")
@@ -384,7 +384,7 @@ def contarVentasMes():
     conn.close()
     return ventasLen
 
-def sumarVentasMes():
+def sumarVentasTotales():
     conn = crear_conexion()
     cursor = conn.cursor()
     cursor.execute("SELECT SUM(total) FROM venta;")
