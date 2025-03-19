@@ -353,7 +353,7 @@ def guardar_venta(id_usuario, carrito, total, metodo_pago):
 def obtener_ventas():
     conn = crear_conexion()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute('SELECT id, id_usuario, fecha, hora, total, metodo_de_pago FROM venta')
+    cursor.execute('SELECT venta.id, usuario, fecha, hora, total, metodo_de_pago FROM venta INNER JOIN usuario ON usuario.id = venta.id_usuario')
     ventas = cursor.fetchall()
     conn.close()
     return ventas
@@ -366,3 +366,11 @@ def obtenerDetallesVenta(id):
     conn.close()
     print(ventas)
     return ventas
+
+def obtenerTotal(id):
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute('SELECT total FROM venta WHERE id = %s', (id,))
+    total = cursor.fetchone()
+    conn.close()
+    return total[0]

@@ -25,7 +25,7 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Id Usuario</th>
+                                    <th>Cliente</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
                                     <th>Total</th>
@@ -37,7 +37,7 @@
                                 {% for venta in ventas %}
                                 <tr>
                                     <td>{{ venta.id }}</td>
-                                    <td>{{ venta.id_usuario }}</td>
+                                    <td>{{ venta.usuario }}</td>
                                     <td>{{ venta.fecha }}</td>
                                     <td>{{ venta.hora }}</td>
                                     <td>US$ {{ venta.total }}</td>
