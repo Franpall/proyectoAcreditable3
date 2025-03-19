@@ -54,13 +54,17 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
+    notificacion = request.args.get('notificacion', False)  # Capturar notificación
+    actionError = request.args.get('actionError', False)    # Capturar actionError
+    actionOK = request.args.get('actionOK', False)
+    
     carritoActual = session.get('carrito', False)
     if carritoActual:
         elementos=obtenerElementosCarrito(carritoActual)
         total = sumarElementos(elementos)
-        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos, total=total)
+        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), elementos=elementos, total=total, notificacion=notificacion, actionOK=actionOK, actionError=actionError)
     else:
-        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False))
+        return render_template('carrito.html', sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/favicon.ico')
 def favicon():
