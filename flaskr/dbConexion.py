@@ -366,3 +366,12 @@ def obtenerDetallesVenta(id):
     conn.close()
     print(ventas)
     return ventas
+
+def obtenerTotal():
+    conn = crear_conexion()
+    cursor = conn.cursor()
+    cursor.execute('SELECT SUM(cantidad * precio_unitario) FROM detalle_venta')
+    total = cursor.fetchone()
+    conn.close()
+    print(total)
+    return total

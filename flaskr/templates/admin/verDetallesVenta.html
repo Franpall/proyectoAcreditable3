@@ -39,10 +39,16 @@
                                 <tr>
                                     <td>{{ elemento.marca + " " + elemento.modelo }}</td>
                                     <td>{{ elemento.cantidad }}</td>
-                                    <td>{{ elemento.precio_unitario }}</td>
-                                    <td>{{ elemento.precio_unitario * elemento.cantidad }}</td>
+                                    <td>{{ elemento.precio_unitario }}<b> $</b></td>
+                                    <td>{{ elemento.precio_unitario * elemento.cantidad }}<b> $</b></td>
                                 </tr>
                                 {% endfor %}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Total: </b>{{ total }}<b> $</b></td>
+                                </tr>
                             </tbody>
                         </table>
                         {% endif %}

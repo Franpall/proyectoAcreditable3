@@ -150,7 +150,8 @@ def adminVentas():
 def verDetallesVenta(id):
     if session.get('sesion_admin', False):
         detallesVenta = obtenerDetallesVenta(id)
-        return render_template('admin/verDetallesVenta.html', sesion=session.get('sesion_admin', False), detallesVenta=detallesVenta)
+        total = obtenerTotal()
+        return render_template('admin/verDetallesVenta.html', sesion=session.get('sesion_admin', False), detallesVenta=detallesVenta, total=total)
     else:
         return render_template('error.html', error="401")
 
