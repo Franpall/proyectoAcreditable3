@@ -14,6 +14,8 @@
             <a class="user_btn" href="{{ url_for('index')}}"><img class="user_btn_icon" src="{{ url_for('static', filename='img/shop-svgrepo-com.svg') }}" alt=""></a>        
             <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
             <div id="float_menu" class="hint">
+                <a href="{{ url_for('verMisCompras') }}">Mis Compras</a>
+                <hr>
                 <a href="{{ url_for('cerrarSesionSolicitud') }}">Cerrar Sesión</a>
             </div>
             {% else %}
