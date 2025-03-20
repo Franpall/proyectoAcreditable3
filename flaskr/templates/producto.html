@@ -40,7 +40,7 @@
                     <div class="detalles_preview">
                         <p class="marca_preview">{{ producto.marca }}</p>
                         <p class="modelo_preview">{{ producto.modelo }}</p>
-                        <p class="precio_preview"> <span>US$</span> {{ producto.precio }} </p>
+                        <p class="precio_preview"> <span>USD$</span> {{ producto.precio }} </p>
                         <p class="stock_preview">Quedan {{ producto.stock }} unidades en stock</p>
                         <p class="cantidad_preview">Cantidad</p>
                         <form action="{{ url_for('agregarAlCarritoProducto') }}" method="POST">

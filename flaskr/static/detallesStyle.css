@@ -371,7 +371,8 @@ h2{
     flex-direction: column;
     gap: 20px;
 }
-h2{
+
+.mainCompras h2{
     text-align: center;
     font-size: 2em;
 }
