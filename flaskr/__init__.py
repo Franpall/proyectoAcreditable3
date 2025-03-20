@@ -1,7 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, url_for, request, session, send_file
 from flaskr.dbConexion import *
 import os
 from datetime import timedelta
+from io import BytesIO
+from xhtml2pdf import pisa
 
 app = Flask(__name__)
 
@@ -25,8 +27,6 @@ def index():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    print(app.secret_key)
-    print(f"Estado actual del carrito: {session.get('carrito', False)}")
     categorias = obtener_categorias()
     productos = mostrar_productos()
     productos_recomendados = mostrar_productos_recomendados()
@@ -83,8 +83,6 @@ def verProductosCategoria(categoria):
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    
-    print(f"Categoría solicitada: {categoria}")  # Depuración
     
     id_categoria = obtener_id_categoria(categoria)
     
@@ -151,6 +149,25 @@ def adminVentas():
         return render_template('admin/ventas.html', ventas=ventas, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
+
+@app.route('/exportarVentasPDF', methods=['GET', 'POST'])
+def exportarVentasPDF():
+    if request.method == 'POST':
+        # Renderizar la plantilla HTML con los datos de ventas
+        rendered = render_template('admin/reporteVentasPDF.html', ventas = obtener_ventas(), total_ingresos = sumarVentasTotales())
+
+        # Crear el objeto PDF
+        pdf_file = BytesIO()
+        pisa_status = pisa.CreatePDF(rendered, dest=pdf_file)
+
+        # Verificar si hubo errores en la generación del PDF
+        if pisa_status.err:
+            return "Error al generar el PDF"
+
+        pdf_file.seek(0)
+
+        # Devolver el PDF como respuesta
+        return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
@@ -241,10 +258,6 @@ def eliminarCategoria(id_categoria):
                 os.remove(filepath)
             except FileNotFoundError:
                 print(f"Imagen de producto {producto.id} no encontrada")
-                
-    print(productos)  # Verifica qué se está devolviendo
-    for producto in productos:
-        print(vars(producto))  # Imprime los atributos del objeto
     
     eliminar_categoria(id_categoria)
 
@@ -306,7 +319,6 @@ def editarProductoSend(id_producto):
         descripcion = request.form['descripcion']
         try:
             recomendado = request.form['recomendado']
-            print(recomendado)
         except KeyError:
             recomendado = 0
 
