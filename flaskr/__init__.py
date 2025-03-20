@@ -354,7 +354,7 @@ def eliminarProducto(id_producto):
     
     if producto and producto.imagen:
         try:
-            filepath = os.remove(os.path.join(app.config['UPLOAD_FOLDER'], producto.imagen))
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], producto.imagen)
             os.remove(filepath)
         except FileNotFoundError:
             print("Imagen de producto no encontrada")
