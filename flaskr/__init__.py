@@ -94,6 +94,10 @@ def verProductosCategoria(categoria):
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada, modoAdmin=session.get('sesion_admin', False)
         )
 
+@app.route('/misCompras')
+def verMisCompras():
+    return render_template('compras.html', sesion=session.get('sesion_iniciada', False))
+
 # Rutas para administradores
 
 @app.route('/dashboard')
