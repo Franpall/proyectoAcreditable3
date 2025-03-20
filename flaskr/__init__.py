@@ -168,6 +168,7 @@ def exportarVentasPDF():
 
         # Devolver el PDF como respuesta
         return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
+    return render_template('admin/reporteVentasPDF.html', ventas=obtener_ventas(), total_ingresos=sumarVentasTotales())
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
