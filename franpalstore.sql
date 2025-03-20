@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2025 a las 00:12:02
+-- Tiempo de generación: 20-03-2025 a las 19:00:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `categoria` (
 CREATE TABLE `detalle_venta` (
   `id` int(11) NOT NULL,
   `id_venta` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
+  `producto` varchar(200) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio_unitario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -118,7 +118,7 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `detalle_venta`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_detalle_producto` (`id_producto`),
+  ADD KEY `fk_detalle_producto` (`producto`),
   ADD KEY `fk_detalle_venta` (`id_venta`);
 
 --
@@ -149,19 +149,19 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -173,7 +173,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
@@ -183,7 +183,6 @@ ALTER TABLE `venta`
 -- Filtros para la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  ADD CONSTRAINT `fk_detalle_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
   ADD CONSTRAINT `fk_detalle_venta` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
