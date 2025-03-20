@@ -21,6 +21,9 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        {% if ventas|length < 1 %}
+                        <h4>No se han registrado ventas, espere a que los clientes realicen compras</h4>
+                        {% else %}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -52,6 +55,7 @@
                         <form action="{{ url_for('exportarVentasPDF') }}" method="POST" id="exportar_ventas_form">
                             <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
                         </form>
+                        {% endif %}
                 </div>
             </div>
                 </div>
