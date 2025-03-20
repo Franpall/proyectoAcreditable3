@@ -391,4 +391,6 @@ def sumarVentasTotales():
     resultado = cursor.fetchone()
     ventasTotal = resultado[0]
     conn.close()
+    if not ventasTotal:
+        return 0
     return ventasTotal
