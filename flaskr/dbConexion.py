@@ -330,8 +330,8 @@ def guardar_venta(id_usuario, carrito, total, metodo_pago):
             cantidad = item['cantidad']
             
             cursor.execute(
-                'INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
-                (venta_id, item['producto_id'], item['cantidad'], producto.precio)
+                'INSERT INTO detalle_venta (id_venta, producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
+                (venta_id, producto.marca + " " + producto.modelo, item['cantidad'], producto.precio)
             )
             
             # Restar el stock del producto
@@ -361,7 +361,7 @@ def obtener_ventas():
 def obtenerDetallesVenta(id):
     conn = crear_conexion()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute('SELECT marca, modelo, cantidad, precio_unitario FROM detalle_venta INNER JOIN producto ON producto.id = detalle_venta.id_producto WHERE id_venta = %s;', (id,))
+    cursor.execute('SELECT producto, cantidad, precio_unitario FROM detalle_venta WHERE id_venta = %s;', (id,))
     ventas = cursor.fetchall()
     conn.close()
     print(ventas)

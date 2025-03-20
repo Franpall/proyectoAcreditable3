@@ -37,7 +37,7 @@
                             <tbody>
                                 {% for elemento in detallesVenta %}
                                 <tr>
-                                    <td>{{ elemento.marca + " " + elemento.modelo }}</td>
+                                    <td>{{ elemento.producto }}</td>
                                     <td>{{ elemento.cantidad }}</td>
                                     <td>{{ elemento.precio_unitario }}<b> $</b></td>
                                     <td>{{ elemento.precio_unitario * elemento.cantidad }}<b> $</b></td>
