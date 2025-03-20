@@ -28,14 +28,60 @@
             {% endif %}
         </div>
     </header>
-    <main>
-        <article class="errorLengthZero">
+    <main class="mainCompras">
+        <h2>Historial de Compras</h2>
+        {% if compras|length < 1 %}
+        <article class="errorLengthZero compras_error_area">
             <p>No has realizado ninguna compra aún</p>
             <img src="{{ url_for('static', filename='img/avatar-thinking-7-svgrepo-com.svg') }}" alt="Joven Pensativo">
         </article>
+        {% else %}
+        <article id="historial_compras">
+            {% for compra in compras %}
+            <section class="elementoCompras">
+                <p>{{ compra.fecha }}, {{ compra.hora }}</p>
+                <div class="elementoComprasBox">
+                    <div class="comprasBoxL">
+                        {% if compra.metodo_de_pago == 'Paypal' %}
+                        <p class="metodoDePagoP"><img src="{{ url_for('static', filename='img/pay-pal-paypal-payments-platform-svgrepo-com.svg') }}" alt="PayPal">{{ compra.metodo_de_pago }}</p>
+                        {% else %}
+                        <p class="metodoDePagoP"><img src="{{ url_for('static', filename='img/credit-card-svgrepo-com.svg') }}" alt="tarjeta de crédito">{{ compra.metodo_de_pago }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="comprasBoxR">
+                        <p><b>$US</b> {{ compra.total }} </p>
+                    </div>
+                </div>
+                <div class="verDetallesBtnArea">
+                    <a href="{{ url_for('verDetallesCompra', id=compra.id) }}" class="verDetallesCompraBtn">Ver Detalles</a>
+                </div>
+            </section>
+            {% endfor %}
+        </article>
+        {% endif %}
         <div id="btn_regresar">
             <a href="{{ url_for('index') }}">Regresar a la tienda</a>
         </div>
+        {% if detallesCompra %}
+        <article id="floatDetallesCompra">
+            <div id="detallesCompraCard">
+                <br>
+                {% for elemento in detallesCompra %}
+                <section class="ddcElemento">
+                    <div class="ddcElementoL">
+                        <h3>{{elemento.producto}}</h3>
+                        <p><b>X</b>{{ elemento.cantidad }}</p>
+                    </div>
+                    <div class="ddcElementoR">
+                        <p><b>$US</b> {{ elemento.precio_unitario }} C/U</p>
+                    </div>
+                </section>
+                {% endfor %}
+                <p class="totalDetallesCompra">Total: <b>$US</b> {{total}}</p>
+            </div>
+            <a class="cerrarDetallesCompraBtn" href="{{ url_for('verMisCompras') }}">Cerrar</a>
+        </article>
+        {% endif %}
     </main>
     <footer>
         <p>Todos los derechos reservados - 2025</p>

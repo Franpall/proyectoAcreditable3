@@ -394,3 +394,13 @@ def sumarVentasTotales():
     if not ventasTotal:
         return 0
     return ventasTotal
+
+# Area de ver Compras realizadas
+
+def obtenerComprasRealizadas(id_usuario):
+    conn = crear_conexion()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT id, fecha, hora, total, metodo_de_pago FROM venta WHERE id_usuario = %s", (id_usuario,))
+    resultado = cursor.fetchall()
+    conn.close()
+    return resultado

@@ -96,7 +96,15 @@ def verProductosCategoria(categoria):
 
 @app.route('/misCompras')
 def verMisCompras():
-    return render_template('compras.html', sesion=session.get('sesion_iniciada', False))
+    compras = obtenerComprasRealizadas(session.get('id_usuario'))
+    return render_template('compras.html', sesion=session.get('sesion_iniciada', False), compras=compras)
+
+@app.route('/detallesCompra/<int:id>')
+def verDetallesCompra(id):
+    compras = obtenerComprasRealizadas(session.get('id_usuario'))
+    detallesCompra = obtenerDetallesVenta(id)
+    total = obtenerTotal(id)
+    return render_template('compras.html', sesion=session.get('sesion_iniciada', False), detallesCompra=detallesCompra, total=total, compras=compras)
 
 # Rutas para administradores
 
