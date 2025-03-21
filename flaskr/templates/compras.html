@@ -49,7 +49,7 @@
                         {% endif %}
                     </div>
                     <div class="comprasBoxR">
-                        <p><b>$US</b> {{ compra.total }} </p>
+                        <p><b>$USD</b> {{ compra.total }} </p>
                     </div>
                 </div>
                 <div class="verDetallesBtnArea">
@@ -73,11 +73,11 @@
                         <p><b>X</b>{{ elemento.cantidad }}</p>
                     </div>
                     <div class="ddcElementoR">
-                        <p><b>$US</b> {{ elemento.precio_unitario }} C/U</p>
+                        <p><b>$USD</b> {{ elemento.precio_unitario }} C/U</p>
                     </div>
                 </section>
                 {% endfor %}
-                <p class="totalDetallesCompra">Total: <b>$US</b> {{total}}</p>
+                <p class="totalDetallesCompra">Total: <b>$USD</b> {{total}}</p>
             </div>
             <a class="cerrarDetallesCompraBtn" href="{{ url_for('verMisCompras') }}">Cerrar</a>
         </article>

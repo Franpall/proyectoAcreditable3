@@ -43,7 +43,7 @@
                                     {{ elemento.marca + " " + elemento.modelo }} <b>X{{ elemento.cantidad }}</b><br>
                                 </div>
                                 <div class="producto-precio"><br>
-                                    <span>US$</span> {{elemento.precio}} c/u
+                                    <span>USD$</span> {{elemento.precio}} c/u
                                 </div>
                             </div>
                             <div id="btn_borrar_del_carrito">
@@ -55,10 +55,10 @@
                     <div class="info">
                         <h2>Información de la compra</h2><br>
                         <div class="subtotal">
-                            Subtotal: {{ total }} <span>US$</span>
+                            Subtotal: {{ total }} <span>USD$</span>
                         </div>
                         <div class="total">
-                            Total: {{ total }} <span>US$</span>
+                            Total: {{ total }} <span>USD$</span>
                         </div>
                         <form action="{{ url_for('realizarCompra') }}" method="POST">
                             <label for="metodo_pago">Método de Pago:</label>
