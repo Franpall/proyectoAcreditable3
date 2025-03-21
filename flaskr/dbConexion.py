@@ -262,8 +262,8 @@ def registrar_cliente(usuario, correo, contraseña, rol):
     contraseña_encriptada = crearHash(contraseña)
     cursor.execute(
         'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
-        (usuario, correo, contraseña_encriptada, rol)
-    )
+        (usuario, correo, contraseña_encriptada, rol))
+    
     conn.commit()
     conn.close()
 
@@ -316,39 +316,34 @@ def eliminar_admin(id):
 def guardar_venta(id_usuario, carrito, total, metodo_pago):
     conn = crear_conexion()
     cursor = conn.cursor()
-    try:
-        # Agregar la venta en la tabla venta
+
+    # Agregar la venta en la tabla venta
+    cursor.execute('INSERT INTO venta (id_usuario, fecha, hora, total, metodo_de_pago) VALUES (%s, CURDATE(), CURTIME(), %s, %s)',
+    (id_usuario, total, metodo_pago))
+    
+    venta_id = cursor.lastrowid  # Obtener el ID de la venta recién insertada
+
+    # Agregar los productos de la venta en la tabla detalle_venta
+    for item in carrito:
+        producto = obtener_producto_por_id(item['producto_id'])
+        cantidad = item['cantidad']
+        
         cursor.execute(
-            'INSERT INTO venta (id_usuario, fecha, hora, total, metodo_de_pago) VALUES (%s, CURDATE(), CURTIME(), %s, %s)',
-            (id_usuario, total, metodo_pago)
-        )
-        venta_id = cursor.lastrowid  # Obtener el ID de la venta recién insertada
-
-        # Agregar los productos de la venta en la tabla detalle_venta
-        for item in carrito:
-            producto = obtener_producto_por_id(item['producto_id'])
-            cantidad = item['cantidad']
+            'INSERT INTO detalle_venta (id_venta, producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
+            (venta_id, producto.marca + " " + producto.modelo, item['cantidad'], producto.precio))
             
-            cursor.execute(
-                'INSERT INTO detalle_venta (id_venta, producto, cantidad, precio_unitario) VALUES (%s, %s, %s, %s)',
-                (venta_id, producto.marca + " " + producto.modelo, item['cantidad'], producto.precio)
-            )
-            
-            # Restar el stock del producto
-            nuevo_stock = producto.stock - int(cantidad)
-            if nuevo_stock < 0:
-                raise ValueError("No hay suficiente stock para el producto con ID {}".format(item['producto_id']))
+        # Restar el stock del producto
+        nuevo_stock = producto.stock - int(cantidad)
+        if nuevo_stock < 0:
+            return False
 
-            cursor.execute(
-                'UPDATE producto SET stock = %s WHERE id = %s',
-                (nuevo_stock, item['producto_id'])
-            )
+        cursor.execute('UPDATE producto SET stock = %s WHERE id = %s',
+            (nuevo_stock, item['producto_id']))
 
         conn.commit()
-        return True
-    finally:
-        cursor.close()
         conn.close()
+        
+    return True
         
 def obtener_ventas():
     conn = crear_conexion()
