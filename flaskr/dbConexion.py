@@ -400,7 +400,7 @@ def sumarVentasTotales():
 def obtenerComprasRealizadas(id_usuario):
     conn = crear_conexion()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT id, fecha, hora, total, metodo_de_pago FROM venta WHERE id_usuario = %s ORDER BY fecha, hora DESC", (id_usuario,))
+    cursor.execute("SELECT id, fecha, hora, total, metodo_de_pago FROM venta WHERE id_usuario = %s ORDER BY fecha DESC, hora DESC", (id_usuario,))
     resultado = cursor.fetchall()
     conn.close()
     return resultado
