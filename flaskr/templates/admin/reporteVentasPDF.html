@@ -4,20 +4,23 @@
     <title>Reporte de Ventas</title>
     <style>
         body { font-family: sans-serif; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        table { width: 100%; border-collapse: collapse; border-radius: 5px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; font-size: 1.4em; }
+        th { background-color: #e8faff; }
     </style>
 </head>
+<header>
+    <h1 style="border-bottom: solid 5px rgb(1, 96, 185); font-size: 2.5em;">Franpal Store</h1>
+</header>
 <body>
-    <h1>Reporte de Ventas</h1>
-    <table>
+    <h2 style="font-size: 1.8em; margin-top: 40px;">Reporte de Ventas</h2>
+    <table style="margin-top: -20px;">
         <thead>
             <tr>
-                <th>ID Venta</th>
+                <th style="width: 10%;">ID Venta</th>
                 <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Hora</th>
+                <th style="width: 15%;">Fecha</th>
+                <th style="width: 13%;">Hora</th>
                 <th>Total</th>
                 <th>Método de Pago</th>
             </tr>
@@ -29,12 +32,12 @@
                 <td>{{ venta.usuario }}</td>
                 <td>{{ venta.fecha }}</td>
                 <td>{{ venta.hora }}</td>
-                <td>{{ venta.total }}</td>
+                <td>{{ venta.total }} <b>$US</b></td>
                 <td>{{ venta.metodo_de_pago }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <p>Ingresos Totales: {{ total_ingresos }}</p>
+    <p style="font-size: 1.5em;">Ingresos Totales: {{ total_ingresos }} <b>$US</b></p>
 </body>
 </html>
