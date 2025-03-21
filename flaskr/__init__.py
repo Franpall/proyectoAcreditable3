@@ -400,9 +400,10 @@ def manejar_carrito():
                 del session['carrito'][count]
                 existente = True
                 session.modified = True
+                break
             count += 1
         if not existente:
-            session['carrito'].append({'producto_id': producto_id, 'cantidad': cantidad})
+            session['carrito'].append({'producto_id': producto_id, 'cantidad': int(cantidad)})
             session.modified = True
 
         return redirect(f"{next_url}?actionOK=True&notificacion=Producto añadido al carrito")
