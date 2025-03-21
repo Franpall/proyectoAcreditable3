@@ -36,9 +36,10 @@ class ProductoAuxiliar:
         self.precio = precio
 
 class ElementoCarrito:
-    def __init__(self, id, marca, modelo, precio, cantidad):
+    def __init__(self, id, marca, modelo, precio, cantidad, stock):
         self.id = id
         self.marca = marca
         self.modelo = modelo
         self.precio = precio
         self.cantidad = cantidad
+        self.stock = stock

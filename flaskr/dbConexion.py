@@ -203,7 +203,7 @@ def obtenerElementosCarrito(carritoSession):
     elementos = []
     for elemento in carritoSession:
         producto = obtener_producto_por_id(elemento['producto_id'])
-        item = ElementoCarrito(elemento['producto_id'], producto.marca, producto.modelo, producto.precio, elemento['cantidad'])
+        item = ElementoCarrito(elemento['producto_id'], producto.marca, producto.modelo, producto.precio, elemento['cantidad'], producto.stock)
         elementos.append(item)
     return elementos
 

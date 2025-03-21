@@ -45,6 +45,9 @@
                                 <div class="producto-precio"><br>
                                     <span>USD$</span> {{elemento.precio}} c/u
                                 </div>
+                                <div class="producto-cantidad-disponible">
+                                    <span>Disponibles:</span> {{elemento.stock}}
+                                </div>
                             </div>
                             <div id="btn_borrar_del_carrito">
                                 <a href="{{ url_for('eliminarDelCarrito', index=loop.index0) }}" class="btn_borrar_icon"><img src="{{ url_for('static', filename='img/delete-svgrepo-com.svg') }}" alt=""></a>
