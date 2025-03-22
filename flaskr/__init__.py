@@ -436,10 +436,11 @@ def eliminarDelCarrito(index):
         # Verificar que el índice exista en la lista
         if 0 <= index < len(session['carrito']):
             del session['carrito'][index]
-            
             session.modified = True
+            
     return redirect(url_for('verCarrito'))
 
+# Actualizar cantidad de productos agregados al carrito
 @app.route('/actualizarCantidad/<int:index>', methods=['POST'])
 def actualizarCantidad(index):
     if 'carrito' in session:
@@ -448,6 +449,7 @@ def actualizarCantidad(index):
             # Actualizar la cantidad en el carrito
             session['carrito'][index]['cantidad'] = nueva_cantidad
             session.modified = True
+            
             return redirect(url_for('verCarrito', actionOK=True, notificacion="Cantidad actualizada correctamente"))
     return redirect(url_for('verCarrito', actionError=True, notificacion="Error al actualizar la cantidad"))
 
@@ -523,6 +525,7 @@ def cerrarSesionSolicitud():
     session.modified = True
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
 
+# Realizar Compras
 @app.route('/realizarCompra', methods=['POST'])
 def realizarCompra():
     if not session.get('sesion_iniciada', False):
