@@ -440,29 +440,6 @@ input[type="number"]::-webkit-outer-spin-button {
         }
 }
 
-@media (min-width:1000px){
-    #elemento_del_carrito{
-        display: flex;   
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        flex-wrap: wrap;
-    }    
-    .producto-precio{
-        width: 100%;
-    }
-    .producto-detalles{
-        display: flex;   
-        justify-content: center;
-        align-items:flex-start;
-        flex-direction: column;
-    }
-    .cantidad-selector-carrito{
-        margin-top: 40px;
-        margin-right: 20px;
-    }
-}
-
 /* Area de MIS COMPRAS */
 
 .mainCompras{
