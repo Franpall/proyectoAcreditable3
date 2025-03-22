@@ -340,8 +340,8 @@ def guardar_venta(id_usuario, carrito, total, metodo_pago):
         cursor.execute('UPDATE producto SET stock = %s WHERE id = %s',
             (nuevo_stock, item['producto_id']))
 
-        conn.commit()
-        conn.close()
+    conn.commit()
+    conn.close()
         
     return True
         

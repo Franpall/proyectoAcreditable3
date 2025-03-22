@@ -340,6 +340,24 @@ h2{
     aspect-ratio: 1/1;
 }
 
+.cantidad-selector-carrito input[type="number"]{
+    margin-left: 10px;
+    width: 40px;
+    height: 20px;
+    font-size: 16px;
+    text-align: center;
+    /* Deshabilitar escritura en el input */
+    pointer-events: none;
+    }
+
+    /* Estilo para las flechas (spinners) */
+.cantidad-selector-carrito
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        /* Habilitar las flechas */
+        pointer-events: auto;
+    }
+
 /* Responsive Carrito */
 
 @media (min-width:700px){

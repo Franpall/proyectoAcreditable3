@@ -439,6 +439,17 @@ def eliminarDelCarrito(index):
             session.modified = True
     return redirect(url_for('verCarrito'))
 
+@app.route('/actualizarCantidad/<int:index>', methods=['POST'])
+def actualizarCantidad(index):
+    if 'carrito' in session:
+        nueva_cantidad = int(request.form['cantidad'])
+        if 0 <= index < len(session['carrito']):
+            # Actualizar la cantidad en el carrito
+            session['carrito'][index]['cantidad'] = nueva_cantidad
+            session.modified = True
+            return redirect(url_for('verCarrito', actionOK=True, notificacion="Cantidad actualizada correctamente"))
+    return redirect(url_for('verCarrito', actionError=True, notificacion="Error al actualizar la cantidad"))
+
 
 # <-- Área de registros y cuentas -->
 
