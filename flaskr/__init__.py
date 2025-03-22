@@ -21,9 +21,6 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
 # Inicio
 @app.route('/')
 def index():
-    # Comprobar que la conexión funciona
-    if not crear_conexion():
-        return render_template('error.html', error="502")
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
@@ -35,6 +32,10 @@ def index():
         categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, modoAdmin=session.get('sesion_admin', False)
     )
 
+# Manejador de errores global para errores de base de datos
+@app.errorhandler(MySQLError)
+def handle_database_error(e):
+    return render_template('error.html', error="502")
 
 # Capturar error 404 para mostrar html personalizado
 @app.errorhandler(404)
