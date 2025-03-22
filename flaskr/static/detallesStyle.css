@@ -247,7 +247,6 @@
     width: 100%;
     box-sizing: border-box;
     padding: 20px 2px;
-    border-bottom: 1px solid #dddddd;
 }
 
 .info{
@@ -264,11 +263,11 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: solid 1px #dddddd;
 }
 
 #elemento_del_carrito{
-    width: calc(100% - 40px);
-    border-bottom: solid 1px #dddddd;
+    width: calc(100% - 40px);   
 }
 
 #btn_borrar_del_carrito{
@@ -299,7 +298,12 @@ h2{
 }
 
 .producto-precio{
-    text-align: right;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
 }
 
 .total {
@@ -327,6 +331,7 @@ h2{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column-reverse;
     padding: 20px;
     gap: 20px;
     box-sizing: border-box;
@@ -334,10 +339,32 @@ h2{
 }
 
 .carrito_vacio img{
-    min-width: 200px;
-    width: 30%;
+    min-width: 120px;
+    width: 100%;
     max-width: 400px;
     aspect-ratio: 1/1;
+    margin-left: -20px;
+}
+
+.carrito_vacio h2{
+    text-align: center;
+}
+
+.cantidad-selector-carrito{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+/* Estilo para las flechas (spinners) */
+.cantidad-selector-carrito
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    /* Habilitar las flechas */
+    pointer-events: auto;
 }
 
 .cantidad-selector-carrito input[type="number"]{
@@ -350,13 +377,19 @@ h2{
     /* pointer-events: none; */
     }
 
-    /* Estilo para las flechas (spinners) */
-.cantidad-selector-carrito
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        /* Habilitar las flechas */
-        pointer-events: auto;
-    }
+.btn-actualizar{
+    border-radius: 5px;
+    background-color: var(--botonGeneral);
+    box-shadow: var(--sombrasDeCajas);
+    color: var(--textInverso);
+    padding: 3px;
+    border: none;
+}
+.producto-cantidad-disponible{
+    margin-bottom: -20px;
+}
+
+
 
 /* Responsive Carrito */
 
@@ -364,11 +397,28 @@ h2{
     .carrito{
         flex-direction: row;
     }
+
+    .carrito_vacio{
+        flex-direction: row;
+    }
+
+    .carrito_vacio img{
+        width: 30%;
+    }
+
+    .carrito_vacio h2{
+        text-align: left;
+    }
+
     .compra{
         width: 60%;
         padding-right: 20px;
-        border-right: 1px solid #dddddd;
         border-bottom: none;
+        border-right: 1px solid #dddddd;
+    }
+
+    .producto{
+        border-right: none;
     }
 
     .error_carrito{

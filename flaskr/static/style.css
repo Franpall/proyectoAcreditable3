@@ -10,6 +10,7 @@
     margin: 0;
     font-family: "Quicksand", serif;
     font-optical-sizing: auto;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{

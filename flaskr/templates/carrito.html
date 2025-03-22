@@ -41,18 +41,20 @@
                                 <div class="producto-detalles"><br><br>
                                     <h2>{{ elemento.marca }}</h2><br>
                                     {{ elemento.marca + " " + elemento.modelo }}
-                                    <div class="cantidad-selector-carrito">
-                                        <form action="{{ url_for('actualizarCantidad', index=loop.index0) }}" method="POST" class="form-cantidad">
-                                            <input type="number" name="cantidad" value="{{ elemento.cantidad }}" min="1" max="{{ elemento.stock }}">
-                                            <button type="submit" class="btn-actualizar">Actualizar</button>
-                                        </form>
+                                </div>
+                                <div class="cantidad-selector-carrito">
+                                    <form action="{{ url_for('actualizarCantidad', index=loop.index0) }}" method="POST" class="form-cantidad">
+                                        <label for="cantidad">Cantidad:</label>
+                                        <input type="number" name="cantidad" value="{{ elemento.cantidad }}" min="1" max="{{ elemento.stock }}">
+                                        <button type="submit" class="btn-actualizar">Actualizar</button>
+                                    </form>
+                                    <div class="producto-cantidad-disponible">
+                                        <span>Disponibles:</span> {{elemento.stock}}
                                     </div>
+                                    <br>
                                 </div>
                                 <div class="producto-precio"><br>
                                     <span>USD$</span> {{elemento.precio}} c/u
-                                </div>
-                                <div class="producto-cantidad-disponible">
-                                    <span>Disponibles:</span> {{elemento.stock}}
                                 </div>
                             </div>
                             <div id="btn_borrar_del_carrito">
