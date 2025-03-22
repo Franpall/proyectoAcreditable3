@@ -469,8 +469,8 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    width: 94%;
-    min-width: 400px;
+    width: 90%;
+    min-width: 340px;
 }
 
 .elementoCompras{
@@ -558,7 +558,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #detallesCompraCard{
-    width: 90%;
+    width: 94%;
     max-width: 500px;
     margin-top: 10px;
     border-radius: var(--radioGeneral);
@@ -567,7 +567,7 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     gap: 10px;
 }
@@ -578,6 +578,7 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: center;
     align-items: center;
     border-bottom: solid 1px gray;
+    gap: 5px;
 }
 
 .ddcElementoL{
@@ -585,11 +586,17 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    width: 70%;
+    width: calc(70% - 5px);
+    max-width: 70%;
 }
 
 .ddcElementoR{
     width: 30%;
+    min-width: 100px;
+}
+
+.ddcElementoR p span{
+    font-size: 0.7em;
 }
 
 .totalDetallesCompra{
