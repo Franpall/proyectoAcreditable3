@@ -71,13 +71,14 @@
                         <div class="total">
                             Total: {{ total }} <span>USD$</span>
                         </div>
-                        <form action="{{ url_for('realizarCompra') }}" method="POST">
+                        <form id="form-pago" action="{{ url_for('realizarCompra') }}" method="POST">
                             <label for="metodo_pago">Método de Pago:</label>
                             <select name="metodo_pago" id="metodo_pago" required>
+                                <option value="" disabled selected>Sin seleccionar</option>
                                 <option value="paypal">PayPal</option>
                                 <option value="tarjeta de crédito">Tarjeta de Crédito</option>
                             </select>
-                            <button type="submit" class="checkout-button">COMPRAR</button>
+                            <button type="button" id="btn-pagar" class="checkout-button">COMPRAR</button>
                         </form>
                     </div>
                 {% else %}
@@ -88,6 +89,28 @@
                         </div>
                     </div>
                 {% endif %}
+                </div>
+                <div id="ventana-paypal" class="ventana-pago">
+                    <div class="contenido-ventana">
+                        <h3>Ingresar datos de PayPal</h3>
+                        <form id="form-paypal" onsubmit="document.getElementById('form-pago').submit(); return false;">
+                            <input type="email" id="paypal-email" placeholder="Correo electrónico" required>
+                            <button type="submit">Aceptar</button>
+                            <button type="button" id="btn-cerrar-paypal">Cerrar</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="ventana-tarjeta" class="ventana-pago">
+                    <div class="contenido-ventana">
+                        <h3>Ingresar datos de Tarjeta</h3>
+                        <form id="form-tarjeta" onsubmit="document.getElementById('form-pago').submit(); return false;">
+                            <input type="text" id="tarjeta-numero" placeholder="Número de tarjeta" required>
+                            <input type="text" id="tarjeta-cvv" placeholder="CVV" required>
+                            <input type="text" id="tarjeta-fecha" placeholder="MM/AA" required>
+                            <button type="submit">Aceptar</button>
+                            <button type="button" id="btn-cerrar-tarjeta">Cerrar</button>
+                        </form>
+                    </div>
                 </div>
             </article>
             <div id="btn_regresar">
@@ -111,5 +134,33 @@
         <p>Todos los derechos reservados - 2025</p>
     </footer>
     <script src="{{ url_for('static', filename='menus.js') }}"></script>
+    <script>
+        // Obtener elementos del DOM
+        const metodoPago = document.getElementById('metodo_pago');
+        const btnPagar = document.getElementById('btn-pagar');
+        const modalPaypal = document.getElementById('ventana-paypal');
+        const modalTarjeta = document.getElementById('ventana-tarjeta');
+
+        // Mostrar modal según el método de pago seleccionado
+        btnPagar.addEventListener('click', () => {
+            const metodo = metodoPago.value;
+            if (metodo === 'paypal') {
+                modalPaypal.style.display = 'block';
+            } else if (metodo === 'tarjeta de crédito') {
+                modalTarjeta.style.display = 'block';
+            } else {
+                alert('Por favor, selecciona un método de pago.');
+            }
+        });
+
+        // Cerrar modales
+        document.getElementById('btn-cerrar-paypal').addEventListener('click', () => {
+            modalPaypal.style.display = 'none';
+        });
+
+        document.getElementById('btn-cerrar-tarjeta').addEventListener('click', () => {
+            modalTarjeta.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
