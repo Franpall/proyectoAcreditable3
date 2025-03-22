@@ -386,10 +386,10 @@ def manejar_carrito():
         cantidad = request.form.get('cantidad')
         next_url = request.form.get('next', 'index')  # Si no hay "next", redirige a 'index'
 
-    if obtener_producto_por_id(producto_id).stock < int(cantidad):
-        return redirect(f"{next_url}?actionError=True&notificacion=No contamos con stock disponible")
-
     if session.get('sesion_iniciada', False):
+        if obtener_producto_por_id(producto_id).stock < int(cantidad):
+            return redirect(f"{next_url}?actionError=True&notificacion=No contamos con stock disponible")
+        
         # Guarda los datos en la sesión para uso temporal
         if 'carrito' not in session:
             session['carrito'] = []
