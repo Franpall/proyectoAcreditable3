@@ -14,7 +14,7 @@
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 350px;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -27,7 +27,7 @@
     margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
-    animation: slideIn 2s ease-in-out;
+    animation: slideIn 1.5s ease-in-out;
     text-align: center;
 }
 
@@ -102,7 +102,7 @@
     border-radius: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 400px;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -111,11 +111,10 @@
 }
 
 .register-container h2 {
-    margin-top: 18px;
     margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
-    animation: slideIn 2s ease-in-out;
+    animation: slideIn 1.5s ease-in-out;
     text-align: center;
 }
 
