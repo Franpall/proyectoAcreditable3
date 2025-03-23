@@ -171,6 +171,12 @@
     transition: background-color 0.3s, transform 0.3s;
 }
 
+.register-container .btn:disabled {
+    background-color: #032e3f; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+  }
+
 .register-container .btn:hover {
     background-color: var(--botonHover);
     transform: scale(1.05);
@@ -194,4 +200,11 @@
     .register-container {
         margin-top: 130px;
     }
+}
+
+.advertenciaForm{
+    margin-top: -5px;
+    margin-bottom: 10px;
+    color: rgb(95, 0, 0);
+    transition: all ease-in 500ms;
 }

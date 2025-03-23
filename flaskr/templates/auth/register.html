@@ -18,22 +18,26 @@
                 <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="20" height="20">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" required>
+                <p class="advertenciaForm" id="nombreUsuarioError"></p>
 
                 <img src="{{ url_for('static', filename='img/img.correo.svg') }}" width="20" height="20">
                 <label for="email">Correo</label>
                 <input type="email" id="email" name="email" required>
+                <p class="advertenciaForm" id="correoElectronicoError"></p>
 
                 <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="20" height="20">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
+                <p class="advertenciaForm" id="contrasenaError"></p>
 
                 <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="20" height="20">
                 <label for="confirm-password">Repita Contraseña</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>
+                <p class="advertenciaForm" id="contrasenaRepeatError"></p>
 
                 <div class="button-container">
                     <a class="btn" href="{{ url_for('iniciarSesion') }}">Ya tengo cuenta</a>
-                    <button class="btn">Registrarse</button>
+                    <button class="btn" id="sendButton" disabled>Registrarse</button>
                 </div>
             </form>
         </div>
@@ -50,8 +54,9 @@
         </div>
         {% endif %}
     </main>
-        <footer>
-            <p>Todos los derechos reservados - 2025</p>
-        </footer>
+    <footer>
+        <p>Todos los derechos reservados - 2025</p>
+    </footer>
+    <script src="{{ url_for('static', filename='auth.js') }}"></script>
 </body>
 </html>
