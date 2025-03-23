@@ -10,7 +10,7 @@ function validarCorreoElectronico(correoElectronico) {
         return "Formato de correo electrónico inválido.";
     }
     correoElectronicoCorrecto = true
-    validarFormulario()
+    validarFormularioP()
     return "";
 }
 
@@ -26,7 +26,7 @@ correoElectronicoInput.addEventListener("input", () => {
     mostrarError(document.getElementById("correoElectronicoError"), validarCorreoElectronico(correoElectronicoInput.value));
 });
 
-function validarFormulario() {
+function validarFormularioP() {
     if (correoElectronicoCorrecto) {
         enviarFormularioButton.disabled = 0
     }
