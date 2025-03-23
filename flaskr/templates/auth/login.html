@@ -15,13 +15,16 @@
         <div class="login-container">
             <h2>Inicio de Sesión</h2>
             <form action="{{ url_for('loginSolicitud') }}" method="post" id="login-form">
-                <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="30" height="30">
-                <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" required>
-
-                <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="30" height="30">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required>
+                <div class="input-login">
+                    <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="22" height="22">
+                    <label for="username"></label>
+                    <input type="text" id="username" name="username" placeholder="Usuario" required>
+                </div>
+                <div class="input-login">
+                    <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="22" height="22">
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                </div>
                 <button class="btn">Iniciar Sesión</button>
                 <a class="btn" href="{{ url_for('registrarse') }}">No tengo cuenta</a>
             </form>

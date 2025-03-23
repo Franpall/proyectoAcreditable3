@@ -10,11 +10,10 @@
 .login-container {
     margin-top: 20px;
     background-color: var(--fondoTarjeta);
-    padding: 15px;
+    padding: 50px 15px 50px 15px;
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 350px;
-    text-align: center;
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -24,11 +23,12 @@
 }
 
 .login-container h2 {
+    margin-top: 18px;
     margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
     animation: slideIn 2s ease-in-out;
-    border-bottom: 1px solid silver;
+    text-align: center;
 }
 
 @keyframes slideIn {
@@ -42,38 +42,40 @@
     align-items: center;
 }
 
-.login-container label {
-    margin-top: 10px;
-    margin-bottom: 5px;
+.input-login {
+    position: relative; 
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.input-login img {
+    position: absolute; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+.input-login input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 35px;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
     font-weight: bold;
     color: #555;
 }
 
-.login-container input{
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    font-size: 16px;
-    width: 80%;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.login-container input:focus {
+.input-login input:focus {
     border-color: #4400ff;
     outline: none;
 }
 
 .login-container a {
-    color: #007bff;
     text-decoration: none;
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-
-.login-container a:hover {
-    text-decoration: underline;
 }
 
 .login-container .btn {
@@ -96,12 +98,11 @@
 .register-container {
     margin-top: 10px;
     background-color: #ffffff;
-    padding: 15px;
+    padding: 50px 15px 50px 15px;
     border-radius: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 400px;
-    text-align: center;
-    animation: fadeIn 1.5s ease-in-out;
+    animation: fadeIn 2s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -110,10 +111,12 @@
 }
 
 .register-container h2 {
-    margin-bottom: 20px;
+    margin-top: 18px;
+    margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
-    animation: slideIn 1.5s ease-in-out;
+    animation: slideIn 2s ease-in-out;
+    text-align: center;
 }
 
 @keyframes slideIn {
@@ -127,25 +130,34 @@
     align-items: center;
 }
 
-.register-container label {
-    margin-top: 5px;
-    margin-bottom: 5px;
+.input-register {
+    position: relative; 
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.input-register img {
+    position: absolute; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+.input-register input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 35px;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
     font-weight: bold;
     color: #555;
 }
 
-.register-container input {
-    padding: 5px;
-    margin-bottom: 12px;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    font-size: 16px;
-    width: 80%;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.register-container input:focus {
+.input-register input:focus {
     border-color: #4400ff;
     outline: none;
 }
@@ -155,6 +167,10 @@
     justify-content: space-between;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.button-container a {
+    text-decoration: none;
 }
 
 .register-container .btn {
@@ -175,7 +191,7 @@
     background-color: #032e3f; 
     opacity: 0.5; 
     cursor: not-allowed;
-  }
+}
 
 .register-container .btn:hover {
     background-color: var(--botonHover);
