@@ -10,11 +10,10 @@
 .login-container {
     margin-top: 20px;
     background-color: var(--fondoTarjeta);
-    padding: 15px;
+    padding: 50px 15px 50px 15px;
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 350px;
-    text-align: center;
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -24,11 +23,12 @@
 }
 
 .login-container h2 {
+    margin-top: 18px;
     margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
     animation: slideIn 2s ease-in-out;
-    border-bottom: 1px solid silver;
+    text-align: center;
 }
 
 @keyframes slideIn {
@@ -42,38 +42,41 @@
     align-items: center;
 }
 
-.login-container label {
-    margin-top: 10px;
-    margin-bottom: 5px;
+.input-icon {
+    position: relative; 
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.input-icon img {
+    position: absolute; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 35px;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
     font-weight: bold;
     color: #555;
 }
 
-.login-container input{
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    font-size: 16px;
-    width: 80%;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.login-container input:focus {
+.input-icon input:focus {
     border-color: #4400ff;
     outline: none;
 }
 
 .login-container a {
-    color: #007bff;
     text-decoration: none;
-    font-size: 12px;
     margin-bottom: 20px;
-}
-
-.login-container a:hover {
-    text-decoration: underline;
 }
 
 .login-container .btn {
