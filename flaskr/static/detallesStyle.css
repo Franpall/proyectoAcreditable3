@@ -385,6 +385,11 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 3px;
     border: none;
 }
+
+.btn-actualizar:hover{
+    background-color: var(--botonHover);
+    cursor: pointer;
+}
 .producto-cantidad-disponible{
     margin-bottom: -20px;
 }
