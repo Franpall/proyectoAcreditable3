@@ -42,13 +42,13 @@
     align-items: center;
 }
 
-.input-icon {
+.input-login {
     position: relative; 
     width: 80%;
     margin-bottom: 25px;
 }
 
-.input-icon img {
+.input-login img {
     position: absolute; 
     right: 10px;
     top: 50%;
@@ -56,7 +56,7 @@
     pointer-events: none; 
 }
 
-.input-icon input {
+.input-login input {
     width: 100%;
     padding: 10px;
     padding-right: 35px;
@@ -69,14 +69,13 @@
     color: #555;
 }
 
-.input-icon input:focus {
+.input-login input:focus {
     border-color: #4400ff;
     outline: none;
 }
 
 .login-container a {
     text-decoration: none;
-    margin-bottom: 20px;
 }
 
 .login-container .btn {
@@ -99,11 +98,10 @@
 .register-container {
     margin-top: 20px;
     background-color: #ffffff;
-    padding: 15px;
+    padding: 50px 15px 50px 15px;
     border-radius: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 400px;
-    text-align: center;
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -113,11 +111,12 @@
 }
 
 .register-container h2 {
-    margin-bottom: 20px;
+    margin-top: 18px;
+    margin-bottom: 50px;
     color: #000000;
     font-size: 24px;
     animation: slideIn 2s ease-in-out;
-    border-bottom: 1px solid silver;
+    text-align: center;
 }
 
 @keyframes slideIn {
@@ -131,25 +130,34 @@
     align-items: center;
 }
 
-.register-container label {
-    margin-top: 10px;
-    margin-bottom: 5px;
+.input-register {
+    position: relative; 
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+.input-register img {
+    position: absolute; 
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+.input-register input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 35px;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
     font-weight: bold;
     color: #555;
 }
 
-.register-container input {
-    padding: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    font-size: 16px;
-    width: 80%;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.register-container input:focus {
+.input-register input:focus {
     border-color: #4400ff;
     outline: none;
 }
@@ -158,6 +166,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+}
+
+.button-container a {
+    text-decoration: none;
 }
 
 .register-container .btn {
@@ -178,7 +190,7 @@
     background-color: #032e3f; 
     opacity: 0.5; 
     cursor: not-allowed;
-  }
+}
 
 .register-container .btn:hover {
     background-color: var(--botonHover);

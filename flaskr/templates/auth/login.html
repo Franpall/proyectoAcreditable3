@@ -15,12 +15,12 @@
         <div class="login-container">
             <h2>Inicio de Sesión</h2>
             <form action="{{ url_for('loginSolicitud') }}" method="post" id="login-form">
-                <div class="input-icon">
+                <div class="input-login">
                     <img src="{{ url_for('static', filename='img/img usuario.svg') }}" width="22" height="22">
                     <label for="username"></label>
                     <input type="text" id="username" name="username" placeholder="Usuario" required>
                 </div>
-                <div class="input-icon">
+                <div class="input-login">
                     <img src="{{ url_for('static', filename='img/img contraseña.svg') }}" width="22" height="22">
                     <label for="password"></label>
                     <input type="password" id="password" name="password" placeholder="Contraseña" required>
