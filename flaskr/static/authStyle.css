@@ -94,14 +94,14 @@
 }
 
 .register-container {
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #ffffff;
     padding: 15px;
     border-radius: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -113,8 +113,7 @@
     margin-bottom: 20px;
     color: #000000;
     font-size: 24px;
-    animation: slideIn 2s ease-in-out;
-    border-bottom: 1px solid silver;
+    animation: slideIn 1.5s ease-in-out;
 }
 
 @keyframes slideIn {
@@ -129,7 +128,7 @@
 }
 
 .register-container label {
-    margin-top: 10px;
+    margin-top: 7px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
@@ -137,7 +136,7 @@
 
 .register-container input {
     padding: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 1px solid #cccccc;
     border-radius: 20px;
     font-size: 16px;
@@ -155,6 +154,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .register-container .btn {
