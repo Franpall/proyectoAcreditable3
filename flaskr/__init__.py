@@ -210,7 +210,7 @@ def adminCategorias():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
             agregar_categoria(nombre, filename)
-            return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Registrada con Éxito"))
+            return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría registrada con éxito"))
     
     categorias = obtener_categorias()
     if session.get('sesion_admin', False):
@@ -247,7 +247,7 @@ def editarCategoriaSend(id_categoria):
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
         actualizar_categoria(id_categoria, nombre, filename)
-        return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría Actualizada con Éxito"))
+        return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría actualizada con éxito"))
 
 # Eliminar Categorias
 @app.route('/delete_categoria/<int:id_categoria>')
@@ -275,7 +275,7 @@ def eliminarCategoria(id_categoria):
     
     eliminar_categoria(id_categoria)
 
-    return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se Eliminó la Categoría"))
+    return redirect(url_for('adminCategorias', actionOK=True, notificacion="Se eliminó la Categoría"))
 
 
 # <-- Área de productos -->
@@ -310,7 +310,7 @@ def registrarProductos():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
             agregar_producto(marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
-            return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Registrado con Éxito"))
+            return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto registrado con éxito"))
         
     return render_template('admin/productos.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
 
@@ -357,7 +357,7 @@ def editarProductoSend(id_producto):
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             imagen.save(filepath)
         actualizar_producto(id_producto, marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
-        return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto Actualizado con Éxito"))
+        return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto actualizado con éxito"))
 
 # Eliminar Productos
 @app.route('/delete_producto/<int:id_producto>')
@@ -374,7 +374,7 @@ def eliminarProducto(id_producto):
     
     eliminar_producto(id_producto)
 
-    return redirect(url_for('adminProductos', actionOK=True, notificacion="Se Eliminó el Producto"))
+    return redirect(url_for('adminProductos', actionOK=True, notificacion="Se eliminó el Producto"))
 
 
 # <-- Área de Carrito -->
@@ -410,9 +410,9 @@ def manejar_carrito():
         return redirect(f"{next_url}?actionOK=True&notificacion=Producto añadido al carrito")
     else:
         if session.get('sesion_admin', False):
-            return redirect(f"{next_url}?actionError=True&notificacion=El admin no puede realizar compras")
+            return redirect(f"{next_url}?actionError=True&notificacion=El Admin no puede realizar compras")
         else:
-            return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para usar el Carrito"))
+            return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia sesión para usar el Carrito"))
 
 # Ruta para HTML 1 (index)
 @app.route('/addItemIndex', methods=['POST'])
@@ -450,8 +450,8 @@ def actualizarCantidad(index):
             session['carrito'][index]['cantidad'] = nueva_cantidad
             session.modified = True
             
-            return redirect(url_for('verCarrito', actionOK=True, notificacion="Cantidad actualizada correctamente"))
-    return redirect(url_for('verCarrito', actionError=True, notificacion="Error al actualizar la cantidad"))
+            return redirect(url_for('verCarrito', actionOK=True, notificacion="Carrito actualizado correctamente"))
+    return redirect(url_for('verCarrito', actionError=True, notificacion="Error al actualizar el carrito"))
 
 
 # <-- Área de registros y cuentas -->
@@ -465,9 +465,9 @@ def registerAdmin():
         contraseña = request.form['password']
 
         if not registrar_cliente(usuario, correo, contraseña, 2):
-            return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está Registrado"))
+            return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está registrado"))
         else:
-            return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Registrado con Éxito"))
+            return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador registrado con éxito"))
 
 
 # Lógica para el registro de clientes
@@ -480,20 +480,20 @@ def registerSolicitud():
         confirmar_contraseña = request.form['confirm-password']
 
         if contraseña != confirmar_contraseña:
-            return render_template('auth/register.html', actionError=True, notificacion="La Contraseña Repetida no Coincide")
+            return render_template('auth/register.html', actionError=True, notificacion="La Contraseña repetida no coincide")
         
         resultado = registrar_cliente(usuario, correo, contraseña, 1)
         
         if resultado:
-            return redirect(url_for('iniciarSesion', actionOK=True, notificacion="Cuenta Creada Con Éxito, ahora Inicia Sesión"))
+            return redirect(url_for('iniciarSesion', actionOK=True, notificacion="Cuenta creada con éxito, ahora inicia sesión"))
         else:
-            return render_template('auth/register.html', actionError=True, notificacion="El Usuario o Correo ya está Registrado")
+            return render_template('auth/register.html', actionError=True, notificacion="El Usuario o Correo ya está registrado")
 
 # Lógica para eliminar Administradores
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
-    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador Eliminado con Éxito"))
+    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador eliminado con éxito"))
 
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
@@ -508,13 +508,13 @@ def loginSolicitud():
             if rol == "cliente":
                 session['sesion_iniciada'] = True
                 session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
-                return redirect(url_for('index', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
+                return redirect(url_for('index', actionOK=True, notificacion="Sesión iniciada con éxito!"))
             elif rol == "admin":
                 session['sesion_admin'] = True
                 session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
-                return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión Iniciada con Exito!"))
+                return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión iniciada con éxito!"))
         else:
-            return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña Incorrectos")
+            return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña incorrectos")
     return render_template('auth/login.html')
 
 # Lógica para cerrar sesiones
@@ -523,13 +523,13 @@ def cerrarSesionSolicitud():
     session['sesion_iniciada'] = False
     session['sesion_admin'] = False
     session.modified = True
-    return render_template('auth/login.html', actionOK=True, notificacion="Sesión Cerrada con Éxito")
+    return render_template('auth/login.html', actionOK=True, notificacion="Sesión cerrada con éxito")
 
 # Realizar Compras
 @app.route('/realizarCompra', methods=['POST'])
 def realizarCompra():
     if not session.get('sesion_iniciada', False):
-        return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia Sesión para realizar la compra"))
+        return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia sesión para realizar la compra"))
 
     metodo_pago = request.form['metodo_pago']
     carrito = session.get('carrito', [])
@@ -537,7 +537,7 @@ def realizarCompra():
     id_usuario = session.get('id_usuario')  # Obtener el id_usuario de la sesión
 
     if not carrito:
-        return redirect(url_for('verCarrito', actionError=True, notificacion="El carrito está vacío"))
+        return redirect(url_for('verCarrito', actionError=True, notificacion="El Carrito está vacío"))
 
     # Guardar la venta en la base de datos
     if guardar_venta(id_usuario, carrito, total, metodo_pago):

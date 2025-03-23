@@ -46,7 +46,7 @@
                                     <form action="{{ url_for('actualizarCantidad', index=loop.index0) }}" method="POST" class="form-cantidad">
                                         <label for="cantidad">Cantidad:</label>
                                         <input type="number" name="cantidad" value="{{ elemento.cantidad }}" min="1" max="{{ elemento.stock }}">
-                                        <button type="submit" class="btn-actualizar">Actualizar</button>
+                                        <button type="submit" class="btn-actualizar">Actualizar🔄</button>
                                     </form>
                                     <div class="producto-cantidad-disponible">
                                         <span>Disponibles:</span> {{elemento.stock}}

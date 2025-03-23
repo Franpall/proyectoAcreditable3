@@ -382,7 +382,7 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: var(--botonGeneral);
     box-shadow: var(--sombrasDeCajas);
     color: var(--textInverso);
-    padding: 3px;
+    padding: 4px;
     border: none;
 }
 
