@@ -96,7 +96,7 @@
 }
 
 .register-container {
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #ffffff;
     padding: 50px 15px 50px 15px;
     border-radius: 30px;
@@ -166,6 +166,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .button-container a {
