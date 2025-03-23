@@ -95,7 +95,8 @@
                         <h3>Ingresar datos de PayPal</h3>
                         <form id="form-paypal" onsubmit="document.getElementById('form-pago').submit(); return false;">
                             <input type="email" id="paypal-email" placeholder="Correo electrónico" required>
-                            <button type="submit">Aceptar</button>
+                            <p id="correoElectronicoError"></p>
+                            <button type="submit" id="paypalPayBtn" disabled>Aceptar</button>
                             <button type="button" id="btn-cerrar-paypal">Cerrar</button>
                         </form>
                     </div>
@@ -133,6 +134,7 @@
     <footer>
         <p>Todos los derechos reservados - 2025</p>
     </footer>
+    <script src="{{ url_for('static', filename='payment.js') }}"></script>
     <script src="{{ url_for('static', filename='menus.js') }}"></script>
     <script>
         // Obtener elementos del DOM
