@@ -128,7 +128,7 @@
 }
 
 .register-container label {
-    margin-top: 7px;
+    margin-top: 5px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
@@ -136,7 +136,7 @@
 
 .register-container input {
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border: 1px solid #cccccc;
     border-radius: 20px;
     font-size: 16px;
