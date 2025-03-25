@@ -654,3 +654,33 @@ input[type="number"]::-webkit-outer-spin-button {
         flex-direction: row;
     }   
 }
+
+/* Area de Mi Cuenta */
+
+#profileCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.profileCardRight{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profileCardRight .userName{
+    font-size: 1.5em;
+}
+
+
+#userIconBig{
+    width: 100px;
+    aspect-ratio: 1/1;
+}

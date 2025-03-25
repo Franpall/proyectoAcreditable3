@@ -30,10 +30,14 @@
     </header>
     <main class="mainCompras">
         <h2>Mi Cuenta</h2>
-        <div>
-            <p>{{ usuario.nombre }}</p>
-            <p>{{ usuario.correo }}</p>
+        <div id="profileCard">
+            <img id="userIconBig" src="{{ url_for('static', filename='img/userColor-svgrepo-com.svg') }}" alt="Usuario">
+            <div class="profileCardRight">
+                <p class="userName">{{ usuario.nombre }}</p>
+                <p>{{ usuario.correo }}</p>
+            </div>
         </div>
+        <a href="">Editar Cuenta o Cambiar Contraseña</a>
         <div id="btn_regresar">
             <a href="{{ url_for('index') }}">Regresar a la tienda</a>
         </div>
