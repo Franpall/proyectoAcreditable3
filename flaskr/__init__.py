@@ -109,7 +109,7 @@ def verDetallesCompra(id):
 
 @app.route('/miCuenta')
 def verMiCuenta():
-    return render_template('miCuenta.html')
+    return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False))
 # Rutas para administradores
 
 @app.route('/dashboard')
