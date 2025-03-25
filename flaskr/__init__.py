@@ -109,7 +109,9 @@ def verDetallesCompra(id):
 
 @app.route('/miCuenta')
 def verMiCuenta():
-    return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False))
+    id_usuario = id_usuario=session.get('id_usuario', False)
+    usuario = obtener_cuenta_por_id(id_usuario)
+    return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False), usuario = usuario)
 # Rutas para administradores
 
 @app.route('/dashboard')

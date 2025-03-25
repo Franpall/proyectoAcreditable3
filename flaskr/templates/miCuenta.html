@@ -30,6 +30,10 @@
     </header>
     <main class="mainCompras">
         <h2>Mi Cuenta</h2>
+        <div>
+            <p>{{ usuario.nombre }}</p>
+            <p>{{ usuario.correo }}</p>
+        </div>
         <div id="btn_regresar">
             <a href="{{ url_for('index') }}">Regresar a la tienda</a>
         </div>
