@@ -349,6 +349,20 @@ def registrar_cliente(usuario, correo, contraseña, rol):
         print(f"Error en registrar_cliente: {e}")
         raise
 
+# area de cuentas
+
+def obtener_cuenta_por_id(id_usuario):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute('SELECT id, usuario, correo FROM usuario WHERE id = %s', (id_usuario,))
+        cuenta = cursor.fetchone()
+        conn.close()
+        return Usuario(cuenta[0], cuenta[1], cuenta[2])
+    except MySQLError as e:
+        print(f"Error en obtener_producto_por_id: {e}")
+        raise
+
 # Area de clientes
 
 def mostrar_clientes():

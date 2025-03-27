@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprobante de Compra</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; border-radius: 5px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; font-size: 1.4em; }
+        th { background-color: #e8faff; }
+    </style>
+</head>
+<header style="display: flex; align-items: center; justify-content: center; height: 70px;">
+    <img src="https://avatars.githubusercontent.com/u/98850575?v=4" alt="" style="height: 50px; aspect-ratio: 1/1; border-radius: 50px;">
+    <h1 style="border-bottom: solid 5px rgb(1, 96, 185); font-size: 3em;">Franpal Store</h1>
+</header>
+<body>
+    <h2 style="font-size: 1.8em; margin-top: 40px;">Comprobante de Compra</h2>
+    <table style="margin-top: -20px;">
+        <thead>
+            <tr>
+                <th style="width: 60%;">Producto</th>
+                <th style="width: 20%;">Cantidad</th>
+                <th style="width: 20%;">Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for elemento in compras %}
+            <tr>
+                <td>{{ elemento.marca }} {{ elemento.modelo }}</td>
+                <td>{{ elemento.cantidad }}</td>
+                <td>{{ elemento.precio }} C/U</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p style="font-size: 1.5em;">Total Pagado: {{ total }} <b>$USD</b></p>
+    <p> Gracias por su Compra </p>
+    <br>
+    <p> Puede utilizar este comprobante para cualquier reclamo o uso de garantía </p>
+    <p> La garantía de nuestros productos es de 3 Meses, para más detalles contacte a un asesor: 0412-123456789 </p>
+</body>
+</html>

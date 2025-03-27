@@ -10451,7 +10451,42 @@ body {
 }
 
 /* Estilos de imagen de formulario */
-
 .editarProductoImg{
   object-fit: cover;
+}
+
+#exportar_ventas_form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.topFormPdf{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+@media (min-width:850px){
+  #exportar_ventas_form{
+    justify-content: none;
+    align-items: flex-start;
+  }
+  .topFormPdf{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .topFormPdf label{
+    margin-left: 20px;
+    margin-right: 3px;
+  }
+
+  .bottomFormPdf button{
+    margin-left: 20px;
+  }
 }

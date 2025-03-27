@@ -14,7 +14,6 @@
             <li class="breadcrumb-item active">Ventas</li>
         </ol>
         <div class="card mb-4">
-                <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>
                     Ventas
@@ -52,12 +51,33 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <form action="{{ url_for('exportarVentasPDF') }}" method="POST" id="exportar_ventas_form">
-                            <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
-                        </form>
                         {% endif %}
-                </div>
-            </div>
+                    </div>
+                    {% if ventas|length > 0 %}
+                    <br>    
+                    <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+                        <h2>Reportes</h2>
+                        <form action="{{ url_for('exportarVentasPDF') }}" method="POST" id="exportar_ventas_form">
+                            <div class="topFormPdf">
+                                <label for="desdeInput" class="col-form-label">Desde</label>
+                                <input type="date" name="desdeInput" id="desdeInput">
+                                <br>
+                                <label for="hastaInput" class="col-form-label">Hasta</label>
+                                <input type="date" name="hastaInput" id="hastaInput">
+                                <br>
+                                <label for="metodoPagoFilter" class="col-form-label">Método de Pago</label>
+                                <select id="metodoPagoFilter" name="metodoPagoFilter" required>
+                                    <option>Todos</option>
+                                    <option>Paypal</option>
+                                    <option>Tarjeta de Crédito</option>
+                                </select>
+                            </div>
+                            <div class="bottomFormPdf">
+                                <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
