@@ -171,6 +171,11 @@ def adminVentas():
 @app.route('/exportarVentasPDF', methods=['GET', 'POST'])
 def exportarVentasPDF():
     if request.method == 'POST':
+        fechaInicio = request.form['desdeInput']
+        fechaFin = request.form['hastaInput']
+        metodoDePago = request.form['metodoPagoFilter']
+        if metodoDePago == 'Todos':
+            metodoDePago = False
         # Renderizar la plantilla HTML con los datos de ventas
         rendered = render_template('admin/reporteVentasPDF.html', ventas = obtener_ventas(), total_ingresos = sumarVentasTotales())
 
