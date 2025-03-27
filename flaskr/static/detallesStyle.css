@@ -558,13 +558,14 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 .verDetallesCompraBtn{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 200px;
     background-color: var(--botonGeneral);
     padding: 10px;
     border-radius: var(--radioGeneral);
