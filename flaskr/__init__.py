@@ -204,7 +204,7 @@ def exportarVentasPDF():
 
         ventas, ventasTotal = obtenerVentasPDFfecha(fechaInicio, fechaFin, metodoDePago)
 
-        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal)
+        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal, desde=fechaInicio, hasta=fechaFin)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()

@@ -7,6 +7,7 @@
         table { width: 100%; border-collapse: collapse; border-radius: 5px; }
         th, td { border: 1px solid black; padding: 8px; text-align: left; font-size: 1.4em; }
         th { background-color: #e8faff; }
+        h3 { font-size: 1.4em;}
     </style>
 </head>
 <header style="display: flex; align-items: center; justify-content: center; height: 70px;">
@@ -15,6 +16,11 @@
 </header>
 <body>
     <h2 style="font-size: 1.8em; margin-top: 40px;">Reporte de Ventas</h2>
+    {% if not desde or not hasta %}
+    <h3>Todas las Ventas</h3>
+    {% else %}
+    <h3>Ventas Realizadas desde: {{ desde }} Hasta: {{ hasta }}</h3>
+    {% endif %}
     <table style="margin-top: -20px;">
         <thead>
             <tr>
