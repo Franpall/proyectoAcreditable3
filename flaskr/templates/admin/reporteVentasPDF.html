@@ -29,16 +29,16 @@
         <tbody>
             {% for venta in ventas %}
             <tr>
-                <td>{{ venta.id }}</td>
-                <td>{{ venta.usuario }}</td>
-                <td>{{ venta.fecha }}</td>
-                <td>{{ venta.hora }}</td>
-                <td>{{ venta.total }} <b>$USD</b></td>
-                <td>{{ venta.metodo_de_pago }}</td>
+                <td>{{ venta[0] }}</td>
+                <td>{{ venta[1] }}</td>
+                <td>{{ venta[2] }}</td>
+                <td>{{ venta[3] }}</td>
+                <td>{{ venta[4] }} <b>$USD</b></td>
+                <td>{{ venta[5] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <p style="font-size: 1.5em;">Ingresos Totales: {{ total_ingresos }} <b>$USD</b></p>
+    <p style="font-size: 1.5em;">Ingresos Totales: {{ventasTotal}} <b>$USD</b></p>
 </body>
 </html>

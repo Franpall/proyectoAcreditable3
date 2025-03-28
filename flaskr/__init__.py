@@ -174,10 +174,10 @@ def exportarVentasPDF():
         fechaInicio = request.form['desdeInput']
         fechaFin = request.form['hastaInput']
         metodoDePago = request.form['metodoPagoFilter']
-        if metodoDePago == 'Todos':
-            metodoDePago = False
-        # Renderizar la plantilla HTML con los datos de ventas
-        rendered = render_template('admin/reporteVentasPDF.html', ventas = obtener_ventas(), total_ingresos = sumarVentasTotales())
+
+        ventas, ventasTotal = obtenerVentasPDFfecha(fechaInicio, fechaFin, metodoDePago)
+
+        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()
@@ -191,7 +191,7 @@ def exportarVentasPDF():
 
         # Devolver el PDF como respuesta
         return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
-    return render_template('admin/reporteVentasPDF.html', ventas=obtener_ventas(), total_ingresos=sumarVentasTotales())
+    return render_template('admin/reporteVentasPDF.html')
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
