@@ -56,7 +56,7 @@
                     <form action=" {{ url_for('exportarCompraPDF') }}" method="POST">
                         <div class="verDetallesBtn">
                             <input type="hidden" name="id_compra" value="{{ compra.id }}">
-                            <button class="verDetallesCompraBtn" type="submit" value="Exportar a PDF">Descargar Comprobante</button>
+                            <button class="verDetallesCompraBtn hoverBugFix" type="submit" value="Exportar a PDF">Descargar Comprobante</button>
                         </div>
                     </form>
                     <div class="verDetallesBtn">
