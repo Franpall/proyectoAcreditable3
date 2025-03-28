@@ -112,6 +112,33 @@ def verMiCuenta():
     id_usuario = id_usuario=session.get('id_usuario', False)
     usuario = obtener_cuenta_por_id(id_usuario)
     return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False), usuario = usuario)
+
+@app.route('/exportarCompraPDF', methods=['POST'])
+def exportarCompraPDF():
+    if request.method == 'POST':
+        id_compra = request.form.get('id_compra')
+        detallesCompra = obtenerDetallesVenta(id_compra)
+        total = obtenerTotal(id_compra)
+        metodo_pago = obtener_metodo_pago(id_compra)
+        fecha_compra = obtener_fecha_compra(id_compra)
+        
+        # Renderizar la plantilla HTML con los datos de ventas
+        rendered = render_template('comprobanteDeCompra.html', detallesCompra=detallesCompra, total=total, metodo_pago=metodo_pago, id_compra=id_compra, fecha_compra=fecha_compra)
+        
+        # Crear el objeto PDF
+        pdf_file = BytesIO()
+        pisa_status = pisa.CreatePDF(rendered, dest=pdf_file)
+
+        # Verificar si hubo errores en la generación del PDF
+        if pisa_status.err:
+            return redirect(url_for('verMisCompras', actionError=True, notificacion="Error al generar el PDF"))
+
+        pdf_file.seek(0)
+        
+        # Devolver el PDF como respuesta
+        return send_file(pdf_file, download_name=f'COMPROBANTE_COMPRA_{id_compra}.pdf', as_attachment=True)
+    return redirect(url_for('verMisCompras'))
+
 # Rutas para administradores
 
 @app.route('/dashboard')

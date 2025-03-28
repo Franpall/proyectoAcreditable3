@@ -10472,7 +10472,7 @@ body {
 @media (min-width:850px){
   #exportar_ventas_form{
     justify-content: none;
-    align-items: none;
+    align-items: flex-start;
   }
   .topFormPdf{
     display: flex;
@@ -10484,5 +10484,9 @@ body {
   .topFormPdf label{
     margin-left: 20px;
     margin-right: 3px;
+  }
+
+  .bottomFormPdf button{
+    margin-left: 20px;
   }
 }

@@ -13,7 +13,7 @@ class Producto:
         self.imagen = imagen
         self.precio = precio
         self.stock = stock
-
+        
 # Para Detalles completos o editar producto
 class ProductoEditar:
     def __init__(self, id, marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado):

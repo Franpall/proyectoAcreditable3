@@ -558,18 +558,27 @@ input[type="number"]::-webkit-outer-spin-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .verDetallesCompraBtn{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 200px;
     background-color: var(--botonGeneral);
     padding: 10px;
     border-radius: var(--radioGeneral);
     color: white;
     text-decoration: none;
+    border: none;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.hoverBugFix{
+    cursor: pointer;
 }
 
 .verDetallesCompraBtn:hover{
@@ -653,6 +662,11 @@ input[type="number"]::-webkit-outer-spin-button {
     .compras_error_area{
         flex-direction: row;
     }   
+
+    .verDetallesBtnArea{
+        flex-direction: row;
+        gap: 10px;
+    }
 }
 
 /* Area de Mi Cuenta */
