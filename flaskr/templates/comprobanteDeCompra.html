@@ -24,19 +24,39 @@
             </tr>
         </thead>
         <tbody>
-            {% for elemento in compras %}
+            {% for elemento in detallesCompra %}
             <tr>
-                <td>{{ elemento.marca }} {{ elemento.modelo }}</td>
+                <td>{{ elemento.producto }}</td>
                 <td>{{ elemento.cantidad }}</td>
-                <td>{{ elemento.precio }} C/U</td>
+                <td>{{ elemento.precio_unitario }} C/U</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <p style="font-size: 1.5em;">Total Pagado: {{ total }} <b>$USD</b></p>
-    <p> Gracias por su Compra </p>
-    <br>
-    <p> Puede utilizar este comprobante para cualquier reclamo o uso de garantía </p>
-    <p> La garantía de nuestros productos es de 3 Meses, para más detalles contacte a un asesor: 0412-123456789 </p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 60%;">Detalles</th>
+                <th style="width: 40%;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fecha de compra</td>
+                <td>{{ fecha_compra }}</td>
+            </tr>
+            <tr>
+                <td>Método de pago</td>
+                <td>{{ metodo_pago }}</td>
+            </tr>
+            <tr>
+                <td>Total pagado</td>
+                <td style="font-size: 1.5em;">{{ total }} <b>$USD</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="font-size: 1.7em;"> Gracias por su Compra! </p>
+    <p style="font-size: 1.3em;"> Puede utilizar este comprobante para cualquier reclamo o uso de garantía </p>
+    <p style="font-size: 1.3em;"> La garantía de nuestros productos es de 3 Meses, para más detalles contacte a un asesor: 0412-123456789 </p>
 </body>
 </html>

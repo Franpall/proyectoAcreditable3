@@ -537,3 +537,27 @@ def obtenerComprasRealizadas(id_usuario):
     except MySQLError as e:
         print(f"Error en obtenerComprasRealizadas: {e}")
         raise
+    
+def obtener_metodo_pago(id_venta):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute('SELECT metodo_de_pago FROM venta WHERE id = %s', (id_venta,))
+        metodo = cursor.fetchone()
+        conn.close()
+        return metodo[0] if metodo else "No especificado"
+    except MySQLError as e:
+        print(f"Error en obtener_metodo_pago: {e}")
+        raise
+    
+def obtener_fecha_compra(id_venta):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute('SELECT fecha FROM venta WHERE id = %s', (id_venta,))
+        fecha = cursor.fetchone()
+        conn.close()
+        return fecha[0] if fecha else "Fecha no disponible"
+    except MySQLError as e:
+        print(f"Error en obtener_fecha_compra: {e}")
+        raise
