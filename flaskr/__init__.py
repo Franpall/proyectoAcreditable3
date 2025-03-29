@@ -204,7 +204,7 @@ def exportarVentasPDF():
 
         ventas, ventasTotal = obtenerVentasPDFfecha(fechaInicio, fechaFin, metodoDePago)
 
-        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal, desde=fechaInicio, hasta=fechaFin)
+        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal, desde=fechaInicio, hasta=fechaFin, metodoDePago=metodoDePago)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()
@@ -225,8 +225,9 @@ def exportarProductosPDF():
     if request.method == 'POST':
         fechaInicio = request.form['desdeInput']
         fechaFin = request.form['hastaInput']
+        categoria = request.form['categoriaFilter']
 
-        rendered = render_template('admin/reporteProductosPDF.html', desde=fechaInicio, hasta=fechaFin)
+        rendered = render_template('admin/reporteProductosPDF.html', desde=fechaInicio, hasta=fechaFin, categoria=categoria)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()

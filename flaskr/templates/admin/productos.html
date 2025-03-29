@@ -112,6 +112,13 @@
                                 <label for="hastaInput" class="col-form-label">Hasta</label>
                                 <input type="date" name="hastaInput" id="hastaInput">
                                 <br>
+                                <label for="categoriaFilter" class="col-form-label">Categoría</label>
+                                <select id="categoriaFilter" name="categoriaFilter" required>
+                                    <option>Todas</option>
+                                    {% for categoria in categorias %}
+                                    <option>{{categoria}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="bottomFormPdf">
                                 <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
