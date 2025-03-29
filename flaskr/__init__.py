@@ -116,6 +116,7 @@ def verMiCuenta():
 @app.route('/exportarCompraPDF', methods=['POST'])
 def exportarCompraPDF():
     if request.method == 'POST':
+        usuario = obtener_cuenta_por_id(session.get('id_usuario'))
         id_compra = request.form.get('id_compra')
         detallesCompra = obtenerDetallesVenta(id_compra)
         total = obtenerTotal(id_compra)
@@ -123,7 +124,7 @@ def exportarCompraPDF():
         fecha_compra = obtener_fecha_compra(id_compra)
         
         # Renderizar la plantilla HTML con los datos de ventas
-        rendered = render_template('comprobanteDeCompra.html', detallesCompra=detallesCompra, total=total, metodo_pago=metodo_pago, id_compra=id_compra, fecha_compra=fecha_compra)
+        rendered = render_template('comprobanteDeCompra.html', detallesCompra=detallesCompra, total=total, metodo_pago=metodo_pago, id_compra=id_compra, fecha_compra=fecha_compra, usuario=usuario)
         
         # Crear el objeto PDF
         pdf_file = BytesIO()
