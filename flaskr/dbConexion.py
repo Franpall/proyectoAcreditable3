@@ -614,3 +614,40 @@ def obtenerVentasPDFfecha(fecha_inicio, fecha_fin, metodoDePago):
     except MySQLError as e:
         print(f"Error en obtenerVentasPDFfecha: {e}")
         raise
+
+def exportarProductosPDFfecha(fechaInicio, fechaFin, nombre_categoria):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor(dictionary=True)
+
+        id_categoria = obtener_id_categoria(nombre_categoria)
+
+        if not fechaInicio and not fechaFin and nombre_categoria == "Todas":
+            cursor.execute(
+                "SELECT id, marca, modelo, precio, stock, fecha_añadido FROM producto",
+            )
+            productos = cursor.fetchall()
+        elif not fechaInicio and not fechaFin:
+            cursor.execute(
+                "SELECT id, marca, modelo, precio, stock, fecha_añadido FROM producto WHERE id_categoria = %s",
+                (id_categoria,),
+            )
+            productos = cursor.fetchall()
+        elif nombre_categoria == "Todas":
+            cursor.execute(
+                "SELECT id, marca, modelo, precio, stock, fecha_añadido FROM producto WHERE fecha_añadido BETWEEN %s AND %s",
+                (fechaInicio, fechaFin),
+            )
+            productos = cursor.fetchall()
+        else:
+            cursor.execute(
+                "SELECT id, marca, modelo, precio, stock, fecha_añadido FROM producto WHERE fecha_añadido BETWEEN %s AND %s AND id_categoria = %s",
+                (fechaInicio, fechaFin, id_categoria),
+            )
+            productos = cursor.fetchall()
+
+        conn.close()
+        return productos
+    except MySQLError as e:
+        print(f"Error en exportarProductosPDF: {e}")
+        raise

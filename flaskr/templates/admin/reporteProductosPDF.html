@@ -21,7 +21,31 @@
     {% else %}
     <h3>Productos añadidos desde: {{ desde }} Hasta: {{ hasta }}</h3>
     {% endif %}
-    <h3>Categorias Mostradas: {{ categoria }}</h3>
+    <h3>Categorias Mostradas: {{ nombre_categoria }}</h3>
     <p style="font-size: 1.5em;">Productos Totales: </p>
+    <table style="margin-top: -20px;">
+        <thead>
+            <tr>
+                <th style="width: 10%;">ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th style="width: 15%;">Precio</th>
+                <th style="width: 13%;">Stock</th>
+                <th>Fecha de añadido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.marca }}</td>
+                <td>{{ producto.modelo }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.fecha_añadido }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

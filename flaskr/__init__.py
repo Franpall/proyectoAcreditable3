@@ -226,9 +226,11 @@ def exportarProductosPDF():
     if request.method == 'POST':
         fechaInicio = request.form['desdeInput']
         fechaFin = request.form['hastaInput']
-        categoria = request.form['categoriaFilter']
+        nombre_categoria = request.form['categoriaFilter']
 
-        rendered = render_template('admin/reporteProductosPDF.html', desde=fechaInicio, hasta=fechaFin, categoria=categoria)
+        productos = exportarProductosPDFfecha(fechaInicio, fechaFin, nombre_categoria)
+
+        rendered = render_template('admin/reporteProductosPDF.html', productos=productos, desde=fechaInicio, hasta=fechaFin, nombre_categoria=nombre_categoria)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()
@@ -241,7 +243,7 @@ def exportarProductosPDF():
         pdf_file.seek(0)
 
         # Devolver el PDF como respuesta
-        return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
+        return send_file(pdf_file, download_name='REPORTE DE PRODUCTOS.pdf', as_attachment=True)
     return render_template('admin/reporteProductosPDF.html')
 
 @app.route('/detallesVenta/<int:id>')
