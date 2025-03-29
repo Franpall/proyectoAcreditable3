@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reporte de Productos</title>
+    <style>
+        body { font-family: sans-serif; }
+        table { width: 100%; border-collapse: collapse; border-radius: 5px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; font-size: 1.4em; }
+        th { background-color: #e8faff; }
+        h3 { font-size: 1.4em;}
+    </style>
+</head>
+<header style="display: flex; align-items: center; justify-content: center; height: 70px;">
+    <img src="https://franpaldev.netlify.app/Resources/LogoVectorial.svg" alt="FranpalStore" style="height: 100px; aspect-ratio: 1/1; border-radius: 50px;">
+    <h1 style="border-bottom: solid 5px rgb(1, 96, 185); font-size: 3em;">Franpal Store</h1>
+</header>
+<body>
+    <h2 style="font-size: 1.8em; margin-top: 40px;">Reporte de Productos</h2>
+    {% if not desde or not hasta %}
+    <h3>Todos los productos</h3>
+    {% else %}
+    <h3>Productos añadidos desde: {{ desde }} Hasta: {{ hasta }}</h3>
+    {% endif %}
+    <p style="font-size: 1.5em;">Productos Totales: </p>
+</body>
+</html>

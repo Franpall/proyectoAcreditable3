@@ -220,6 +220,28 @@ def exportarVentasPDF():
         return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
     return render_template('admin/reporteVentasPDF.html')
 
+@app.route('/exportarProductosPDF', methods=['GET', 'POST'])
+def exportarProductosPDF():
+    if request.method == 'POST':
+        fechaInicio = request.form['desdeInput']
+        fechaFin = request.form['hastaInput']
+
+        rendered = render_template('admin/reporteProductosPDF.html', desde=fechaInicio, hasta=fechaFin)
+
+        # Crear el objeto PDF
+        pdf_file = BytesIO()
+        pisa_status = pisa.CreatePDF(rendered, dest=pdf_file)
+
+        # Verificar si hubo errores en la generación del PDF
+        if pisa_status.err:
+            return "Error al generar el PDF"
+
+        pdf_file.seek(0)
+
+        # Devolver el PDF como respuesta
+        return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
+    return render_template('admin/reporteProductosPDF.html')
+
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
     if session.get('sesion_admin', False):
