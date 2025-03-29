@@ -1,12 +1,17 @@
 // Area de paypal
 
 function validarCorreoElectronico(correoElectronico) {
+
+    correoElectronicoCorrecto = false
+
     if (correoElectronico.length < 5 || correoElectronico.length > 254) {
+        validarFormularioP();
         return "La longitud debe estar entre 5 y 254 caracteres.";
     }
 
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
     if (!regex.test(correoElectronico)) {
+        validarFormularioP();
         return "Formato de correo electrónico inválido.";
     }
     correoElectronicoCorrecto = true
@@ -28,9 +33,11 @@ correoElectronicoInput.addEventListener("input", () => {
 
 function validarFormularioP() {
     if (correoElectronicoCorrecto) {
-        enviarFormularioButton.disabled = 0
+      enviarFormularioButton.disabled = 0
+    } else {
+        enviarFormularioButton.disabled = 1
     }
-}
+  }
 
 // Area de tarjeta de credito
 function validarNumeroTarjeta(numeroTarjeta) {
