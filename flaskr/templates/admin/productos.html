@@ -99,6 +99,33 @@
                         </table>
                         {% endif %}
                     </div>
+                    {% if productos|length > 0 %}
+                    <br>    
+                    <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+                        <h2>Reportes</h2>
+                        <form action="{{ url_for('exportarProductosPDF') }}" method="POST" id="exportar_ventas_form">
+                            <p>Mostrar productos que fueron añadidos</p>
+                            <div class="topFormPdf">
+                                <label for="desdeInput" class="col-form-label">Desde</label>
+                                <input type="date" name="desdeInput" id="desdeInput">
+                                <br>
+                                <label for="hastaInput" class="col-form-label">Hasta</label>
+                                <input type="date" name="hastaInput" id="hastaInput">
+                                <br>
+                                <label for="categoriaFilter" class="col-form-label">Categoría</label>
+                                <select id="categoriaFilter" name="categoriaFilter" required>
+                                    <option>Todas</option>
+                                    {% for categoria in categorias %}
+                                    <option>{{categoria}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="bottomFormPdf">
+                                <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
                 </div>
                 </div>
             </div>

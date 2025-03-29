@@ -205,7 +205,7 @@ def exportarVentasPDF():
 
         ventas, ventasTotal = obtenerVentasPDFfecha(fechaInicio, fechaFin, metodoDePago)
 
-        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal, desde=fechaInicio, hasta=fechaFin)
+        rendered = render_template('admin/reporteVentasPDF.html', ventas=ventas, ventasTotal=ventasTotal, desde=fechaInicio, hasta=fechaFin, metodoDePago=metodoDePago)
 
         # Crear el objeto PDF
         pdf_file = BytesIO()
@@ -220,6 +220,29 @@ def exportarVentasPDF():
         # Devolver el PDF como respuesta
         return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
     return render_template('admin/reporteVentasPDF.html')
+
+@app.route('/exportarProductosPDF', methods=['GET', 'POST'])
+def exportarProductosPDF():
+    if request.method == 'POST':
+        fechaInicio = request.form['desdeInput']
+        fechaFin = request.form['hastaInput']
+        categoria = request.form['categoriaFilter']
+
+        rendered = render_template('admin/reporteProductosPDF.html', desde=fechaInicio, hasta=fechaFin, categoria=categoria)
+
+        # Crear el objeto PDF
+        pdf_file = BytesIO()
+        pisa_status = pisa.CreatePDF(rendered, dest=pdf_file)
+
+        # Verificar si hubo errores en la generación del PDF
+        if pisa_status.err:
+            return "Error al generar el PDF"
+
+        pdf_file.seek(0)
+
+        # Devolver el PDF como respuesta
+        return send_file(pdf_file, download_name='REPORTE DE VENTAS.pdf', as_attachment=True)
+    return render_template('admin/reporteProductosPDF.html')
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
