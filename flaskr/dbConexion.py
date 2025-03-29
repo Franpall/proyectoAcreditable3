@@ -139,7 +139,7 @@ def agregar_producto(marca, modelo, descripcion, id_categoria, imagen, precio, s
         conn = crear_conexion()
         cursor = conn.cursor()
         cursor.execute(
-            'INSERT INTO producto (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+            'INSERT INTO producto (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado, fecha_añadido) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURDATE())',
             (marca, modelo, descripcion, id_categoria, imagen, precio, stock, recomendado)
         )
         conn.commit()
