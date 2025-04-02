@@ -13,40 +13,32 @@
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">Clientes</li>
         </ol>
-        <div class="card mb-4">
-            <div class="card-header">Clientes</div>
+        <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+            <h2><i class="fas fa-table mr-1" style="font-size: 25px;"></i> Clientes</h2>
             <div class="card-body">
-                <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Todos Los Clientes
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        {% if clientes|length < 1 %}
-                        <h4>No hay clientes registrados</h4>
-                        {% else %}
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for cliente in clientes %}
-                                <tr>
-                                    <td>{{ cliente.id }}</td>
-                                    <td>{{ cliente.nombre }}</td>
-                                    <td>{{ cliente.correo }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
-                </div>
-            </div>
+                <div class="table-responsive">
+                    {% if clientes|length < 1 %}
+                    <h4>No hay clientes registrados</h4>
+                    {% else %}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>{{ cliente.id }}</td>
+                                <td>{{ cliente.nombre }}</td>
+                                <td>{{ cliente.correo }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
                 </div>
             </div>
         </div>
