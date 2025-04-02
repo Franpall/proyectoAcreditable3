@@ -10490,3 +10490,14 @@ body {
     margin-left: 20px;
   }
 }
+
+/* Estilos de botones de acciones del dashboard */
+
+.dashBoardOptions{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 50px 20px;
+}

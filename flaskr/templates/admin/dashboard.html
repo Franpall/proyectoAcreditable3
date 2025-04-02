@@ -124,14 +124,12 @@
                 </div>
             </a>
         </div>
+        <form action="{{ url_for('exportarEstadisticasPDF') }}" method="POST" class="dashBoardOptions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> Exportar a PDF
+            </button>
+        </form>
     </div>
-    <br>
-    <form action="{{ url_for('exportarEstadisticasPDF') }}" method="POST">
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-file-pdf"></i> Exportar a PDF
-        </button>
-    </form>
-    <br>
     {% if actionError %}
     <div class="notificacionR">
         <img src="{{ url_for('static', filename='img/error-round-svgrepo-com.svg') }}" alt="Error">

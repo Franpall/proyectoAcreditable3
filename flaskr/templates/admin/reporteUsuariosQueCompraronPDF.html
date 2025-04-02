@@ -21,6 +21,7 @@
     {% else %}
     <h3>Usuarios que compraron desde: {{ desde }} hasta: {{ hasta }}</h3>
     {% endif %}
+    {% if usuarios|length > 0 %}
     <table style="margin-top: -20px;">
         <thead>
             <tr>
@@ -39,5 +40,8 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <h3 style="font-size: 2em; border: solid 1px red; padding: 20px;">No hay Usuarios que hayan comprado desde: {{ desde }} hasta: {{ hasta }}</h3>
+    {% endif %}
 </body>
 </html>
