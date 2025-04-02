@@ -10474,6 +10474,11 @@ body {
     justify-content: none;
     align-items: flex-start;
   }
+
+  #exportar_ventas_form h3{
+    margin-left: 20px;
+  }
+
   .topFormPdf{
     display: flex;
     flex-direction: row;
