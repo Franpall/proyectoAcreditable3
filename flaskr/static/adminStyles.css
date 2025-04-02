@@ -660,6 +660,7 @@ pre code {
   #product_form{
     display: flex;
     flex-direction: row;
+    gap: 25px;
   }
 }
 @media (min-width: 1200px) {
