@@ -22,7 +22,7 @@
     <h3>Productos añadidos desde: {{ desde }} Hasta: {{ hasta }}</h3>
     {% endif %}
     <h3>Categorias Mostradas: {{ nombre_categoria }}</h3>
-    <p style="font-size: 1.5em;">Productos Totales: </p>
+    {% if productos|length > 0 %}
     <table style="margin-top: -20px;">
         <thead>
             <tr>
@@ -47,5 +47,8 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <h3 style="font-size: 2em; border: solid 1px red; padding: 20px;">No hay Productos que coíncidan con el filtro.</h3>
+    {% endif %}
 </body>
 </html>
