@@ -615,6 +615,38 @@ def obtenerVentasPDFfecha(fecha_inicio, fecha_fin, metodoDePago):
         print(f"Error en obtenerVentasPDFfecha: {e}")
         raise
 
+def obtenerUsuariosQueCompraronPDFfecha(fecha_inicio, fecha_fin, correo):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor(dictionary=True)
+
+        if not fecha_inicio and not fecha_fin and correo == "Todos":
+            cursor.execute(
+                "SELECT DISTINCT usuario.id, usuario.usuario, usuario.correo FROM venta INNER JOIN usuario ON usuario.id = venta.id_usuario"
+            )
+        elif not fecha_inicio and not fecha_fin:
+            cursor.execute(
+                "SELECT DISTINCT usuario.id, usuario.usuario, usuario.correo FROM venta INNER JOIN usuario ON usuario.id = venta.id_usuario WHERE usuario.correo = %s",
+                (correo,)
+            )
+        elif correo == "Todos":
+            cursor.execute(
+                "SELECT DISTINCT usuario.id, usuario.usuario, usuario.correo FROM venta INNER JOIN usuario ON usuario.id = venta.id_usuario WHERE venta.fecha BETWEEN %s AND %s",
+                (fecha_inicio, fecha_fin)
+            )
+        else:
+            cursor.execute(
+                "SELECT DISTINCT usuario.id, usuario.usuario, usuario.correo FROM venta INNER JOIN usuario ON usuario.id = venta.id_usuario WHERE venta.fecha BETWEEN %s AND %s AND usuario.correo = %s",
+                (fecha_inicio, fecha_fin, correo)
+            )
+
+        usuarios = cursor.fetchall()
+        conn.close()
+        return usuarios
+    except MySQLError as e:
+        print(f"Error en obtenerUsuariosQueCompraronPDFfecha: {e}")
+        raise
+
 def exportarProductosPDFfecha(fechaInicio, fechaFin, nombre_categoria):
     try:
         conn = crear_conexion()

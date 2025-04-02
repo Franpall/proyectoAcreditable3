@@ -76,6 +76,21 @@
                                 <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
                             </div>
                         </form>
+                        <br>
+                        <h3>Lista de Usuarios</h3>
+                        <form action="{{ url_for('exportarUsuariosQueCompraronPDF') }}" method="POST" id="exportar_ventas_form">
+                            <div class="topFormPdf">
+                                <label for="desdeInput" class="col-form-label">Desde</label>
+                                <input type="date" name="desdeInput" id="desdeInput">
+                                <br>
+                                <label for="hastaInput" class="col-form-label">Hasta</label>
+                                <input type="date" name="hastaInput" id="hastaInput">
+                                <br>
+                            </div>
+                            <div class="bottomFormPdf">
+                                <button class="btn btn-primary" type="submit" value="Exportar a PDF">Exportar a PDF</button>
+                            </div>
+                        </form>
                     </div>
                     {% endif %}
                 </div>
