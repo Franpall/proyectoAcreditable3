@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Estadísticas</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px 0; }
+        .header { display: flex; align-items: center; margin-bottom: 30px; }
+        .stats-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .stat-card { border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f9f9f9; }
+        .stat-label { font-size: 18px; color: #414949; margin-bottom: 5px; }
+        .valores { font-size: 18px; font-weight: bold; color: #2e2e2e; margin-top: 10px; }
+        .usd { font-size: 16px; font-weight: bold; color: #27ae60; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://franpaldev.netlify.app/Resources/LogoVectorial.svg" alt="" style="height: 100px; aspect-ratio: 1/1; border-radius: 50px;">
+        <h1 style="border-bottom: solid 5px rgb(1, 96, 185); font-size: 3em;">Franpal Store</h1>
+        <h2 style="font-size: 1.8em; margin-top: 40px;">Reporte de Estadísticas Generales</h2>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-label">Categorías Disponibles: <span class="valores">{{ categorias_disponibles }}</span></div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">Productos Disponibles: <span class="valores">{{ productos_disponibles }}</span></div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">Clientes Registrados: <span class="valores">{{ clientes }}</span></div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-label">Ventas Totales: <span class="valores">{{ ventas_totales }}</span></div>
+        </div>
+        
+        <div class="stat-card" style="grid-column: span 2;">
+            <div class="stat-label">Ingresos Totales: <span class="valores">{{ ingresos_totales }} USD</div>
+        </div>
+    </div>
+</body>
+</html>

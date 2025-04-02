@@ -270,6 +270,30 @@ def exportarProductosPDF():
         return send_file(pdf_file, download_name='REPORTE DE PRODUCTOS.pdf', as_attachment=True)
     return render_template('admin/reporteProductosPDF.html')
 
+@app.route('/exportarEstadisticasPDF', methods=['POST'])
+def exportarEstadisticasPDF():
+    if session.get('sesion_admin', False):
+        clientes = contarClientes()
+        productos_disponibles = contarProductosDisponibles()
+        categorias_disponibles = contarCategoriasDisponibles()
+        ventas_totales = contarVentasTotales()
+        ingresos_totales = sumarVentasTotales()
+
+        rendered = render_template('admin/reporteEstadisticasPDF.html', clientes=clientes, productos_disponibles=productos_disponibles,
+            categorias_disponibles=categorias_disponibles, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales)
+
+        pdf_file = BytesIO()
+        pisa_status = pisa.CreatePDF(rendered, dest=pdf_file)
+
+        if pisa_status.err:
+            return redirect(url_for('adminDashboard', actionError=True, notificacion="Error al generar el PDF"))
+
+        pdf_file.seek(0)
+        
+        # Devolver el PDF como respuesta
+        return send_file(pdf_file, download_name='REPORTE DE ESTADISTICAS.pdf', as_attachment=True)
+    return render_template('admin/reporteEstadisticasPDF.html')
+
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
     if session.get('sesion_admin', False):
