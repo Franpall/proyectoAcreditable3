@@ -107,6 +107,10 @@ p {
   margin-top: 6px;
 }
 
+#right_admin_form{
+  margin-top: 0px;
+}
+
 #checkbox_producto{
   display: flex;
   flex-direction: row-reverse;

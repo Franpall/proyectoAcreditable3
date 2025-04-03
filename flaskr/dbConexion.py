@@ -395,6 +395,19 @@ def contarClientes():
 
 # Area de administradores
 
+def mostrar_admin_por_id(id_admin):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, usuario, correo FROM usuario WHERE id = %s",(id_admin,))
+        admin = cursor.fetchone()
+        usuario = Usuario(admin[0],admin[1],admin[2])
+        conn.close()
+        return usuario
+    except MySQLError as e:
+        print(f"Error en mostrar_admins: {e}")
+        raise
+
 def mostrar_admins():
     try:
         conn = crear_conexion()
@@ -408,6 +421,22 @@ def mostrar_admins():
         return usuarios
     except MySQLError as e:
         print(f"Error en mostrar_admins: {e}")
+        raise
+
+def actualizar_datos_admin(id_admin, nombre, correo):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute(
+            'UPDATE usuario SET usuario = %s, correo = %s WHERE id = %s',
+            (nombre, correo, id_admin)
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return True
+    except MySQLError as e:
+        print(f"Error en actualizar_producto: {e}")
         raise
 
 def eliminar_admin(id):

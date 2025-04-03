@@ -600,6 +600,24 @@ def registerSolicitud():
         else:
             return render_template('auth/register.html', actionError=True, notificacion="El Usuario o Correo ya está registrado")
 
+# Lógica para editar Administradores
+
+@app.route('/editarAdmin/<int:id_admin>')
+def editarAdminView(id_admin):
+    admin = mostrar_admin_por_id(id_admin)
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    return render_template('admin/editarAdmin.html', admin=admin, sesion=session.get('sesion_admin', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK)
+
+@app.route('/actualizarDatosAdmin/<int:id_admin>', methods=['GET', 'POST'])
+def editarAdminDataSend(id_admin):
+    if request.method == 'POST':
+        nombre = request.form['admin_name']
+        correo = request.form['admin_email']
+        actualizar_datos_admin(id_admin, nombre, correo)
+        return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Producto actualizado con éxito"))
+
 # Lógica para eliminar Administradores
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
