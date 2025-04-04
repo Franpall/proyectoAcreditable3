@@ -10,13 +10,12 @@
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="/admins">Administradores</a></li>
-            <li class="breadcrumb-item active">Editar Administrador</li>
+            <li class="breadcrumb-item active">Editar Mi Cuenta</li>
         </ol>
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
-            <h2>Editar Administrador <i class="fas fa-pen" style="font-size: 25px; margin-bottom: 3px;"></i></h2>
-            <div class="card-body">
-                <form action="{{ url_for('editarAdminDataSend', id_admin=admin.id) }}" method="post" id="product_form">
+            <h2>Editar Mi Cuenta <i class="fas fa-pen" style="font-size: 25px; margin-bottom: 3px;"></i></h2>
+            <div class="card-body" id="product_form">
+                <form action="{{ url_for('editarAdminDataSend', id_admin=admin.id) }}" method="post">
                     <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
                         <div id="left_product_form" class="product_form_area">
                             <h3>Editar datos</h3>
@@ -28,13 +27,15 @@
                             <input type="submit" value="Actualizar" class="btn btn-primary" >
                         </div>
                     </div>
+                </form>
+                <form action="{{ url_for('editarContraseñaAdmin', id_admin=admin.id) }}" method="post">
                     <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
                         <div id="right_admin_form" class="product_form_area">
                             <h3>Cambiar Contraseña <i class="fas fa-exclamation-triangle"></i></h3>
                             <label for="password" class="col-form-label">Contraseña Actual</label>
                             <input type="password" name="password" id="password">
-                            <label for="confirm-password" class="col-form-label">Nueva Contraseña</label>
-                            <input type="password" name="confirm-password" id="confirm-password">
+                            <label for="passwordNew" class="col-form-label">Nueva Contraseña</label>
+                            <input type="password" name="passwordNew" id="passwordNew">
                             <br>
                             <input type="submit" value="Actualizar" class="btn btn-primary" >
                         </div>

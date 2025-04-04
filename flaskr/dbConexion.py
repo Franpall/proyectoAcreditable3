@@ -363,6 +363,21 @@ def obtener_cuenta_por_id(id_usuario):
         print(f"Error en obtener_producto_por_id: {e}")
         raise
 
+def actualizar_contraseña(id_usuario, contraseña):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        contraseña_encriptada = crearHash(contraseña)
+        cursor.execute(
+            'UPDATE usuario SET contraseña = %s WHERE id = %s',
+            (contraseña_encriptada, id_usuario))
+        conn.commit()
+        conn.close()
+        return True
+    except MySQLError as e:
+        print(f"Error en registrar_cliente: {e}")
+        raise
+
 # Area de clientes
 
 def mostrar_clientes():

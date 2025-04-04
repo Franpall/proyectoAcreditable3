@@ -10511,3 +10511,69 @@ body {
   box-sizing: border-box;
   padding: 50px 20px;
 }
+
+/* Menu flotante dinámico */
+
+#contralogo_area{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 20px;
+}
+
+.user_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease;   
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.user_btn:hover{
+  cursor: pointer;
+}
+
+.user_btn_icon{
+  height: 80%;
+  aspect-ratio: 1/1;
+  color: white;
+}
+
+#float_menu.visible{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.hint{
+  display: none;
+}
+
+#float_menu{
+  flex-direction: column;
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 150px;
+  background-color: white;
+  box-shadow: 2px 2px 5px var(--gray-dark);
+}
+
+#float_menu a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+}

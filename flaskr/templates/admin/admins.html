@@ -58,8 +58,6 @@
                                         {% if admin.nombre == "admin" %}
                                         <p><i class="fas fa-lock"></i> Cuenta Permanente</p>
                                         {% else %}
-                                        <a href="{{ url_for('editarAdminView', id_admin=admin.id) }}" class="update_btn_admin">Editar</a>
-                                        <br>
                                         <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin">Borrar</a>  
                                         {% endif %}
                                     </td>

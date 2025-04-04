@@ -144,6 +144,7 @@ def exportarCompraPDF():
 
 @app.route('/dashboard')
 def adminDashboard():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     clientes = contarClientes()
     productos_disponibles = contarProductosDisponibles()
     categorias_disponibles = contarCategoriasDisponibles()
@@ -153,46 +154,50 @@ def adminDashboard():
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     if session.get('sesion_admin', False):
-        return render_template('admin/dashboard.html', clientes=clientes, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales)
+        return render_template('admin/dashboard.html', clientes=clientes, admin=admin, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales)
     else:
         return render_template('error.html', error="401")
 
 @app.route('/productos')
 def adminProductos():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     categorias = verCategorias()
     productos = mostrar_productos_admin()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     if session.get('sesion_admin', False):
-        return render_template('admin/productos.html', productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+        return render_template('admin/productos.html', admin=admin, productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
 @app.route('/clientes')
 def adminClientes():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     usuarios = mostrar_clientes()
     if session.get('sesion_admin', False):
-        return render_template('admin/clientes.html', clientes=usuarios, sesion=session.get('sesion_admin', False))
+        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
 @app.route('/admins')
 def adminAdmins():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     usuarios = mostrar_admins()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     if session.get('sesion_admin', False):
-        return render_template('admin/admins.html', admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+        return render_template('admin/admins.html', admin=admin, admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
 @app.route('/ventas')
 def adminVentas():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     if session.get('sesion_admin', False):
         ventas = obtener_ventas()
-        return render_template('admin/ventas.html', ventas=ventas, sesion=session.get('sesion_admin', False))
+        return render_template('admin/ventas.html', admin=admin, ventas=ventas, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
@@ -308,6 +313,7 @@ def verDetallesVenta(id):
 # Agregar categorias
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
@@ -325,15 +331,16 @@ def adminCategorias():
     
     categorias = obtener_categorias()
     if session.get('sesion_admin', False):
-        return render_template('admin/categorias.html', categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+        return render_template('admin/categorias.html', admin=admin, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
 # Editar categorias
 @app.route('/editarCategoria/<int:id_categoria>')
 def editarCategoriaView(id_categoria):
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     categoria = obtener_categoria_especifica(id_categoria)
-    return render_template('admin/editarCategoria.html', categoria=categoria, sesion=session.get('sesion_admin', False))
+    return render_template('admin/editarCategoria.html', admin=admin, categoria=categoria, sesion=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacionC/<int:id_categoria>', methods=['GET', 'POST'])
 def editarCategoriaSend(id_categoria):
@@ -428,9 +435,10 @@ def registrarProductos():
 # Editar productos
 @app.route('/editarProducto/<int:id_producto>')
 def editarProductoView(id_producto):
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     producto = obtener_producto_por_id(id_producto)
     categorias = obtener_categorias()
-    return render_template('admin/editarProducto.html', producto=producto, categorias=categorias, sesion=session.get('sesion_admin', False))
+    return render_template('admin/editarProducto.html', admin=admin, producto=producto, categorias=categorias, sesion=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacion/<int:id_producto>', methods=['GET', 'POST'])
 def editarProductoSend(id_producto):
@@ -616,7 +624,21 @@ def editarAdminDataSend(id_admin):
         nombre = request.form['admin_name']
         correo = request.form['admin_email']
         actualizar_datos_admin(id_admin, nombre, correo)
-        return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Producto actualizado con éxito"))
+        return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Usuario actualizado con éxito"))
+    
+@app.route('/actualizarPassAdmin/<int:id_admin>', methods=['GET', 'POST'])
+def editarContraseñaAdmin(id_admin):
+    if request.method == 'POST':
+        admin = mostrar_admin_por_id(id_admin)
+        usuario = admin.nombre
+        contraseñaActual = request.form['password']
+        contraseñaNueva = request.form['passwordNew']
+        if iniciar_sesion(usuario, contraseñaActual):
+            if actualizar_contraseña(id_admin, contraseñaNueva):
+                return redirect(url_for('editarAdminView', id_admin=id_admin, actionOk=True, notificacion="Contraseña actualizada con éxito"))
+            else:
+                return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
+        return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
 
 # Lógica para eliminar Administradores
 @app.route("/delete/<int:id_admin>")
