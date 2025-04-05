@@ -314,7 +314,8 @@ def verDetallesVenta(id):
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         detallesVenta = obtenerDetallesVenta(id)
         total = obtenerTotal(id)
-        return render_template('admin/verDetallesVenta.html', detallesVenta=detallesVenta, total=total,
+        admin = mostrar_admin_por_id(session.get('id_usuario', False))
+        return render_template('admin/verDetallesVenta.html', detallesVenta=detallesVenta, total=total, admin=admin,
             es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
