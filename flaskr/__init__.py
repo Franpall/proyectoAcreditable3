@@ -153,8 +153,11 @@ def adminDashboard():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    if session.get('sesion_admin', False):
-        return render_template('admin/dashboard.html', clientes=clientes, admin=admin, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales)
+    
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
+        return render_template('admin/dashboard.html', clientes=clientes, admin=admin, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, 
+        notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales,
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -166,8 +169,10 @@ def adminProductos():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    if session.get('sesion_admin', False):
-        return render_template('admin/productos.html', admin=admin, productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
+        return render_template('admin/productos.html', admin=admin, productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -175,8 +180,8 @@ def adminProductos():
 def adminClientes():
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     usuarios = mostrar_clientes()
-    if session.get('sesion_admin', False):
-        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, sesion=session.get('sesion_admin', False))
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
+        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -187,17 +192,20 @@ def adminAdmins():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
-    if session.get('sesion_admin', False):
-        return render_template('admin/admins.html', admin=admin, admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    
+    if session.get('sesion_jefe', False):
+        return render_template('admin/admins.html', admin=admin, admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, es_jefe=session.get('sesion_jefe', False))
     else:
         return render_template('error.html', error="401")
 
 @app.route('/ventas')
 def adminVentas():
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
-    if session.get('sesion_admin', False):
+    
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         ventas = obtener_ventas()
-        return render_template('admin/ventas.html', admin=admin, ventas=ventas, sesion=session.get('sesion_admin', False))
+        return render_template('admin/ventas.html', admin=admin, ventas=ventas,
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -319,6 +327,9 @@ def adminCategorias():
     actionOK = request.args.get('actionOK', False)
 
     if request.method == 'POST':
+        if not (session.get('sesion_jefe', False) or session.get('sesion_admin', False)):
+            return render_template('error.html', error="403")
+        
         nombre = request.form['nombre']
         imagen = request.files['imagen']
 
@@ -330,8 +341,10 @@ def adminCategorias():
             return redirect(url_for('adminCategorias', actionOK=True, notificacion="Categoría registrada con éxito"))
     
     categorias = obtener_categorias()
-    if session.get('sesion_admin', False):
-        return render_template('admin/categorias.html', admin=admin, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
+        return render_template('admin/categorias.html', admin=admin, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -658,21 +671,31 @@ def loginSolicitud():
             rol, id_usuario = resultado
             if rol == "cliente":
                 session['sesion_iniciada'] = True
-                session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
+                session['id_usuario'] = id_usuario
                 return redirect(url_for('index', actionOK=True, notificacion="Sesión iniciada con éxito!"))
+            elif rol == "jefe":
+                session['sesion_jefe'] = True
+                session['id_usuario'] = id_usuario
+                return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión iniciada con éxito!"))
             elif rol == "admin":
                 session['sesion_admin'] = True
-                session['id_usuario'] = id_usuario  # Guardar el id_usuario en la sesión
+                session['id_usuario'] = id_usuario
                 return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión iniciada con éxito!"))
-        else:
-            return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña incorrectos")
-    return render_template('auth/login.html')
+            elif rol == "supervisor":
+                session['sesion_supervisor'] = True
+                session['id_usuario'] = id_usuario
+                return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión iniciada con éxito!"))
+            else:
+                return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña incorrectos")
+        return render_template('auth/login.html')
 
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
 def cerrarSesionSolicitud():
     session['sesion_iniciada'] = False
+    session['sesion_jefe'] = False
     session['sesion_admin'] = False
+    session['sesion_supervisor'] = False
     session.modified = True
     return render_template('auth/login.html', actionOK=True, notificacion="Sesión cerrada con éxito")
 

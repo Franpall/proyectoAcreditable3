@@ -12,6 +12,7 @@
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">Categorías</li>
         </ol>
+        {% if not session.sesion_supervisor %}
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2>Nueva Categoría <i class="fas fa-plus" style="font-size: 16px; margin-bottom: 4px;"></i></h2>
             <div class="card-body">
@@ -27,6 +28,7 @@
                 </form>
             </div>
         </div>
+        {% endif %}
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2><i class="fas fa-table mr-1" style="font-size: 25px; margin-bottom: 3px;"></i> Categorías</h2>
             <div class="card-body">
@@ -51,11 +53,13 @@
                             <td class="text-center">
                                 <img src="{{ url_for('static', filename='uploads/' + categoria.imagen) }}" alt="{{ categoria.nombre }}" style=" height: 120px; margin: none; padding: none; aspect-ratio:6/4; object-fit: cover;">
                             </td>
+                            {% if not es_supervisor %}
                             <td class="actions_td" height="140px">
                                 <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a>
                                 <br>
                                 <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
                             </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -12,6 +12,7 @@
             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
             <li class="breadcrumb-item active">Productos</li>
         </ol>
+        {% if not session.sesion_supervisor %}
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2>Nuevo Producto <i class="fas fa-plus" style="font-size: 16px; margin-bottom: 4px;"></i></h2>
             <div class="card-body">
@@ -51,6 +52,7 @@
                 </form>
             </div>
         </div>
+        {% endif %}
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2><i class="fas fa-table mr-1" style="font-size: 25px; margin-bottom: 3px;"></i> Inventario de Productos</h2>
         <div class="card-body">
@@ -67,7 +69,9 @@
                             <th>Imagen</th>
                             <th>Precio</th>
                             <th>Stock</th>
+                            {% if not session.sesion_supervisor %}
                             <th>Acciones</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -81,11 +85,13 @@
                             </td>
                             <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.precio }}</p></td>
                             <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.stock }}</p></td>
+                            {% if not es_supervisor %}
                             <td class="actions_td" height="90px">
                                 <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
                                 <br>
                                 <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
                             </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -26,6 +26,9 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
+                                {% if not es_supervisor %}
+                                <th>Acciones</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +37,11 @@
                                 <td>{{ cliente.id }}</td>
                                 <td>{{ cliente.nombre }}</td>
                                 <td>{{ cliente.correo }}</td>
+                                {% if not es_supervisor %}
+                                <td class="actions_td">
+                                    <a href="#" class="delete_btn_admin">Eliminar</a>
+                                </td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>
