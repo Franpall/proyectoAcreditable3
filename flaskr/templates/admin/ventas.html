@@ -55,6 +55,7 @@
                     {% endif %}
                 </div>
             </div>
+            {% if ventas|length > 0 %}
             <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
                 <h2>Reportes</h2>
                 <form action="{{ url_for('exportarVentasPDF') }}" method="POST" id="exportar_ventas_form" class="card mb-4" style="padding: 20px; box-sizing: border-box;">
@@ -93,6 +94,7 @@
                     </div>
                 </form>
             </div>
+            {% endif %}
         </div>
     </div>
 </main>
