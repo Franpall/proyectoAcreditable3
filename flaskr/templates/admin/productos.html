@@ -13,93 +13,104 @@
             <li class="breadcrumb-item active">Productos</li>
         </ol>
         {% if not session.sesion_supervisor %}
-        <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
-            <h2>Nuevo Producto <i class="fas fa-plus" style="font-size: 16px; margin-bottom: 4px;"></i></h2>
-            <div class="card-body">
-                <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form" enctype="multipart/form-data">
-                    <div id="left_product_form" class="product_form_area">
-                        <label for="marca" class="col-form-label">Marca</label>
-                        <input type="text" name="marca" id="marca" required>
-                        <label for="modelo" class="col-form-label">Modelo</label>
-                        <input type="text" name="modelo" id="modelo" required>
-                        <label for="stock" class="col-form-label">Cantidad Disponible</label>
-                        <input type="number" name="stock" id="stock" min="1" required>
-                        <label for="precio" class="col-form-label">Precio</label>
-                        <input type="number" name="precio" id="precio" min="0" required>
-                        <label for="categoria" class="col-form-label">Categoria:</label>
-                        <select id="categoria" name="categoria" required>
-                            {% if categorias|length < 1 %}
-                            <option disabled>No hay categorias</option>
-                            {% else %}
-                                {% for categoria in categorias %}
-                                <option>{{categoria}}</option>
-                                {% endfor %}
-                            {% endif %}
-                        </select>
-                    </div>
-                    <div id="right_product_form" class="product_form_area">
-                        <label for="descripcion">Descripcion</label>
-                        <textarea type="text" name="descripcion" id="descripcion"></textarea>
-                        <div id="checkbox_producto">
-                            <label for="recomendado" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
-                            <input type="checkbox" name="recomendado" id="recomendado">
+            {% if categorias|length < 1 %}
+            <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+                <h2>Nuevo Producto <i class="fas fa-plus" style="font-size: 16px; margin-bottom: 4px;"></i></h2>
+                <div class="card-body">
+                    <h4>Por favor, crea una categoria antes de añadir productos.</h4>
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+                <h2>Nuevo Producto <i class="fas fa-plus" style="font-size: 16px; margin-bottom: 4px;"></i></h2>
+                <div class="card-body">
+                    <form action="{{ url_for('registrarProductos') }}" method="POST" id="product_form" enctype="multipart/form-data">
+                        <div id="left_product_form" class="product_form_area">
+                            <label for="marca" class="col-form-label">Marca</label>
+                            <input type="text" name="marca" id="marca" required>
+                            <label for="modelo" class="col-form-label">Modelo</label>
+                            <input type="text" name="modelo" id="modelo" required>
+                            <label for="stock" class="col-form-label">Cantidad Disponible</label>
+                            <input type="number" name="stock" id="stock" min="1" required>
+                            <label for="precio" class="col-form-label">Precio</label>
+                            <input type="number" name="precio" id="precio" min="0" required>
+                            <label for="categoria" class="col-form-label">Categoria:</label>
+                            <select id="categoria" name="categoria" required>
+                                {% if categorias|length < 1 %}
+                                <option disabled>No hay categorias</option>
+                                {% else %}
+                                    {% for categoria in categorias %}
+                                    <option>{{categoria}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
                         </div>
-                        <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
-                        <input type="file" name="imagen" id="imagen" required>
-                        <br>
-                        <input type="submit" value="Añadir Producto" class="btn btn-primary" >
-                    </div>
-                </form>
+                        <div id="right_product_form" class="product_form_area">
+                            <label for="descripcion">Descripcion</label>
+                            <textarea type="text" name="descripcion" id="descripcion"></textarea>
+                            <div id="checkbox_producto">
+                                <label for="recomendado" class="col-form-label">Producto Recomendado (fijar al inicio)</label>
+                                <input type="checkbox" name="recomendado" id="recomendado">
+                            </div>
+                            <label for="imagen" class="col-form-label imagen_label">Imagen:</label>
+                            <input type="file" name="imagen" id="imagen" required>
+                            <br>
+                            <input type="submit" value="Añadir Producto" class="btn btn-primary" >
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+        {% if categorias|length > 0 %}
+        <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
+            <h2><i class="fas fa-table mr-1" style="font-size: 25px; margin-bottom: 3px;"></i> Inventario de Productos</h2>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if productos|length < 1 %} 
+                    <h4>No hay productos en el inventario</h4>
+                    {% else %}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Imagen</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                {% if not session.sesion_supervisor %}
+                                <th>Acciones</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for producto in productos %}
+                            <tr>
+                                <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.id }}</p></td>
+                                <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.marca }}</p></td>
+                                <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.modelo }}</p></td>
+                                <td class="text-center">
+                                    <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}" style=" width: 100px; margin: none; padding: none; aspect-ratio:1/1; object-fit: cover;">
+                                </td>
+                                <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.precio }}</p></td>
+                                <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.stock }}</p></td>
+                                {% if not es_supervisor %}
+                                <td class="actions_td" height="90px">
+                                    <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
+                                    <br>
+                                    <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% endif %}
-        <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
-            <h2><i class="fas fa-table mr-1" style="font-size: 25px; margin-bottom: 3px;"></i> Inventario de Productos</h2>
-        <div class="card-body">
-            <div class="table-responsive">
-                {% if productos|length < 1 %} 
-                <h4>No hay productos en el inventario</h4>
-                {% else %}
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Imagen</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            {% if not session.sesion_supervisor %}
-                            <th>Acciones</th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for producto in productos %}
-                        <tr>
-                            <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.id }}</p></td>
-                            <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.marca }}</p></td>
-                            <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.modelo }}</p></td>
-                            <td class="text-center">
-                                <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.modelo }}" style=" width: 100px; margin: none; padding: none; aspect-ratio:1/1; object-fit: cover;">
-                            </td>
-                            <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.precio }}</p></td>
-                            <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.stock }}</p></td>
-                            {% if not es_supervisor %}
-                            <td class="actions_td" height="90px">
-                                <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
-                                <br>
-                                <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
-                            </td>
-                            {% endif %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-            </div>
-        </div>
-        </div>
         {% if productos|length > 0 %}
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2>Reportes</h2>
