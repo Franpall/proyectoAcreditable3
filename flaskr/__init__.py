@@ -310,10 +310,10 @@ def exportarEstadisticasPDF():
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
-    if session.get('sesion_admin', False):
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         detallesVenta = obtenerDetallesVenta(id)
         total = obtenerTotal(id)
-        return render_template('admin/verDetallesVenta.html', sesion=session.get('sesion_admin', False), detallesVenta=detallesVenta, total=total)
+        return render_template('admin/verDetallesVenta.html', detallesVenta=detallesVenta, total=total, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -351,7 +351,7 @@ def adminCategorias():
 def editarCategoriaView(id_categoria):
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     categoria = obtener_categoria_especifica(id_categoria)
-    return render_template('admin/editarCategoria.html', admin=admin, categoria=categoria, sesion=session.get('sesion_admin', False))
+    return render_template('admin/editarCategoria.html', admin=admin, categoria=categoria, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacionC/<int:id_categoria>', methods=['GET', 'POST'])
 def editarCategoriaSend(id_categoria):
@@ -441,7 +441,7 @@ def registrarProductos():
             agregar_producto(marca, modelo, descripcion, id_categoria, filename, precio, stock, recomendado)
             return redirect(url_for('adminProductos', actionOK=True, notificacion="Producto registrado con éxito"))
         
-    return render_template('admin/productos.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK, sesion=session.get('sesion_admin', False))
+    return render_template('admin/productos.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False))
 
 # Editar productos
 @app.route('/editarProducto/<int:id_producto>')
@@ -449,7 +449,7 @@ def editarProductoView(id_producto):
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     producto = obtener_producto_por_id(id_producto)
     categorias = obtener_categorias()
-    return render_template('admin/editarProducto.html', admin=admin, producto=producto, categorias=categorias, sesion=session.get('sesion_admin', False))
+    return render_template('admin/editarProducto.html', admin=admin, producto=producto, categorias=categorias, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False))
 
 @app.route('/subirActualizacion/<int:id_producto>', methods=['GET', 'POST'])
 def editarProductoSend(id_producto):
