@@ -624,7 +624,7 @@ def registerSolicitud():
 
 # Lógica para editar Administradores
 
-@app.route('/editarAdmin/<int:id_admin>')
+@app.route('/editarUsuario/<int:id_admin>')
 def editarAdminView(id_admin):
     admin = mostrar_admin_por_id(id_admin)
     notificacion = request.args.get('notificacion', False)
@@ -632,7 +632,7 @@ def editarAdminView(id_admin):
     actionOK = request.args.get('actionOK', False)
     return render_template('admin/editarAdmin.html', admin=admin, sesion=session.get('sesion_admin', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
-@app.route('/actualizarDatosAdmin/<int:id_admin>', methods=['GET', 'POST'])
+@app.route('/actualizarDatosUsuarios/<int:id_admin>', methods=['GET', 'POST'])
 def editarAdminDataSend(id_admin):
     if request.method == 'POST':
         nombre = request.form['admin_name']
@@ -640,7 +640,7 @@ def editarAdminDataSend(id_admin):
         actualizar_datos_admin(id_admin, nombre, correo)
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Usuario actualizado con éxito"))
     
-@app.route('/actualizarPassAdmin/<int:id_admin>', methods=['GET', 'POST'])
+@app.route('/actualizarPassUsuario/<int:id_admin>', methods=['GET', 'POST'])
 def editarContraseñaAdmin(id_admin):
     if request.method == 'POST':
         admin = mostrar_admin_por_id(id_admin)
