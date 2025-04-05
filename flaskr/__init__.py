@@ -145,15 +145,16 @@ def exportarCompraPDF():
 
 @app.route('/dashboard')
 def adminDashboard():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     clientes = contarClientes()
     productos_disponibles = contarProductosDisponibles()
     categorias_disponibles = contarCategoriasDisponibles()
     ventas_totales = contarVentasTotales()
     ingresos_totales = sumarVentasTotales()
-    notificacion = request.args.get('notificacion', False)
-    actionError = request.args.get('actionError', False)
-    actionOK = request.args.get('actionOK', False)
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/dashboard.html', clientes=clientes, admin=admin, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, 
@@ -286,7 +287,7 @@ def exportarProductosPDF():
 
 @app.route('/exportarEstadisticasPDF', methods=['POST'])
 def exportarEstadisticasPDF():
-    if session.get('sesion_admin', False):
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         clientes = contarClientes()
         productos_disponibles = contarProductosDisponibles()
         categorias_disponibles = contarCategoriasDisponibles()
@@ -306,14 +307,15 @@ def exportarEstadisticasPDF():
         
         # Devolver el PDF como respuesta
         return send_file(pdf_file, download_name='REPORTE DE ESTADISTICAS.pdf', as_attachment=True)
-    return render_template('admin/reporteEstadisticasPDF.html')
+    return render_template('admin/dashboard.html')
 
 @app.route('/detallesVenta/<int:id>')
 def verDetallesVenta(id):
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         detallesVenta = obtenerDetallesVenta(id)
         total = obtenerTotal(id)
-        return render_template('admin/verDetallesVenta.html', detallesVenta=detallesVenta, total=total, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+        return render_template('admin/verDetallesVenta.html', detallesVenta=detallesVenta, total=total,
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -660,6 +662,10 @@ def eliminarAdmin(id_admin):
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
 def loginSolicitud():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    
     if request.method == 'POST':
         usuario = request.form['username']
         contraseña = request.form['password']
@@ -683,9 +689,9 @@ def loginSolicitud():
                 session['sesion_supervisor'] = True
                 session['id_usuario'] = id_usuario
                 return redirect(url_for('adminDashboard', actionOK=True, notificacion="Sesión iniciada con éxito!"))
-            else:
-                return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña incorrectos")
-        return render_template('auth/login.html')
+        return render_template('auth/login.html', actionError=True, notificacion="Usuario o Contraseña incorrectos")
+    
+    return render_template('auth/login.html', notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 # Lógica para cerrar sesiones
 @app.route('/bye', methods=('GET', 'POST'))
