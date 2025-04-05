@@ -29,8 +29,8 @@ def index():
     productos_recomendados = mostrar_productos_recomendados()
 
     return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=session.get('sesion_iniciada', False), 
-        categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK, modoAdmin=session.get('sesion_admin', False)
-    )
+        categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
+        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
 
 # Manejador de errores global para errores de base de datos
 @app.errorhandler(MySQLError)
@@ -77,7 +77,8 @@ def verProducto(id):
     actionOK = request.args.get('actionOK', False)
     actionError = request.args.get('actionError', False)
     producto = obtener_producto_por_id(id)
-    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError, modoAdmin=session.get('sesion_admin', False))
+    return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError,
+        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -92,8 +93,8 @@ def verProductosCategoria(categoria):
     
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     
-    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada, modoAdmin=session.get('sesion_admin', False)
-        )
+    return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada,
+        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
 
 @app.route('/misCompras')
 def verMisCompras():
@@ -156,8 +157,8 @@ def adminDashboard():
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/dashboard.html', clientes=clientes, admin=admin, productos_disponibles=productos_disponibles, categorias_disponibles=categorias_disponibles, 
-        notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales,
-        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+            notificacion=notificacion, actionError=actionError, actionOK=actionOK, ventas_totales=ventas_totales, ingresos_totales=ingresos_totales,
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -172,7 +173,7 @@ def adminProductos():
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/productos.html', admin=admin, productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
-        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -205,7 +206,7 @@ def adminVentas():
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         ventas = obtener_ventas()
         return render_template('admin/ventas.html', admin=admin, ventas=ventas,
-        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -341,7 +342,7 @@ def adminCategorias():
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/categorias.html', admin=admin, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
-        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 

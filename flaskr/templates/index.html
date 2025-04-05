@@ -20,7 +20,7 @@
                 <hr>
                 <a href="{{ url_for('cerrarSesionSolicitud') }}">Cerrar Sesión</a>
             </div>
-            {% elif modoAdmin == True %}
+            {% elif modoJefe or modoAdmin or modoSupervisor == True %}
             <a class="user_btn" id="user_btn" href="{{ url_for('adminDashboard') }}"><img class="user_btn_icon" src="{{ url_for('static', filename='img/exit-svgrepo-com.svg') }}" alt=""></a>    
             {% else %}
             <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
