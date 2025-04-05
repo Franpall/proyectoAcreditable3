@@ -52,6 +52,12 @@
                             Admins
                         </a>
                         {% endif %}
+                        {% if not es_supervisor %}
+                        <a class="nav-link" href="/supervisores">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                            Supervisores
+                        </a>
+                        {% endif %}
                         <br>
                         <a class="nav-link btn btn-primary" href="/">
                             <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>

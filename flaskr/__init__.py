@@ -189,14 +189,30 @@ def adminClientes():
 
 @app.route('/admins')
 def adminAdmins():
-    admin = mostrar_admin_por_id(session.get('id_usuario', False))
-    usuarios = mostrar_admins()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
+    usuarios = mostrar_admins()
+    
     if session.get('sesion_jefe', False):
         return render_template('admin/admins.html', admin=admin, admins=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK, es_jefe=session.get('sesion_jefe', False))
+    else:
+        return render_template('error.html', error="401")
+
+@app.route('/supervisores')
+def adminSupervisores():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
+    usuarios = mostrar_supervisores()
+    
+    if session.get('sesion_jefe', False) or session.get('sesion_admin', False):
+        return render_template('admin/supervisores.html', admin=admin, supervisores=usuarios, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
+            es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False))
     else:
         return render_template('error.html', error="401")
 
@@ -589,7 +605,7 @@ def actualizarCantidad(index):
 
 # <-- Área de registros y cuentas -->
 
-# Lógica para el registro de administradores
+# Lógica para el registro de administradores y supervisores
 @app.route('/addAdmin', methods=('GET', 'POST'))
 def registerAdmin():
     if request.method == 'POST':
@@ -597,11 +613,22 @@ def registerAdmin():
         correo = request.form['admin_email']
         contraseña = request.form['password']
 
-        if not registrar_cliente(usuario, correo, contraseña, 2):
+        if not registrar_cliente(usuario, correo, contraseña, 3):
             return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está registrado"))
         else:
             return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador registrado con éxito"))
 
+@app.route('/addSupervisor', methods=('GET', 'POST'))
+def registerSupervisor():
+    if request.method == 'POST':
+        usuario = request.form['admin_name']
+        correo = request.form['admin_email']
+        contraseña = request.form['password']
+
+        if not registrar_cliente(usuario, correo, contraseña, 4):
+            return redirect(url_for('adminSupervisores', actionError=True, notificacion="El Usuario o Correo ya está registrado"))
+        else:
+            return redirect(url_for('adminSupervisores', actionOK=True, notificacion="Supervisor registrado con éxito"))
 
 # Lógica para el registro de clientes
 @app.route('/registerSolicitud', methods=('GET', 'POST'))
@@ -654,11 +681,16 @@ def editarContraseñaAdmin(id_admin):
                 return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
 
-# Lógica para eliminar Administradores
+# Lógica para eliminar Administradores y supervisores
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
     return redirect(url_for('adminAdmins', actionOK=True, notificacion="Administrador eliminado con éxito"))
+
+@app.route("/deleteSupervisor/<int:id_supervisor>")
+def eliminarSupervisor(id_supervisor):
+    eliminar_supervisor(id_supervisor)
+    return redirect(url_for('adminSupervisores', actionOK=True, notificacion="Supervisor eliminado con éxito"))
 
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))

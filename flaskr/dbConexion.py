@@ -336,6 +336,7 @@ def registrar_cliente(usuario, correo, contraseña, rol):
         if resultado_usuario or resultado_correo:
             conn.close()
             return False
+        
         contraseña_encriptada = crearHash(contraseña)
         cursor.execute(
             'INSERT INTO usuario (usuario, correo, contraseña, rol) VALUES (%s, %s, %s, %s)',
@@ -437,6 +438,21 @@ def mostrar_admins():
     except MySQLError as e:
         print(f"Error en mostrar_admins: {e}")
         raise
+    
+def mostrar_supervisores():
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'supervisor'")
+        supervisores = cursor.fetchall()
+        usuarios = list()
+        for supervisor in supervisores:
+            usuarios.append(Usuario(supervisor[0],supervisor[1],supervisor[2]))
+        conn.close()
+        return usuarios
+    except MySQLError as e:
+        print(f"Error en mostrar_admins: {e}")
+        raise
 
 def actualizar_datos_admin(id_admin, nombre, correo):
     try:
@@ -458,6 +474,18 @@ def eliminar_admin(id):
     try:
         conn = crear_conexion()
         print(id)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
+        conn.commit()
+        conn.close()
+        return "Eliminado con exito"
+    except MySQLError as e:
+        print(f"Error en eliminar_admin: {e}")
+        raise
+
+def eliminar_supervisor(id):
+    try:
+        conn = crear_conexion()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
         conn.commit()
