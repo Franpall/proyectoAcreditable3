@@ -327,9 +327,6 @@ def adminCategorias():
     actionOK = request.args.get('actionOK', False)
 
     if request.method == 'POST':
-        if not (session.get('sesion_jefe', False) or session.get('sesion_admin', False)):
-            return render_template('error.html', error="403")
-        
         nombre = request.form['nombre']
         imagen = request.files['imagen']
 
