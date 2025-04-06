@@ -687,7 +687,7 @@ def editarContraseñaAdmin(id_admin):
         contraseñaNueva = request.form['passwordNew']
         if iniciar_sesion(usuario, contraseñaActual):
             if actualizar_contraseña(id_admin, contraseñaNueva):
-                return redirect(url_for('editarAdminView', id_admin=id_admin, actionOk=True, notificacion="Contraseña actualizada con éxito"))
+                return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Contraseña actualizada con éxito"))
             else:
                 return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
@@ -702,7 +702,7 @@ def editarContraseñaCliente(id_cliente):
         contraseñaNueva = request.form['passwordNew']
         if iniciar_sesion(usuario, contraseñaActual):
             if actualizar_contraseña(id_cliente, contraseñaNueva):
-                return redirect(url_for('verMiCuenta', actionOK=True, notificacion="Contraseña actualizado con éxito"))
+                return redirect(url_for('verMiCuenta', actionOK=True, notificacion="Contraseña actualizada con éxito"))
             else:
                 return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
