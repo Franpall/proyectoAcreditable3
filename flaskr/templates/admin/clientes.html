@@ -39,7 +39,8 @@
                                 <td>{{ cliente.correo }}</td>
                                 {% if not es_supervisor %}
                                 <td class="actions_td">
-                                    <a href="#" class="delete_btn_admin">Borrar</a>
+                                    <a href="{{ url_for('eliminarCliente', id_cliente=cliente.id) }}" class="delete_btn_admin"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este Cliente?')">Borrar</a>
                                 </td>
                                 {% endif %}
                             </tr>

@@ -409,6 +409,18 @@ def contarClientes():
         print(f"Error en contarClientes: {e}")
         raise
 
+def eliminar_cliente(id):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
+        conn.commit()
+        conn.close()
+        return "Eliminado con exito"
+    except MySQLError as e:
+        print(f"Error en eliminar_cliente: {e}")
+        raise
+
 # Area de administradores
 
 def mostrar_admin_por_id(id_admin):

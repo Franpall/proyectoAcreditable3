@@ -681,7 +681,13 @@ def editarContraseñaAdmin(id_admin):
                 return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
 
-# Lógica para eliminar Administradores y supervisores
+# Lógica para eliminar Administradores, Clientes y supervisores
+
+@app.route("/deleteCliente/<int:id_cliente>")
+def eliminarCliente(id_cliente):
+    eliminar_cliente(id_cliente)
+    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Cliente eliminado con éxito"))
+
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
