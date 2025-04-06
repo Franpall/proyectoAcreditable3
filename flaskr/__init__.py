@@ -30,7 +30,7 @@ def index():
 
     return render_template('index.html', productos=productos, productos_recomendados=productos_recomendados, sesion=session.get('sesion_iniciada', False), 
         categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
-        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
 
 # Manejador de errores global para errores de base de datos
 @app.errorhandler(MySQLError)
@@ -78,7 +78,7 @@ def verProducto(id):
     actionError = request.args.get('actionError', False)
     producto = obtener_producto_por_id(id)
     return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError,
-        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
 
 @app.route('/<string:categoria>')
 def verProductosCategoria(categoria):
@@ -94,7 +94,7 @@ def verProductosCategoria(categoria):
     categoriaSeleccionada = obtener_categoria_especifica(id_categoria)
     
     return render_template('categoria.html', productos=mostrar_productos_categoria(id_categoria), sesion=session.get('sesion_iniciada', False), notificacion=notificacion, actionError=actionError, actionOK=actionOK, categoria = categoriaSeleccionada,
-        modoJefe=session.get('sesion_jefe', False), modoAdmin=session.get('sesion_admin', False), modoSupervisor=session.get('sesion_supervisor', False))
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
 
 @app.route('/misCompras')
 def verMisCompras():

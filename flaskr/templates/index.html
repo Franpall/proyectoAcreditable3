@@ -20,7 +20,7 @@
                 <hr>
                 <a href="{{ url_for('cerrarSesionSolicitud') }}">Cerrar Sesión</a>
             </div>
-            {% elif modoJefe or modoAdmin or modoSupervisor == True %}
+            {% elif es_jefe or es_admin or es_supervisor == True %}
             <a class="user_btn" id="user_btn" href="{{ url_for('adminDashboard') }}"><img class="user_btn_icon" src="{{ url_for('static', filename='img/exit-svgrepo-com.svg') }}" alt=""></a>    
             {% else %}
             <a class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""></a>
@@ -84,7 +84,7 @@
                                 <p class="marca">{{producto.marca}}</p>
                                 <p class="modelo">{{producto.modelo}}</p>
                                 <p class="precio"> <span>USD$</span> {{producto.precio}}</p>
-                                {% if not es_jefe or es_admin or es_supervisor %}
+                                {% if not (es_jefe or es_admin or es_supervisor) %}
                                 <form action="{{ url_for('agregarAlCarritoIndex') }}" method="POST">
                                     <div class="acciones_producto">
                                         <input type="hidden" name="producto_id" value="{{ producto.id }}">
@@ -120,7 +120,7 @@
                             <p class="marca">{{producto.marca}}</p>
                             <p class="modelo">{{producto.modelo}}</p>
                             <p class="precio"> <span>USD$</span> {{producto.precio}}</p>
-                            {% if not es_jefe or es_admin or es_supervisor %}
+                            {% if not (es_jefe or es_admin or es_supervisor) %}
                             <form action="{{ url_for('agregarAlCarritoIndex') }}" method="POST">
                                 <div class="acciones_producto">
                                     <input type="hidden" name="producto_id" value="{{ producto.id }}">
