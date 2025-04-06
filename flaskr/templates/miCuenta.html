@@ -65,7 +65,8 @@
                     </div>
                 </div>
             </form>
-            <button>Borrar Mi Cuenta</button>
+            <a href="{{ url_for('eliminarMiCuenta', id_cliente=usuario.id) }}" class="delete_btn_admin"
+            onclick="return confirm('¿Estás seguro de que quieres eliminar tu cuenta, este proceso es irreversible')">Borrar</a>
         </div>
         <div id="btn_regresar">
             <a href="{{ url_for('index') }}">Regresar a la tienda</a>

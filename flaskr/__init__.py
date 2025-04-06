@@ -699,6 +699,11 @@ def eliminarCliente(id_cliente):
     eliminar_cliente(id_cliente)
     return redirect(url_for('adminAdmins', actionOK=True, notificacion="Cliente eliminado con éxito"))
 
+@app.route("/darDeBaja/<int:id_cliente>")
+def eliminarMiCuenta(id_cliente):
+    eliminar_cliente(id_cliente)
+    return redirect(url_for('cerrarSesionSolicitud'))
+
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):
     eliminar_admin(id_admin)
