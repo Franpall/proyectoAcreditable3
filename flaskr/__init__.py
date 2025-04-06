@@ -702,7 +702,7 @@ def editarContraseñaCliente(id_cliente):
         contraseñaNueva = request.form['passwordNew']
         if iniciar_sesion(usuario, contraseñaActual):
             if actualizar_contraseña(id_cliente, contraseñaNueva):
-                return redirect(url_for('verMiCuenta', actionOk=True, notificacion="Contraseña actualizada con éxito"))
+                return redirect(url_for('verMiCuenta', actionOK=True, notificacion="Contraseña actualizado con éxito"))
             else:
                 return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
