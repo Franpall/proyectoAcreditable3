@@ -110,9 +110,12 @@ def verDetallesCompra(id):
 
 @app.route('/miCuenta')
 def verMiCuenta():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
     id_usuario = id_usuario=session.get('id_usuario', False)
     usuario = obtener_cuenta_por_id(id_usuario)
-    return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False), usuario = usuario)
+    return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False), usuario = usuario, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/exportarCompraPDF', methods=['POST'])
 def exportarCompraPDF():
@@ -666,6 +669,14 @@ def editarAdminDataSend(id_admin):
         correo = request.form['admin_email']
         actualizar_datos_admin(id_admin, nombre, correo)
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionOK=True, notificacion="Usuario actualizado con éxito"))
+    
+@app.route('/actualizarDatosUsuariosCliente/<int:id_cliente>', methods=['GET', 'POST'])
+def editarClienteDataSend(id_cliente):
+    if request.method == 'POST':
+        nombre = request.form['admin_name']
+        correo = request.form['admin_email']
+        actualizar_datos_admin(id_cliente, nombre, correo)
+        return redirect(url_for('verMiCuenta', actionOK=True, notificacion="Usuario actualizado con éxito"))
     
 @app.route('/actualizarPassUsuario/<int:id_admin>', methods=['GET', 'POST'])
 def editarContraseñaAdmin(id_admin):
