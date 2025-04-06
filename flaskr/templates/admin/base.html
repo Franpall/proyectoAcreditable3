@@ -13,7 +13,7 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <a class="navbar-brand" href="/dashboard">Franpal Store Control</a>
-        <a style="position: absolute; right: 15px;" class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt="">{{ admin.nombre }}</a>
+        <a style="position: absolute; right: 15px;" class="user_btn" id="user_btn"><img class="user_btn_icon" src="{{ url_for('static', filename='img/user-svgrepo-com.svg') }}" alt=""><p>{{ admin.nombre }}</p></a>
         <div id="float_menu" class="hint">
             <a class="btn btn-light" href="{{ url_for('editarAdminView', id_admin=admin.id) }}">Editar Cuenta</a>
             <a class="btn btn-light" href="{{ url_for('cerrarSesionSolicitud') }}">Cerrar Sesión</a>
