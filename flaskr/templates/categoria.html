@@ -56,7 +56,8 @@
                         <div class="detalles_producto">
                             <p class="marca">{{producto.marca}}</p>
                             <p class="modelo">{{producto.modelo}}</p>
-                            <p class="precio"> <span>US$</span> {{producto.precio}}</p>
+                            <p class="precio"> <span>USD$</span> {{producto.precio}}</p>
+                            {% if sesion %}
                             <form action="{{ url_for('agregarAlCarritoCategoria') }}" method="POST">
                                 <div class="acciones_producto">
                                     <input type="hidden" name="producto_id" value="{{ producto.id }}">
@@ -65,6 +66,7 @@
                                     <button class="add_cart_button">Agregar Al Carrito</button>
                                 </div>
                             </form>
+                            {% endif %}
                         </div>
                     </a>
                 </article>
