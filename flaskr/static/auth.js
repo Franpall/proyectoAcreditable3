@@ -1,10 +1,15 @@
 function validarNombreUsuario(nombreUsuario) {
+
+    nombreUsuarioCorrecto = false
+
     if (nombreUsuario.length < 3 || nombreUsuario.length > 20) {
+      validarFormulario()
       return "La longitud debe estar entre 3 y 20 caracteres.";
     }
   
     const regex = /^[a-zA-Z0-9_]+$/;
     if (!regex.test(nombreUsuario)) {
+      validarFormulario()
       return "Solo letras, números y guiones bajos permitidos.";
     }
     nombreUsuarioCorrecto = true
@@ -13,13 +18,18 @@ function validarNombreUsuario(nombreUsuario) {
   }
   
 function validarCorreoElectronico(correoElectronico) {
+
+    correoElectronicoCorrecto = false
+
     if (correoElectronico.length < 5 || correoElectronico.length > 254) {
-        return "La longitud debe estar entre 5 y 254 caracteres.";
+      validarFormulario()
+      return "La longitud debe estar entre 5 y 254 caracteres.";
     }
 
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,15}$/;
     if (!regex.test(correoElectronico)) {
-        return "Formato de correo electrónico inválido.";
+      validarFormulario()
+      return "Formato de correo electrónico inválido.";
     }
     correoElectronicoCorrecto = true
     validarFormulario()
@@ -27,11 +37,16 @@ function validarCorreoElectronico(correoElectronico) {
 }
   
 function validarContrasena(contrasena) {
+
+    contrasenaCorrecto = false
+
     if (contrasena.length < 8 || contrasena.length > 100) {
+      validarFormulario()
       return "La longitud debe estar entre 8 y 100 caracteres.";
     }
   
     if (!/[a-z]/.test(contrasena)) {
+      validarFormulario()
       return "Debe contener al menos una letra minúscula.";
     }
   
@@ -44,7 +59,11 @@ function validarContrasena(contrasena) {
 }
 
 function validarContrasenaRepeat(contrasena, contrasenaRepeat) {
+
+    contrasenaRepeatCorrecto = false
+
     if (contrasena != contrasenaRepeat) {
+      validarFormulario()
       return "La contraseña repetida no coincide";
     }
     contrasenaRepeatCorrecto = true
@@ -84,6 +103,8 @@ contrasenaRepeat.addEventListener("input", () => {
   
 function validarFormulario() {
     if (nombreUsuarioCorrecto && correoElectronicoCorrecto && contrasenaCorrecto && contrasenaRepeatCorrecto) {
-        enviarFormularioButton.disabled = 0
-    }
-}
+      enviarFormularioButton.disabled = 0
+      } else {
+        enviarFormularioButton.disabled = 1
+        }
+      }
