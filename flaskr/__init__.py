@@ -558,7 +558,7 @@ def manejar_carrito():
 
         return redirect(f"{next_url}?actionOK=True&notificacion=Producto añadido al carrito")
     else:
-        if not session.get('sesion_iniciada', False):
+        if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
             return redirect(f"{next_url}?actionError=True&notificacion=La parte administrativa no puede realizar compras")
         else:
             return redirect(url_for('iniciarSesion', actionError=True, notificacion="Inicia sesión para usar el Carrito"))
