@@ -60,8 +60,7 @@
                                     <td>{{ supervisor.correo }}</td>
                                     {% if es_jefe %}
                                     <td class="actions_td">
-                                        <a href="{{ url_for('eliminarSupervisor', id_supervisor=supervisor.id) }}" 
-                                            class="delete_btn_admin"
+                                        <a href="{{ url_for('eliminarSupervisor', id_supervisor=supervisor.id) }}" class="delete_btn_admin"
                                             onclick="return confirm('¿Estás seguro de que deseas eliminar este supervisor?')">Borrar</a>  
                                     </td>
                                     {% endif %}
