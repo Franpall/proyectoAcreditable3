@@ -38,35 +38,37 @@
             </div>
         </div>
         <a id="mostrarContenidoCuenta">Editar Cuenta o Cambiar Contraseña</a>
-        <div id="editarCuentaDiv" class="hint">
-            <form action="{{ url_for('editarClienteDataSend', id_cliente=usuario.id) }}" method="post">
-                <div class="card mb-4" style="padding: 10px; box-sizing: border-box;">
-                    <div id="left_product_form" class="product_form_area">
+        <div id="editarCuentaDiv" class="editarCuentaDiv hint">
+            <form action="{{ url_for('editarClienteDataSend', id_cliente=usuario.id) }}" method="post" class="dataAreaForm">
+                <div class="cardForm">
                         <h3>Editar datos</h3>
                         <label for="admin_name" class="col-form-label">Usuario</label>
-                        <input type="text" name="admin_name" id="admin_name" value="{{ usuario.nombre }}">
+                        <input type="text" name="admin_name" id="admin_name" value="{{ usuario.nombre }}" class="inputMiCuenta">
+                        <br>
                         <label for="admin_email" class="col-form-label">Correo</label>
-                        <input type="text" name="admin_email" id="admin_email" value="{{ usuario.correo }}">
+                        <input type="text" name="admin_email" id="admin_email" value="{{ usuario.correo }}" class="inputMiCuenta">
                         <br>
-                        <input type="submit" value="Actualizar" class="btn btn-primary" >
-                    </div>
+                        <input type="submit" value="Actualizar" class="btnActualizarCuenta" >
                 </div>
             </form>
-            <form action="{{ url_for('editarClienteDataSend', id_cliente=usuario.id) }}" method="post">
-                <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
-                    <div id="right_admin_form" class="product_form_area">
-                        <h3>Cambiar Contraseña <i class="fas fa-exclamation-triangle"></i></h3>
-                        <label for="password" class="col-form-label">Contraseña Actual</label>
-                        <input type="password" name="password" id="password">
-                        <label for="passwordNew" class="col-form-label">Nueva Contraseña</label>
-                        <input type="password" name="passwordNew" id="passwordNew">
-                        <br>
-                        <input type="submit" value="Actualizar" class="btn btn-primary" >
-                    </div>
+            <br>
+            <form action="{{ url_for('editarClienteDataSend', id_cliente=usuario.id) }}" method="post" class="passAreaForm">
+                <div class="cardForm">
+                    <h3>Cambiar Contraseña <i class="fas fa-exclamation-triangle"></i></h3>
+                    <label for="password" class="col-form-label">Contraseña Actual</label>
+                    <input type="password" name="password" id="password" class="inputMiCuenta">
+                    <br>
+                    <label for="passwordNew" class="col-form-label">Nueva Contraseña</label>
+                    <input type="password" name="passwordNew" id="passwordNew" class="inputMiCuenta">
+                    <br>
+                    <input type="submit" value="Actualizar" class="btnActualizarCuenta" >
                 </div>
             </form>
-            <a href="{{ url_for('eliminarMiCuenta', id_cliente=usuario.id) }}" class="delete_btn_admin"
-            onclick="return confirm('¿Estás seguro de que quieres eliminar tu cuenta, este proceso es irreversible')">Borrar</a>
+            <br>
+            <div class="deleteDangerarea">
+                <a href="{{ url_for('eliminarMiCuenta', id_cliente=usuario.id) }}" class="delete_btn_danger"
+                onclick="return confirm('¿Estás seguro de que quieres eliminar tu cuenta, este proceso es irreversible')">Borrar mi Cuenta</a>
+            </div>
         </div>
         <div id="btn_regresar">
             <a href="{{ url_for('index') }}">Regresar a la tienda</a>

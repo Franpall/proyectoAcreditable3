@@ -3,10 +3,10 @@ mostrarButton.onclick = cambiarEstadoVisible;
 
 function cambiarEstadoVisible(){
     const contenido = document.getElementById("editarCuentaDiv");
-    if (contenido.className == "hint"){
-        contenido.className = "visible"
+    if (contenido.classList.contains("hint")){
+        contenido.classList.remove("hint");
     } 
     else{
-        contenido.className = "hint"
+        contenido.classList.add("hint");
     }
 }
