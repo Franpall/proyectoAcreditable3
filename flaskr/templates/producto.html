@@ -44,7 +44,7 @@
                         <p class="modelo_preview">{{ producto.modelo }}</p>
                         <p class="precio_preview"> <span>USD$</span> {{ producto.precio }} </p>
                         <p class="stock_preview">Quedan {{ producto.stock }} unidades en stock</p>
-                        {% if sesion %}
+                        {% if not es_jefe or es_admin or es_supervisor %}
                         <p class="cantidad_preview">Cantidad</p>
                         <form action="{{ url_for('agregarAlCarritoProducto') }}" method="POST">
                             <div class="cantidad-selector">
