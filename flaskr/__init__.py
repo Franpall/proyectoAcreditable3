@@ -691,6 +691,21 @@ def editarContraseñaAdmin(id_admin):
             else:
                 return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
+    
+
+@app.route('/actualizarPassUsuarioCliente/<int:id_cliente>', methods=['GET', 'POST'])
+def editarContraseñaCliente(id_cliente):
+    if request.method == 'POST':
+        cliente = mostrar_admin_por_id(id_cliente)
+        usuario = cliente.nombre
+        contraseñaActual = request.form['password']
+        contraseñaNueva = request.form['passwordNew']
+        if iniciar_sesion(usuario, contraseñaActual):
+            if actualizar_contraseña(id_cliente, contraseñaNueva):
+                return redirect(url_for('verMiCuenta', actionOk=True, notificacion="Contraseña actualizada con éxito"))
+            else:
+                return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
+        return redirect(url_for('verMiCuenta', actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
 
 # Lógica para eliminar Administradores, Clientes y supervisores
 
