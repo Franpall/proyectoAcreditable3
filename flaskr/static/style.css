@@ -547,9 +547,10 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70px;
+    height: 100px;
     background-color: var(--fondoBanner);
     color: var(--textInverso);
+    margin-top: 50px;
 }
 
 /* Adaptaciones para pantallas más grandes */
