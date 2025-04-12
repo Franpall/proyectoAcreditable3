@@ -560,6 +560,7 @@ footer{
         opacity: 0;
         transform: translateY(50px);
         transition: opacity 1.5s ease, transform 1.5s ease;
+        gap: 25px;
     }
     
     #categorias.visible {
@@ -567,9 +568,10 @@ footer{
         transform: translateY(0);
     }
 
-
     .categoria{ 
-        transition: all 500ms ease; 
+        transition: all 500ms ease;
+        height: 230px;
+        width: 370px;
     }
 
     .categoria:hover{
