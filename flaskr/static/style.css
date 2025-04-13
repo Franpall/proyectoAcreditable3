@@ -305,7 +305,7 @@ header h1 a{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     gap: 5px;
     text-decoration: none;
     color: white;
@@ -404,7 +404,7 @@ header h1 a{
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #area_ofertas h2{
