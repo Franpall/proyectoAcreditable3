@@ -144,7 +144,7 @@ header h1 a{
 
 .imagen-banner{
     width: 100%;
-    height: 100%;
+    height: 101%;
     object-fit: cover; 
     display: block;
 }
@@ -255,7 +255,7 @@ header h1 a{
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    background-color: var(--fondoBanner); 
+    background-color: var(--fondoBanner);
 }
 
 #area_categorias h2{
