@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
+    margin-top: 20px;
 }
 
 #btn_regresar{
@@ -458,6 +459,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
     .carrito_vacio h2{
         text-align: left;
+    }
+
+    .contenido-carrito{
+        padding: 70px;
     }
 
     .compra{
