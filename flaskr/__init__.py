@@ -740,10 +740,6 @@ def loginSolicitud():
         usuario = request.form['username']
         contraseña = request.form['password']
         
-        print(f"\n=== Intento de inicio de sesión ===")
-        print(f"Usuario: {usuario}")
-        print(f"Contraseña: {contraseña}")
-
         resultado = iniciar_sesion(usuario, contraseña)
         if resultado:
             rol, id_usuario = resultado

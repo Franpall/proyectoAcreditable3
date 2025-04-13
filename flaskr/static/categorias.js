@@ -24,31 +24,31 @@ function cambiarEstadoVisible(){
 }
 
 function ocultarMenu(){
-  const menuUser = document.getElementById("float_menu");
-  if (menuUser.className != "hint"){
+    const menuUser = document.getElementById("float_menu");
+    if (menuUser.className != "hint"){
     menuUser.className = "hint"
-  } 
+    } 
 }
 
 // Animación para la sección de categorías
 document.addEventListener('DOMContentLoaded', function() {
   // Configuración del Intersection Observer
-  const observerOptions = {
+    const observerOptions = {
       threshold: 0.1 // Se activa cuando el 10% del elemento es visible
-  };
+    };
 
-  const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target); // Deja de observar después de activar
-          }
-      });
-  }, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Deja de observar después de activar
+                }
+            });
+        }, observerOptions);
 
-  // Observa el elemento de categorías
-  const categoriasSection = document.querySelector('#categorias');
-  if (categoriasSection) {
-      observer.observe(categoriasSection);
-  }
-});
+    // Observa el elemento de categorías
+    const categoriasSection = document.querySelector('#categorias');
+    if (categoriasSection) {
+        observer.observe(categoriasSection);
+        }
+    });

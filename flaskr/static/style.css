@@ -611,9 +611,21 @@ footer{
     }
 
     #area_banner_categoria{
-        height: 400px; 
+        height: 400px;
+        overflow: hidden;
+        animation: fadeInUp 1.5s ease forwards;
     }
-    
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
     
 }
 
