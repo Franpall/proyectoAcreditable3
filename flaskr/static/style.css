@@ -176,13 +176,13 @@ header h1 a{
 .banner-content h2{
     font-size: 2.5em;
     margin-bottom: 10px;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.9s ease-in-out;
 }
 
 .banner-content p{
     font-size: 1.2em;
     margin-bottom: 20px;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.9s ease-in-out;
 }
 
 .btn-banner{
@@ -201,7 +201,7 @@ header h1 a{
     outline: none;
     text-decoration: none;
     width: 200px;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.9s ease-in-out;
 }
 
 @keyframes fadeIn {

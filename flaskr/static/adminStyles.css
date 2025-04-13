@@ -10551,13 +10551,21 @@ body {
   color: white;
 }
 
-
-
 #float_menu.visible{
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
 }
 
 .hint{
