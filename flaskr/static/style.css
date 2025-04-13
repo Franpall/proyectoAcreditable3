@@ -144,7 +144,7 @@ header h1 a{
 
 .imagen-banner{
     width: 100%;
-    height: 101%;
+    height: calc(100% + 1px);
     object-fit: cover; 
     display: block;
 }
