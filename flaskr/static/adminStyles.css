@@ -140,6 +140,8 @@ p {
 }
 
 .actions_td a{
+  justify-content: center;
+  align-items: center;
   color: white;
   border-radius: 10px;
   text-decoration: none;
@@ -1764,7 +1766,6 @@ pre code {
 .table th,
 .table td {
   padding: 0.75rem;
-  vertical-align: top;
   border-top: 1px solid #dee2e6;
 }
 .table thead th {
