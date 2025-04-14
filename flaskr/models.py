@@ -1,8 +1,9 @@
 class Usuario:
-    def __init__(self, id, nombre, correo):
+    def __init__(self, id, nombre, correo, activo=True):
         self.id = id
         self.nombre = nombre
         self.correo = correo
+        self.activo = activo
 
 # Para las tarjetas del producto
 class Producto:

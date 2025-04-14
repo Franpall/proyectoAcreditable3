@@ -184,9 +184,12 @@ def adminProductos():
 @app.route('/clientes')
 def adminClientes():
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
-    usuarios = mostrar_clientes()
+    mostrar_inactivos = request.args.get('mostrar_inactivos', 'false') == 'true'
+    usuarios = mostrar_clientes(solo_activos=not mostrar_inactivos)
+    
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
-        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, mostrar_inactivos=mostrar_inactivos,
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")
 
@@ -709,15 +712,20 @@ def editarContraseñaCliente(id_cliente):
 
 # Lógica para eliminar Administradores, Clientes y supervisores
 
-@app.route("/deleteCliente/<int:id_cliente>")
-def eliminarCliente(id_cliente):
-    eliminar_cliente(id_cliente)
-    return redirect(url_for('adminAdmins', actionOK=True, notificacion="Cliente eliminado con éxito"))
+@app.route("/deactivateCliente/<int:id_cliente>")
+def desactivarCliente(id_cliente):
+    desactivar_cliente(id_cliente)
+    return redirect(url_for('adminClientes', actionOK=True, notificacion="Cliente desactivado con éxito"))
 
 @app.route("/darDeBaja/<int:id_cliente>")
-def eliminarMiCuenta(id_cliente):
-    eliminar_cliente(id_cliente)
+def desactivarMiCuenta(id_cliente):
+    desactivar_cliente(id_cliente)
     return redirect(url_for('cerrarSesionSolicitud'))
+
+@app.route("/reactivateCliente/<int:id_cliente>")
+def reactivarCliente(id_cliente):
+    reactivar_cliente(id_cliente)
+    return redirect(url_for('adminClientes', actionOK=True, notificacion="Cliente reactivado con éxito"))
 
 @app.route("/delete/<int:id_admin>")
 def eliminarAdmin(id_admin):

@@ -293,13 +293,13 @@ def iniciar_sesion(usuario, contraseña):
     try:
         conn = crear_conexion()
         cursor = conn.cursor()
-        cursor.execute('SELECT id, contraseña, rol FROM usuario WHERE usuario= %s', (usuario,))
+        cursor.execute('SELECT id, contraseña, rol FROM usuario WHERE usuario= %s AND activo = TRUE', (usuario,))
         resultado = cursor.fetchone()
         if resultado:
             id_usuario, hash, rol = resultado
             if verificarHash(contraseña, hash):
                 conn.close()
-                return rol, id_usuario  # Devuelve el rol y el id_usuario
+                return rol, id_usuario
         conn.close()
         return False
     except MySQLError as e:
@@ -381,15 +381,21 @@ def actualizar_contraseña(id_usuario, contraseña):
 
 # Area de clientes
 
-def mostrar_clientes():
+def mostrar_clientes(solo_activos=True):
     try:
         conn = crear_conexion()
         cursor = conn.cursor()
-        cursor.execute("SELECT id, usuario, correo FROM usuario WHERE rol = 'cliente'")
+        if solo_activos:
+            # Mostrar solo activos
+            cursor.execute("SELECT id, usuario, correo, activo FROM usuario WHERE rol = 'cliente' AND activo = TRUE")
+        else:
+            # Mostrar solo inactivos
+            cursor.execute("SELECT id, usuario, correo, activo FROM usuario WHERE rol = 'cliente' AND activo = FALSE")
+        
         clientes = cursor.fetchall()
         usuarios = list()
         for cliente in clientes:
-            usuarios.append(Usuario(cliente[0],cliente[1],cliente[2]))
+            usuarios.append(Usuario(cliente[0], cliente[1], cliente[2], cliente[3]))
         conn.close()
         return usuarios
     except MySQLError as e:
@@ -400,7 +406,7 @@ def contarClientes():
     try:
         conn = crear_conexion()
         cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente';")
+        cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente' AND activo = TRUE;")
         resultado = cursor.fetchone()
         clientesLen = resultado[0]
         conn.close()
@@ -409,16 +415,28 @@ def contarClientes():
         print(f"Error en contarClientes: {e}")
         raise
 
-def eliminar_cliente(id):
+def desactivar_cliente(id):
     try:
         conn = crear_conexion()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM usuario WHERE id = %s", (id,))
+        cursor.execute("UPDATE usuario SET activo = FALSE WHERE id = %s", (id,))
         conn.commit()
         conn.close()
-        return "Eliminado con exito"
+        return "Cliente desactivado con éxito"
     except MySQLError as e:
-        print(f"Error en eliminar_cliente: {e}")
+        print(f"Error en desactivar_cliente: {e}")
+        raise
+    
+def reactivar_cliente(id):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE usuario SET activo = TRUE WHERE id = %s", (id,))
+        conn.commit()
+        conn.close()
+        return "Cliente reactivado con éxito"
+    except MySQLError as e:
+        print(f"Error en reactivar_cliente: {e}")
         raise
 
 # Area de administradores

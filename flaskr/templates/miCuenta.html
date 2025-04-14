@@ -68,8 +68,8 @@
             </form>
             <br>
             <div class="deleteDangerarea">
-                <a href="{{ url_for('eliminarMiCuenta', id_cliente=usuario.id) }}" class="delete_btn_danger"
-                onclick="return confirm('¿Estás seguro de que quieres eliminar tu cuenta, este proceso es irreversible')">Borrar mi Cuenta</a>
+                <a href="{{ url_for('desactivarMiCuenta', id_cliente=usuario.id) }}" class="delete_btn_danger"
+                onclick="return confirm('¿Estás seguro de que deseas desactivar tu cuenta?\nPara reactivarla tendrás que comunicarte con soporte')">Desactivar mi Cuenta</a>
             </div>
         </div>
         <div id="btn_regresar">

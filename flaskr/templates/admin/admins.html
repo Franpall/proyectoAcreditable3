@@ -42,7 +42,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Correo</th>
                                     <th>Acciones</th>
@@ -56,7 +56,8 @@
                                     <td>{{ admin.correo }}</td>
                                     <td class="actions_td">
                                         <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin"
-                                            onclick="return confirm('¿Estás seguro de que deseas eliminar este administrador?')">Borrar</a>
+                                            onclick="return confirm('¿Estás seguro de que deseas eliminar este administrador?')">Borrar
+                                        </a>
                                     </td>
                                 </tr>
                                 {% endfor %}

@@ -1,9 +1,8 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}
-<title>Inventory Managmnet App</title>
+<title>Inventory Management App</title>
 {% endblock %}
-
 
 {% block content %}
 <main>
@@ -15,17 +14,38 @@
         </ol>
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2><i class="fas fa-table mr-1" style="font-size: 25px;"></i> Clientes</h2>
+            
+            <!-- Botón para alternar entre mostrar activos/inactivos -->
+            <div class="mb-3">
+                {% if mostrar_inactivos %}
+                <a href="{{ url_for('adminClientes') }}" class="btn btn-success">
+                    <i class="fas fa-eye"></i> Mostrar Activos
+                </a>
+            {% else %}
+                <a href="{{ url_for('adminClientes', mostrar_inactivos='true') }}" class="btn btn-warning">
+                    <i class="fas fa-eye-slash"></i> Mostrar Inactivos
+                </a>
+            {% endif %}
+            </div>
+            
             <div class="card-body">
                 <div class="table-responsive">
                     {% if clientes|length < 1 %}
-                    <h4>No hay clientes registrados</h4>
+                    <div class="alert alert-info">
+                        {% if mostrar_inactivos %}
+                            No hay clientes inactivos
+                        {% else %}
+                            No hay clientes activos
+                        {% endif %}
+                    </div>
                     {% else %}
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
+                                <th>Estado</th>
                                 {% if not es_supervisor %}
                                 <th>Acciones</th>
                                 {% endif %}
@@ -33,14 +53,30 @@
                         </thead>
                         <tbody>
                             {% for cliente in clientes %}
-                            <tr>
+                            <tr class="{{ '' if not cliente.activo else '' }}">
                                 <td>{{ cliente.id }}</td>
                                 <td>{{ cliente.nombre }}</td>
                                 <td>{{ cliente.correo }}</td>
+                                <td>
+                                    {% if cliente.activo %}
+                                        <span>Activo</span>
+                                    {% else %}
+                                        <span>Inactivo</span>
+                                    {% endif %}
+                                </td>
                                 {% if not es_supervisor %}
                                 <td class="actions_td">
-                                    <a href="{{ url_for('eliminarCliente', id_cliente=cliente.id) }}" class="delete_btn_admin"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este Cliente?')">Borrar</a>
+                                    {% if cliente.activo %}
+                                        <a href="{{ url_for('desactivarCliente', id_cliente=cliente.id) }}" class="delete_btn_admin"
+                                            onclick="return confirm('¿Estás seguro de que deseas DESACTIVAR este cliente?')">
+                                            <i class="fas fa-toggle-off"></i> Desactivar
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ url_for('reactivarCliente', id_cliente=cliente.id) }}" class="update_btn_admin"
+                                            onclick="return confirm('¿Estás seguro de que deseas REACTIVAR este cliente?')">
+                                            <i class="fas fa-toggle-on"></i> Activar
+                                        </a>
+                                    {% endif %}
                                 </td>
                                 {% endif %}
                             </tr>
