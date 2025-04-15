@@ -434,7 +434,7 @@ def desactivar_cliente(id):
         cursor.execute("UPDATE usuario SET activo = FALSE WHERE id = %s", (id,))
         conn.commit()
         conn.close()
-        return "Cliente desactivado con éxito"
+        return True
     except MySQLError as e:
         print(f"Error en desactivar_cliente: {e}")
         raise
@@ -446,7 +446,7 @@ def reactivar_cliente(id):
         cursor.execute("UPDATE usuario SET activo = TRUE WHERE id = %s", (id,))
         conn.commit()
         conn.close()
-        return "Cliente reactivado con éxito"
+        return True
     except MySQLError as e:
         print(f"Error en reactivar_cliente: {e}")
         raise

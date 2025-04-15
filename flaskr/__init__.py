@@ -24,6 +24,7 @@ def index():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
     categorias = obtener_categorias()
     productos = mostrar_productos()
     productos_recomendados = mostrar_productos_recomendados()
@@ -55,11 +56,12 @@ def registrarse():
 
 @app.route('/carrito')
 def verCarrito():
-    notificacion = request.args.get('notificacion', False)  # Capturar notificación
-    actionError = request.args.get('actionError', False)    # Capturar actionError
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
     
     carritoActual = session.get('carrito', False)
+    
     if carritoActual:
         elementos=obtenerElementosCarrito(carritoActual)
         total = sumarElementos(elementos)
@@ -76,7 +78,9 @@ def verProducto(id):
     notificacion = request.args.get('notificacion', False)
     actionOK = request.args.get('actionOK', False)
     actionError = request.args.get('actionError', False)
+    
     producto = obtener_producto_por_id(id)
+    
     return render_template('producto.html', sesion=session.get('sesion_iniciada', False), producto = producto, notificacion=notificacion, actionOK=actionOK, actionError=actionError,
         es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
 
@@ -113,8 +117,10 @@ def verMiCuenta():
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
     id_usuario = id_usuario=session.get('id_usuario', False)
     usuario = obtener_cuenta_por_id(id_usuario)
+    
     return render_template('miCuenta.html', sesion=session.get('sesion_iniciada', False), usuario = usuario, notificacion=notificacion, actionError=actionError, actionOK=actionOK)
 
 @app.route('/exportarCompraPDF', methods=['POST'])
@@ -168,12 +174,13 @@ def adminDashboard():
 
 @app.route('/productos')
 def adminProductos():
-    admin = mostrar_admin_por_id(session.get('id_usuario', False))
-    categorias = verCategorias()
-    productos = mostrar_productos_admin()
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
+    categorias = verCategorias()
+    productos = mostrar_productos_admin()
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/productos.html', admin=admin, productos=productos, categorias=categorias, notificacion=notificacion, actionError=actionError, actionOK=actionOK,
@@ -183,6 +190,10 @@ def adminProductos():
 
 @app.route('/clientes')
 def adminClientes():
+    notificacion = request.args.get('notificacion', False)
+    actionError = request.args.get('actionError', False)
+    actionOK = request.args.get('actionOK', False)
+    
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     mostrar_inactivos = request.args.get('mostrar_inactivos', 'false') == 'true'
     usuarios = mostrar_clientes(solo_activos=not mostrar_inactivos)
@@ -190,7 +201,8 @@ def adminClientes():
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
         return render_template('admin/clientes.html', admin=admin, clientes=usuarios, mostrar_inactivos=mostrar_inactivos, hay_clientes=hay_clientes,
-        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
+        es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False),
+        notificacion=notificacion, actionError=actionError, actionOK=actionOK)
     else:
         return render_template('error.html', error="401")
 
@@ -348,10 +360,11 @@ def verDetallesVenta(id):
 # Agregar categorias
 @app.route('/categorias', methods=['GET', 'POST'])
 def adminCategorias():
-    admin = mostrar_admin_por_id(session.get('id_usuario', False))
     notificacion = request.args.get('notificacion', False)
     actionError = request.args.get('actionError', False)
     actionOK = request.args.get('actionOK', False)
+    
+    admin = mostrar_admin_por_id(session.get('id_usuario', False))
 
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -703,7 +716,6 @@ def editarContraseñaAdmin(id_admin):
             else:
                 return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, no se pudo cambiar la contraseña"))
         return redirect(url_for('editarAdminView', id_admin=id_admin, actionError=True, notificacion="Error, la contraseña actual es incorrecta"))
-    
 
 @app.route('/actualizarPassUsuarioCliente/<int:id_cliente>', methods=['GET', 'POST'])
 def editarContraseñaCliente(id_cliente):
