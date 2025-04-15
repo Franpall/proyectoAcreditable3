@@ -616,9 +616,13 @@ def actualizarCantidad(index):
 @app.route('/addAdmin', methods=('GET', 'POST'))
 def registerAdmin():
     if request.method == 'POST':
-        usuario = request.form['admin_name']
-        correo = request.form['admin_email']
+        usuario = request.form['username']
+        correo = request.form['email']
         contraseña = request.form['password']
+        confirmar_contraseña = request.form['confirm-password']
+        
+        if contraseña != confirmar_contraseña:
+            return render_template('admin/admins.html', actionError=True, notificacion="La Contraseña repetida no coincide")
 
         if not registrar_cliente(usuario, correo, contraseña, 3):
             return redirect(url_for('adminAdmins', actionError=True, notificacion="El Usuario o Correo ya está registrado"))
@@ -628,9 +632,13 @@ def registerAdmin():
 @app.route('/addSupervisor', methods=('GET', 'POST'))
 def registerSupervisor():
     if request.method == 'POST':
-        usuario = request.form['admin_name']
-        correo = request.form['admin_email']
+        usuario = request.form['username']
+        correo = request.form['email']
         contraseña = request.form['password']
+        confirmar_contraseña = request.form['confirm-password']
+        
+        if contraseña != confirmar_contraseña:
+            return render_template('admin/supervisores.html', actionError=True, notificacion="La Contraseña repetida no coincide")
 
         if not registrar_cliente(usuario, correo, contraseña, 4):
             return redirect(url_for('adminSupervisores', actionError=True, notificacion="El Usuario o Correo ya está registrado"))

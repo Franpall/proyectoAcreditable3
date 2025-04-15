@@ -99,7 +99,7 @@ p {
   flex-direction: column;
   box-sizing: border-box;
   padding: 5px;
-  max-width: 400px;
+  max-width: 350px;
   min-width: 200px;
 }
 
