@@ -224,7 +224,7 @@ header h1 a{
 
 #area_banner_categoria{
     width: 100%;
-    height: 450px; 
+    height: 500px; 
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -240,9 +240,9 @@ header h1 a{
 }
 
 .imagen-banner_categoria{
-    width: 80%;
-    max-width: 650px;
-    height: 90%;
+    width: 90%;
+    max-width: 700px;
+    height: 80%;
     object-fit: cover; 
     display: block;
     border-radius: var(--radioGeneral);
@@ -326,7 +326,7 @@ header h1 a{
     flex-direction: column;
     border-radius: var(--radioGeneral);
     height: 230px;
-    width: calc(100% - 10px);
+    width: 100%;
     color: white;
     font-size: 1.3rem;
     text-shadow: 3px 3px 6px black;
