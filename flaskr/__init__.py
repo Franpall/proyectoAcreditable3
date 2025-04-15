@@ -186,9 +186,10 @@ def adminClientes():
     admin = mostrar_admin_por_id(session.get('id_usuario', False))
     mostrar_inactivos = request.args.get('mostrar_inactivos', 'false') == 'true'
     usuarios = mostrar_clientes(solo_activos=not mostrar_inactivos)
+    hay_clientes = hay_clientes_registrados()
     
     if session.get('sesion_jefe', False) or session.get('sesion_admin', False) or session.get('sesion_supervisor', False):
-        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, mostrar_inactivos=mostrar_inactivos,
+        return render_template('admin/clientes.html', admin=admin, clientes=usuarios, mostrar_inactivos=mostrar_inactivos, hay_clientes=hay_clientes,
         es_jefe=session.get('sesion_jefe', False), es_admin=session.get('sesion_admin', False), es_supervisor=session.get('sesion_supervisor', False))
     else:
         return render_template('error.html', error="401")

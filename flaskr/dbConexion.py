@@ -402,6 +402,18 @@ def mostrar_clientes(solo_activos=True):
         print(f"Error en mostrar_clientes: {e}")
         raise
 
+def hay_clientes_registrados():
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(id) FROM usuario WHERE rol = 'cliente'")
+        total = cursor.fetchone()[0]
+        conn.close()
+        return total > 0
+    except MySQLError as e:
+        print(f"Error en hay_clientes_registrados: {e}")
+        raise
+
 def contarClientes():
     try:
         conn = crear_conexion()

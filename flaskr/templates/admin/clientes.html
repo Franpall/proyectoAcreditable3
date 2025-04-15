@@ -14,18 +14,22 @@
         </ol>
         <div class="card mb-4" style="padding: 20px; box-sizing: border-box;">
             <h2><i class="fas fa-table mr-1" style="font-size: 25px;"></i> Clientes</h2>
-            
+            {% if not hay_clientes %}
+            <div class="card-body">
+                <h4>No hay clientes registrados</h4>
+            </div>
+            {% else %}
             <!-- Botón para alternar entre mostrar activos/inactivos -->
             <div class="mb-3">
                 {% if mostrar_inactivos %}
                 <a href="{{ url_for('adminClientes') }}" class="btn btn-success">
                     <i class="fas fa-eye"></i> Mostrar Activos
                 </a>
-            {% else %}
+                {% else %}
                 <a href="{{ url_for('adminClientes', mostrar_inactivos='true') }}" class="btn btn-warning">
                     <i class="fas fa-eye-slash"></i> Mostrar Inactivos
                 </a>
-            {% endif %}
+                {% endif %}
             </div>
             
             <div class="card-body">
@@ -86,6 +90,7 @@
                     {% endif %}
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </main>
