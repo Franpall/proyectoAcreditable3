@@ -737,6 +737,23 @@ def eliminarSupervisor(id_supervisor):
     eliminar_supervisor(id_supervisor)
     return redirect(url_for('adminSupervisores', actionOK=True, notificacion="Supervisor eliminado con éxito"))
 
+# Lógica para cambiar rol de admin a supervisor y viceversa
+@app.route('/hacer_admin/<int:id_usuario>')
+def hacer_admin(id_usuario):
+    if session.get('sesion_jefe', False):
+        cambiar_a_admin(id_usuario)
+        return redirect(url_for('adminSupervisores', actionOK=True, notificacion="Rol cambiado a Administrador con éxito"))
+    else:
+        return render_template('error.html', error="401")
+
+@app.route('/hacer_supervisor/<int:id_usuario>')
+def hacer_supervisor(id_usuario):
+    if session.get('sesion_jefe', False):
+        cambiar_a_supervisor(id_usuario)
+        return redirect(url_for('adminAdmins', actionOK=True, notificacion="Rol cambiado a Supervisor con éxito"))
+    else:
+        return render_template('error.html', error="401")
+
 # Lógica para iniciar sesión
 @app.route('/loginSolicitud', methods=('GET', 'POST'))
 def loginSolicitud():

@@ -525,6 +525,32 @@ def eliminar_supervisor(id):
         print(f"Error en eliminar_admin: {e}")
         raise
 
+# Cambiar roles
+def cambiar_a_admin(id_usuario):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE usuario SET rol = 'admin' WHERE id = %s", (id_usuario,))
+        conn.commit()
+        conn.close()
+        return True
+    except MySQLError as e:
+        print(f"Error en cambiar_a_admin: {e}")
+        return False
+
+def cambiar_a_supervisor(id_usuario):
+    try:
+        conn = crear_conexion()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE usuario SET rol = 'supervisor' WHERE id = %s", (id_usuario,))
+        conn.commit()
+        conn.close()
+        return True
+    except MySQLError as e:
+        print(f"Error en cambiar_a_supervisor: {e}")
+        return False
+
+
 def guardar_venta(id_usuario, carrito, total, metodo_pago):
     try:
         conn = crear_conexion()

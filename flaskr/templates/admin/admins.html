@@ -54,8 +54,11 @@
                                     <td>{{ admin.nombre }}</td>
                                     <td>{{ admin.correo }}</td>
                                     <td class="actions_td">
+                                        <a href="{{ url_for('hacer_supervisor', id_usuario=admin.id) }}" class="update_btn_admin"
+                                            onclick="return confirm('¿Convertir este administrador en supervisor?')">Hacer Supervisor
+                                        </a>
                                         <a href="{{ url_for('eliminarAdmin', id_admin=admin.id) }}" class="delete_btn_admin"
-                                            onclick="return confirm('¿Estás seguro de que deseas eliminar este administrador?')">Borrar
+                                            onclick="return confirm('¿Estás seguro de eliminar este administrador?')">Borrar
                                         </a>
                                     </td>
                                 </tr>
