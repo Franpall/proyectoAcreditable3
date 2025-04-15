@@ -34,7 +34,7 @@ function ocultarMenu(){
 document.addEventListener('DOMContentLoaded', function() {
   // Configuración del Intersection Observer
     const observerOptions = {
-      threshold: 0.10 // Se activa cuando el 10% del elemento es visible
+      threshold: 0.15 // Se activa cuando el 15% del elemento es visible
     };
 
     const observer = new IntersectionObserver((entries) => {
