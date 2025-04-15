@@ -34,17 +34,29 @@ function ocultarMenu(){
 document.addEventListener('DOMContentLoaded', function() {
   // Configuración del Intersection Observer
     const observerOptions = {
-      threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+      threshold: 0.10 // Se activa cuando el 10% del elemento es visible
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Deja de observar después de activar
+                // Animación para la versión mobile
+                if (window.innerWidth <= 695) {
+                    const categorias = entry.target.querySelectorAll('.categoria');
+                    categorias.forEach((categoria, index) => {
+                        // Delays diferentes a cada categoría
+                        categoria.style.transitionDelay = `${0.3 + (index * 0.2)}s`;
+                        categoria.style.opacity = '1';
+                        categoria.style.transform = 'translateX(0)';
+                    });
+                } else {
+                    // Animación para la versión desktop
+                    entry.target.classList.add('visible');
                 }
-            });
-        }, observerOptions);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
     // Observa el elemento de categorías
     const categoriasSection = document.querySelector('#categorias');

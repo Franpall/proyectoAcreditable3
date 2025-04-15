@@ -230,7 +230,13 @@ header h1 a{
     text-align: center;
     display: flex; 
     justify-content: center; 
-    align-items: center; 
+    align-items: center;
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1; }
 }
 
 .imagen-banner_categoria{
@@ -283,6 +289,34 @@ header h1 a{
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
+    opacity: 1;
+    transform: none;
+}
+
+@media (max-width: 695px) {
+#categorias .categoria {
+    opacity: 0;
+    transform: translateX(-70px);
+    transition: opacity 2s ease, transform 1.5s ease;
+}
+
+#categorias.visible .categoria:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.1s;
+}
+
+#categorias.visible .categoria:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.3s;
+}
+
+#categorias.visible .categoria:nth-child(3) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.5s;
+    }
 }
 
 .categoria{
