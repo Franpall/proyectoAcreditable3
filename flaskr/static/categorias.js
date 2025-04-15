@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const categorias = entry.target.querySelectorAll('.categoria');
                     categorias.forEach((categoria, index) => {
                         // Delays diferentes a cada categoría
-                        categoria.style.transitionDelay = `${0.3 + (index * 0.2)}s`;
+                        categoria.style.transitionDelay = `${0.1 + (index * 0.2)}s`;
                         categoria.style.opacity = '1';
                         categoria.style.transform = 'translateX(0)';
                     });
