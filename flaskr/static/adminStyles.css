@@ -146,6 +146,8 @@ p {
   border-radius: 10px;
   text-decoration: none;
   padding: 2px 5px;
+  display: inline-block; 
+  white-space: nowrap; 
 }
 
 .actions_td a:hover{
