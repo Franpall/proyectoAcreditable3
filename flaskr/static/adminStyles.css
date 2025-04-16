@@ -10463,7 +10463,9 @@ body {
 
 /* Estilos de imagen de formulario */
 .editarProductoImg{
-  object-fit: cover;
+  object-fit: contain;
+  max-width: 100%;
+  aspect-ratio: 1/1;
 }
 
 #exportar_ventas_form{
