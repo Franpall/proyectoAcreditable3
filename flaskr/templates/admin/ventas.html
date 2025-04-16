@@ -35,12 +35,12 @@
                             <tbody>
                                 {% for venta in ventas %}
                                 <tr>
-                                    <td>{{ venta.id }}</td>
-                                    <td>{{ venta.usuario }}</td>
-                                    <td>{{ venta.fecha }}</td>
-                                    <td>{{ venta.hora }}</td>
-                                    <td>US$ {{ venta.total }}</td>
-                                    <td>{{ venta.metodo_de_pago }}</td>
+                                    <td class="inline_td">{{ venta.id }}</td>
+                                    <td class="inline_td">{{ venta.usuario }}</td>
+                                    <td class="inline_td">{{ venta.fecha }}</td>
+                                    <td class="inline_td">{{ venta.hora }}</td>
+                                    <td class="inline_td">US$ {{ venta.total }}</td>
+                                    <td class="inline_td">{{ venta.metodo_de_pago }}</td>
                                     <td class="actions_td" height="20px">
                                         <a href="{{ url_for('verDetallesVenta', id=venta.id) }}" class="update_btn_admin">Visualizar</a>
                                     </td>

@@ -164,6 +164,9 @@ p {
   background-color: rgb(28, 116, 199);
 }
 
+.inline_td{
+  white-space: nowrap; 
+}
 
 abbr[title],
 abbr[data-original-title] {
