@@ -66,10 +66,10 @@
                                     {% if es_jefe %}
                                     <td class="actions_td">
                                         <a href="{{ url_for('hacer_admin', id_usuario=supervisor.id) }}" class="update_btn_admin"
-                                            onclick="return confirm('¿Convertir este supervisor en administrador?')">Hacer Admin
+                                            onclick="return confirm('¿Convertir este supervisor en administrador?')"><i class="fas fa-retweet"></i> Hacer Admin
                                         </a>
                                         <a href="{{ url_for('eliminarSupervisor', id_supervisor=supervisor.id) }}" class="delete_btn_admin"
-                                            onclick="return confirm('¿Estás seguro de eliminar este supervisor?')">Borrar
+                                            onclick="return confirm('¿Estás seguro de eliminar este supervisor?')"><i class="fas fa-trash"></i> Borrar
                                         </a>
                                     </td>
                                     {% endif %}

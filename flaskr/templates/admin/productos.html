@@ -96,9 +96,9 @@
                                 <td><p style="height: 90px; display: flex; align-items: center; justify-content: center;">{{ producto.stock }}</p></td>
                                 {% if not es_supervisor %}
                                 <td class="actions_td" height="90px">
-                                    <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin">Editar</a>
+                                    <a href="{{ url_for('editarProductoView', id_producto=producto.id) }}" class="update_btn_admin"><i class="fas fa-pen"></i> Editar</a>
                                     <br>
-                                    <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger">Borrar</a> 
+                                    <a href="{{ url_for('eliminarProducto', id_producto=producto.id) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a> 
                                 </td>
                                 {% endif %}
                             </tr>

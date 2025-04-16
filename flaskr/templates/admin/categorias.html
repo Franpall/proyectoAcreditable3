@@ -57,9 +57,9 @@
                             </td>
                             {% if not es_supervisor %}
                             <td class="actions_td" height="140px">
-                                <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin">Editar</a>
+                                <a href="{{ url_for('editarCategoriaView', id_categoria=categoria.id) }}" class="update_btn_admin"><i class="fas fa-pen"></i> Editar</a>
                                 <br>
-                                <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger">Borrar</a>
+                                <a href="{{ url_for('eliminarCategoria', id_categoria=categoria.id) }}" class="btn btn-danger"><i class="fas fa-trash"></i> Borrar</a>
                             </td>
                             {% endif %}
                         </tr>
